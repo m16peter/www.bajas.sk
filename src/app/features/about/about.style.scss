@@ -1,0 +1,12 @@
+.about {
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  will-change: transform;
+  transform: translateZ(0);
+  background-color: #fff;
+
+  > div {
+    padding: 100px 20px;
+  }
+}

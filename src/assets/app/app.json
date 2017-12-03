@@ -1,0 +1,53 @@
+{
+  "data":
+  {
+    "languages":
+    [
+      {
+        "id": "sk",
+        "icon": "assets/app/img/sk.svg",
+        "titleI18n":
+        {
+          "sk": "Slovenský",
+          "ro": "Slovacă"
+        }
+      },
+      {
+        "id": "ro",
+        "icon": "assets/app/img/ro.svg",
+        "titleI18n":
+        {
+          "sk": "Rumunský",
+          "ro": "Română"
+        }
+      }
+    ],
+    "features":
+    [
+      {
+        "id": 0,
+        "module": "home",
+        "route": "",
+        "titleI18n":
+        {
+          "sk": "Suspendisse ornare",
+          "ro": "Neque porro quisquam"
+        }
+      },
+      {
+        "id": 1,
+        "module": "about",
+        "routeI18n":
+        {
+          "sk": "o-nas",
+          "ro": "despre-noi"
+        },
+        "titleI18n":
+        {
+          "sk": "Quis Autem",
+          "ro": "Ut Enim"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,52 @@
+<div class="navigation {{ navigationState }}">
+
+  <div class="shape" (click)="toggleMenu()"></div>
+
+  <div class="hamburger" (click)="toggleMenu()">
+    <span class="hamburger_line_1"></span>
+    <span class="hamburger_line_2"></span>
+    <span class="hamburger_line_3"></span>
+  </div>
+
+  <div *ngIf="loaded">
+
+    <div class="languages">
+
+      <div class="flex"></div>
+
+      <div class="language" *ngFor="let language of languages.list">
+        <img
+          src     = "{{ language.icon }}"
+          alt     = "{{ language.id }}"
+          (click) = "selectLanguage(language)"
+        />
+        <div class="tooltip {{ languageStatus(language.id) }}">
+          <span>{{ i18n(language, 'title') }}</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="features">
+      <div class="feature" *ngFor="let feature of features.list">
+
+        <a (click)="toggleMenu()" routerLink="{{ parseRoute(feature) }}">
+          <span>{{ i18n(feature, 'title') }}</span>
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="full-screen click-catcher" (click)="toggleMenu()"></div>
+
+</div>
+
+<div class="full-screen">
+  <div class="loader"></div>
+</div>
+
+<div *ngIf="loaded">
+  <router-outlet></router-outlet>
+</div>
