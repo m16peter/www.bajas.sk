@@ -28,24 +28,20 @@
         "id": 0,
         "module": "home",
         "route": "",
-        "titleI18n":
-        {
-          "sk": "Suspendisse ornare",
-          "ro": "Neque porro quisquam"
-        }
+        "title": "Stretnutie Rumunskych veriacich zijucich na Slovensku"
       },
       {
         "id": 1,
-        "module": "about",
+        "module": "news",
         "routeI18n":
         {
-          "sk": "o-nas",
-          "ro": "despre-noi"
+          "sk": "novinky",
+          "ro": "noutati"
         },
         "titleI18n":
         {
-          "sk": "Quis Autem",
-          "ro": "Ut Enim"
+          "sk": "Novinky",
+          "ro": "Noutăți"
         }
       }
     ]

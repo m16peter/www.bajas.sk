@@ -172,7 +172,6 @@
     }
     &_active {
       a > span::after {
-        background: #113;
         transform: scaleX(1);
       }
     }

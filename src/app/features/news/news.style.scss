@@ -1,4 +1,4 @@
-.about {
+.news {
   overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
@@ -8,5 +8,12 @@
 
   > div {
     padding: 100px 20px;
+
+    h2 {
+      line-height: 200%;
+      padding: 20px;
+      text-transform: uppercase;
+      text-align: center;
+    }
   }
 }

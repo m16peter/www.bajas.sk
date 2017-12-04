@@ -9,8 +9,12 @@
   > div {
     padding: 20px;
 
-    h1 {
+    h2 {
+      max-width: 1024px;
+      line-height: 200%;
+      padding: 20px;
       text-transform: uppercase;
+      text-align: center;
     }
   }
 }

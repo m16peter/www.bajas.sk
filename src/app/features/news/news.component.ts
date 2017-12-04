@@ -15,25 +15,23 @@ import { PageService } from '@app/core/page.service';
 import { ScrollService } from '@app/core/scroll.service';
 import { UrlService } from '@app/core/url.service';
 
-import { About } from './about.model';
+import { News } from './news.model';
 
 const config =
 {
-  'json': 'assets/about/about.json',
-  'title': 'About | bajas.sk',
-  'description': '...',
+  'json': 'assets/news/news.json',
   'err_message': 'Ooops, something went wrong!'
 };
 
 @Component({
-  selector: 'app-about',
-  templateUrl: 'about.view.html',
-  styleUrls: ['about.style.scss']
+  selector: 'app-news',
+  templateUrl: 'news.view.html',
+  styleUrls: ['news.style.scss']
 })
 
-export class AboutComponent implements OnInit, OnDestroy
+export class NewsComponent implements OnInit, OnDestroy
 {
-  public about: About;
+  public news: News;
   public languageId: string;
 
   private subscription: Subscription;
@@ -51,17 +49,22 @@ export class AboutComponent implements OnInit, OnDestroy
     private scrollService: ScrollService,
     private urlService: UrlService
   ) {
-    this.about = new About();
+    this.news = new News();
     this.languageId = undefined;
-
-    this.pageService.updateTitle(config.title);
-    this.pageService.updateDescription(config.description);
 
     this.subscription = this.appCommunicationService.onChangeLanguage$
       .subscribe((languageId) =>
       {
-        console.log('App language:', languageId);
-        this.languageId = languageId;
+        if (this.languageId !== languageId)
+        {
+          console.log('App language:', languageId);
+          this.languageId = languageId;
+
+          if (this.news.loaded)
+          {
+            this.router.navigate(['/01/' + this.news.feature['routeI18n'][this.languageId]]);
+          }
+        }
       }
     );
   }
@@ -71,21 +74,19 @@ export class AboutComponent implements OnInit, OnDestroy
     this.appCommunicationService.verifyLanguage();
 
     this.route.paramMap
-      .do(() =>
-      {
-        console.log('<!--');
-        this.about.loaded = false;
-      })
       .switchMap((params: ParamMap) =>
       {
-        if (this.about.loaded)
+        if (this.news.loaded)
         {
-          this.detectLanguage(params.get('url'));
-          return of(this.languageId);
+          console.log('<!-- url changed::');
+          this.news.url = params.get('url');
+          this.detectLanguage(this.news.url);
+          return of('');
         }
         else
         {
-          this.about.url = params.get('url');
+          console.log('<!-- http.get:');
+          this.news.url = params.get('url');
           return from(this.http
             .get(config.json)
             .retry(3)
@@ -95,9 +96,15 @@ export class AboutComponent implements OnInit, OnDestroy
     )
     .subscribe((json) =>
     {
-      this.about.initialize(json);
-      this.detectLanguage(this.about.url);
-      this.about.loaded = true;
+      if (!this.news.loaded)
+      {
+        this.news.initialize(json);
+        this.detectLanguage(this.news.url);
+        this.news.loaded = true;
+      }
+
+      this.pageService.updateTitle(this.i18n(this.news.feature, 'title'));
+      this.pageService.updateDescription(this.i18n(this.news.cards, 'description'));
       console.log('-->');
     },
     (e) =>
@@ -108,19 +115,19 @@ export class AboutComponent implements OnInit, OnDestroy
 
   private detectLanguage(url: string): void
   {
-    const language = this.urlService.detectedUrlLanguage(url, this.about.feature, this.about.languages);
+    const language = this.urlService.detectedUrlLanguage(url, this.news.feature, this.news.languages);
 
     try
     {
       if (language === '')
       {
-        if (this.about.feature['routeI18n'] === undefined)
+        if (this.news.feature['routeI18n'] === undefined)
         {
-          this.router.navigate(['/01/' + this.about.feature['route']]);
+          this.router.navigate(['/01/' + this.news.feature['route']]);
         }
         else
         {
-          this.router.navigate(['/01/' + this.about.feature['routeI18n'][this.languageId]]);
+          this.router.navigate(['/01/' + this.news.feature['routeI18n'][this.languageId]]);
         }
       }
       else

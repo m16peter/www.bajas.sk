@@ -3,11 +3,24 @@
   {
     "feature":
     {
-      "id": 0,
-      "module": "home",
-      "route": "",
-      "title": "Stretnutie Rumunskych veriacich zijucich na Slovensku"
+      "id": 1,
+      "module": "news",
+      "routeI18n":
+      {
+        "sk": "novinky",
+        "ro": "noutati"
+      },
+      "titleI18n":
+      {
+        "sk": "Novinky",
+        "ro": "Noutăți"
+      }
     },
+    "languages":
+    [
+      "sk",
+      "ro"
+    ],
     "cards":
     {
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",

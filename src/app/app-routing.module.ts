@@ -11,7 +11,7 @@ const routes: Routes =
   },
   {
     path: '01',
-    loadChildren: 'app/features/about/about.module#AboutModule'
+    loadChildren: 'app/features/news/news.module#NewsModule'
   },
   {
     path: '**',

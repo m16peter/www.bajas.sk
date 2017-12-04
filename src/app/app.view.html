@@ -28,7 +28,7 @@
     </div>
 
     <div class="features">
-      <div class="feature" *ngFor="let feature of features.list">
+      <div class="feature {{ featureStatus(feature.id) }}" *ngFor="let feature of features.list">
 
         <a (click)="toggleMenu()" routerLink="{{ parseRoute(feature) }}">
           <span>{{ i18n(feature, 'title') }}</span>

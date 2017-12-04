@@ -6,12 +6,7 @@ import { Languages, Language } from '@app/languages.model';
 
 const config =
 {
-  'local-storage-id': 'app-language',
-  'routes':
-  {
-    'home': '/',
-    'about': '01/'
-  }
+  'local-storage-id': 'app-language'
 };
 
 @Injectable()
@@ -86,8 +81,8 @@ export class AppService
   {
     switch (module)
     {
-      case 'home': return (config.routes.home);
-      case 'about': return (config.routes.about);
+      case 'home': return ('/');
+      case 'news': return ('01/');
       default: return ('/');
     }
   }

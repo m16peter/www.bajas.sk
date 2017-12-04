@@ -12,7 +12,7 @@ import { Home } from './home.model';
 const config =
 {
   'json': 'assets/home/home.json',
-  'title': 'Home | www.bajas.sk',
+  'title': 'Home | bajas.sk',
   'description': '...',
   'err_message': 'Ooops, something went wrong!'
 };
