@@ -1,25 +1,13 @@
-import { Feature } from '@app/features.model';
-
-export class NewsCards
-{
-  public description: string;
-  public descriptionI18n: any;
-  public list: any[];
-
-  constructor()
-  {
-    this.description = undefined;
-    this.descriptionI18n = undefined;
-    this.list = [];
-  }
-}
+import { Feature, Language } from '@app/app.model';
 
 export class News
 {
-  public feature: Feature;
-  public languages: string[];
+  public cards: any;
+  public content: any;
+  public features: Feature[];
+  public featureId: number;
+  public languages: Language[];
   public loaded: boolean;
-  public cards: NewsCards;
   public url: string;
 
   constructor()
@@ -29,24 +17,32 @@ export class News
 
   private init(): void
   {
-    this.feature = new Feature();
-    this.languages = [];
+    this.cards =
+    {
+      'list': []
+    };
+    this.content =
+    {
+      'description': undefined
+    };
+    this.featureId = undefined;
     this.loaded = false;
-    this.cards = new NewsCards();
   }
 
-  public initialize(json: any): void
+  public initialize(data: any, features: Feature[], languages: Language[]): void
   {
     try
     {
-      console.log("Json loaded!", json);
-      this.feature = json['data']['feature'];
-      this.languages = json['data']['languages'];
-      this.cards = json['data']['cards'];
+      this.cards = data['cards'];
+      this.content = data['content'];
+      this.features = features;
+      this.featureId = data['featureId'];
+      this.languages = languages;
+      this.loaded = true;
     }
     catch (e)
     {
-      console.log("Ooops, something went wrong!");
+      console.log('Ooops, something went wrong...');
       this.init();
     }
   }

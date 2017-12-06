@@ -1,9 +1,7 @@
-<div *ngIf="news.loaded">
-  <div class="news full-screen" #scrollEl>
-    <div>
+<div class="news full-screen" #scrollEl  *ngIf="news.loaded">
+  <div>
 
-      <h2>{{ i18n(news.feature, 'title') }}</h2>
+    <h2>{{ i18n(globals.app.activeFeature, 'title') }}</h2>
 
-    </div>
   </div>
 </div>

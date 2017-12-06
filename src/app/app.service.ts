@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 
 import { LocalStorageService } from '@app/core/local-storage.service';
+import { GlobalsService } from '@app/core/globals.service';
 
-import { Languages, Language } from '@app/languages.model';
+import { Language } from '@app/app.model';
 
 const config =
 {
@@ -12,10 +13,12 @@ const config =
 @Injectable()
 export class AppService
 {
-  constructor(private localStorage: LocalStorageService)
-  {}
+  constructor(
+    private globals: GlobalsService,
+    private localStorage: LocalStorageService
+  ) {}
 
-  public initializeLanguage(languages: Language[]): Language
+  public initLanguage(languages: Language[]): string
   {
     // Check the Local Storage for language
     const localStorageLanguage = this.localStorage.getItem(config['local-storage-id']);
@@ -26,8 +29,8 @@ export class AppService
 
       if (language !== undefined)
       {
-        console.log('lang (source: local-storage):', language.id);
-        this.updateLanguage(language.id);
+        console.log('lang (source: local-storage):', language);
+        this.updateLanguage(language);
         return (language);
       }
     }
@@ -36,7 +39,7 @@ export class AppService
     return (this.getDefaultLanguage(languages));
   }
 
-  private getDefaultLanguage(languages: Language[]): Language
+  private getDefaultLanguage(languages: Language[]): string
   {
     // Check users browser language preferences
     const browserLanguage = window.navigator.language;
@@ -47,8 +50,8 @@ export class AppService
 
       if (language !== undefined)
       {
-        console.log('(source: browser) language:', language.id);
-        this.updateLanguage(language.id);
+        console.log('(source: browser) language:', language);
+        this.updateLanguage(language);
         return (language);
       }
     }
@@ -56,16 +59,16 @@ export class AppService
     // Just set the first available language as default
     console.log('(source: json) language:', languages[0].id);
     this.updateLanguage(languages[0].id);
-    return (languages[0]);
+    return (languages[0].id);
   }
 
-  private selectLanguage(language: string, languages: Language[]): Language
+  private selectLanguage(language: string, languages: Language[]): string
   {
     for (let i = 0; i < languages.length; i++)
     {
       if (language === languages[i].id)
       {
-        return (languages[i]);
+        return (language);
       }
     }
     return (undefined);
@@ -81,9 +84,9 @@ export class AppService
   {
     switch (module)
     {
-      case 'home': return ('/');
-      case 'news': return ('01/');
-      default: return ('/');
+      case 'home': return (this.globals.routes.home);
+      case 'news': return (this.globals.routes.news);
+      default: return (this.globals.routes.home);
     }
   }
 }

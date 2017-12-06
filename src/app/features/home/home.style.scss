@@ -5,16 +5,25 @@
   will-change: transform;
   transform: translateZ(0);
   background-color: #fff;
+}
 
-  > div {
-    padding: 20px;
+.news {
+  .content {
 
-    h2 {
-      max-width: 1024px;
-      line-height: 200%;
-      padding: 20px;
-      text-transform: uppercase;
-      text-align: center;
+    > div {
+     padding: 50px;
+     margin: auto;
     }
+    h2, p {
+      text-align: right;
+      margin: 50px 0;
+    }
+    button {
+      margin-left: auto;
+    }
+  }
+  .cards {
+    position: relative;
+    background-color: #dee;
   }
 }

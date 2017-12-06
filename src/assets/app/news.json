@@ -1,16 +1,13 @@
 {
   "data":
   {
-    "feature":
+    "featureId": 1,
+    "content":
     {
-      "id": 0,
-      "module": "home",
-      "route": "",
-      "title": "Stretnutie Rumunskych veriacich zijucich na Slovensku"
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
     },
     "cards":
     {
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "list":
       [
         {

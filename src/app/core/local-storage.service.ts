@@ -17,9 +17,9 @@ export class LocalStorageService
     }
     else
     {
-      console.log("Ooops, something went wrong...");
-      console.log("key: " + key);
-      console.log("value: ", value);
+      console.log('Ooops, something went wrong...');
+      console.log('key: ' + key);
+      console.log('value: ', value);
     }
   }
 }

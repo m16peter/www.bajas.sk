@@ -1,4 +1,4 @@
-<div class="navigation {{ navigationState }}">
+<div class="navigation {{ app.navigationState ? 'active' : '' }}">
 
   <div class="shape" (click)="toggleMenu()"></div>
 
@@ -8,17 +8,17 @@
     <span class="hamburger_line_3"></span>
   </div>
 
-  <div *ngIf="loaded">
+  <div *ngIf="app.loaded">
 
     <div class="languages">
 
       <div class="flex"></div>
 
-      <div class="language" *ngFor="let language of languages.list">
+      <div class="language" *ngFor="let language of app.languages">
         <img
           src     = "{{ language.icon }}"
           alt     = "{{ language.id }}"
-          (click) = "selectLanguage(language)"
+          (click) = "selectLanguage(language.id)"
         />
         <div class="tooltip {{ languageStatus(language.id) }}">
           <span>{{ i18n(language, 'title') }}</span>
@@ -28,7 +28,7 @@
     </div>
 
     <div class="features">
-      <div class="feature {{ featureStatus(feature.id) }}" *ngFor="let feature of features.list">
+      <div class="feature {{ featureStatus(feature.id) }}" *ngFor="let feature of app.features">
 
         <a (click)="toggleMenu()" routerLink="{{ parseRoute(feature) }}">
           <span>{{ i18n(feature, 'title') }}</span>
@@ -47,6 +47,6 @@
   <div class="loader"></div>
 </div>
 
-<div *ngIf="loaded">
+<div *ngIf="app.loaded">
   <router-outlet></router-outlet>
 </div>

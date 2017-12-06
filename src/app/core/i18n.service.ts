@@ -7,22 +7,22 @@ export class I18nService
   {
     try
     {
-      if (obj[key + 'I18n'] !== undefined)
+      if (obj[key] === undefined)
       {
-        return (obj[key + 'I18n'][language]);
-      }
-      else if (obj[key] !== undefined)
-      {
-        return (obj[key]);
+        return (obj[key + '-i18n'][language]);
       }
       else
       {
-        throw 'undefined';
+        return (obj[key]);
       }
     }
     catch (e)
     {
-      console.log("Ooops, something went wrong!");
+      console.log('Ooops, something went wrong...');
+      // console.log(obj);
+      // console.log(key);
+      // console.log(language);
+      // console.log(e);
       return (undefined);
     }
   }

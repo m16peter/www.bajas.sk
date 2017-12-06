@@ -1,21 +1,11 @@
-import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Subscription } from 'rxjs/Subscription';
-import 'rxjs/add/operator/retry';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 
 import { AppCommunicationService } from '@app/app-communication.service';
+import { GlobalsService } from '@app/core/globals.service';
 import { I18nService } from '@app/core/i18n.service';
 import { PageService } from '@app/core/page.service';
 
 import { Home } from './home.model';
-
-const config =
-{
-  'json': 'assets/home/home.json',
-  'title': 'Home | bajas.sk',
-  'description': '...',
-  'err_message': 'Ooops, something went wrong!'
-};
 
 @Component({
   selector: 'app-home',
@@ -23,65 +13,48 @@ const config =
   styleUrls: ['home.style.scss']
 })
 
-export class HomeComponent implements OnInit, OnDestroy
+export class HomeComponent implements OnInit
 {
   public home: Home;
-  public languageId: string;
-
-  private subscription: Subscription;
 
   constructor(
+    private appCommunication: AppCommunicationService,
     private cdr: ChangeDetectorRef,
-    private http: HttpClient,
+    private globals: GlobalsService,
     private i18nService: I18nService,
-    private pageService: PageService,
-    private appCommunicationService: AppCommunicationService
+    private pageService: PageService
   ) {
-    this.languageId = undefined;
     this.home = new Home();
-
-    this.pageService.updateTitle(config.title);
-    this.pageService.updateDescription(config.description);
-
-    this.subscription = this.appCommunicationService.onChangeLanguage$
-      .subscribe((languageId: string) =>
-      {
-        console.log('Language verifyed!', languageId);
-        this.languageId = languageId;
-        this.cdr.detectChanges();
-      }
-    );
   }
 
   ngOnInit()
   {
-    this.appCommunicationService.verifyLanguage();
+    // seo
+    this.pageService.updateTitle(this.globals.seo['page-title']);
+    this.pageService.updateDescription(this.globals.seo['meta-description']);
 
-    this.http.get(config.json)
-      .retry(3)
-      .subscribe((json) =>
-      {
-        console.log('Json loaded!', json);
-        this.home.initialize(json);
-        this.cdr.detectChanges();
-      },
-      (e) =>
-      {
-        console.log(config.err_message, e);
-      }
-    );
+    if (this.globals.json.home.loaded && this.globals.json.app.loaded)
+    {
+      // initialize home component, instead of http-get,
+      // used stored json data...
+      this.home.initialize(this.globals.json.home['data'], this.globals.json.app['data']);
+
+      // optimized for faster load,
+      // therefore we assume this is the feature with id of 0
+      this.globals.app.activeFeature = this.globals.json.features['data'][0];
+      this.appCommunication.updateAppFeature();
+
+      // this.cdr.detectChanges();
+    }
+    else
+    {
+      console.log('Ooops, something went wrong...', this.globals.json.home);
+    }
   }
 
   public i18n(obj: any, key: string): any
   {
-    if (this.languageId !== undefined)
-    {
-      return this.i18nService.tryI18n(obj, key, this.languageId);
-    }
-  }
-
-  ngOnDestroy()
-  {
-    this.subscription.unsubscribe();
+    // i18n
+    return this.i18nService.tryI18n(obj, key, this.globals.app.activeLanguageId);
   }
 }

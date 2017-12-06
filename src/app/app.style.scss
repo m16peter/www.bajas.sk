@@ -171,8 +171,8 @@
       }
     }
     &_active {
-      a > span::after {
-        transform: scaleX(1);
+      a > span {
+        color: #58B;
       }
     }
   }
