@@ -1,0 +1,92 @@
+{
+  "data":
+  {
+    "app":
+    {
+      "more-i18n":
+      {
+        "sk": "viac",
+        "ro": "mai mult"
+      },
+      "go-to-i18n":
+      {
+        "sk": "prejist na",
+        "ro": "treci la"
+      }
+    },
+    "features":
+    [
+      {
+        "id": 0,
+        "module": "home",
+        "route": "",
+        "title": "Stretnutie Rumunskych veriacich zijucich na Slovensku"
+      },
+      {
+        "id": 1,
+        "module": "news",
+        "route-i18n":
+        {
+          "sk": "novinky",
+          "ro": "noutati"
+        },
+        "title-i18n":
+        {
+          "sk": "Novinky",
+          "ro": "Noutăți"
+        }
+      }
+    ],
+    "languages":
+    [
+      {
+        "id": "sk",
+        "icon": "assets/app/img/sk.svg",
+        "title-i18n":
+        {
+          "sk": "Slovensky",
+          "ro": "Rumunsky"
+        }
+      },
+      {
+        "id": "ro",
+        "icon": "assets/app/img/ro.svg",
+        "title-i18n":
+        {
+          "sk": "Slovaca",
+          "ro": "Romana"
+        }
+      }
+    ],
+    "home":
+    {
+      "featureId": 0,
+      "news":
+      {
+        "content":
+        {
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
+        },
+        "cards":
+        [
+          {
+            "id": 0,
+            "title": "#0 ..."
+          },
+          {
+            "id": 1,
+            "title": "#1 ..."
+          },
+          {
+            "id": 2,
+            "title": "#2 ..."
+          },
+          {
+            "id": 3,
+            "title": "#3 ..."
+          }
+        ]
+      }
+    }
+  }
+}
