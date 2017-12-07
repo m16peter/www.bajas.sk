@@ -30,20 +30,24 @@ export class Feature
 
 export class App
 {
-  public languages: Language[];
-  public languageId: string;
-  public loaded: boolean;
   public features: Feature[];
+  public languages: Language[];
+
   public featureId: number;
+  public languageId: string;
+
   public navigationState: boolean;
+  public loaded: boolean;
 
   constructor()
   {
-    this.languages = [];
-    this.languageId = undefined;
-    this.loaded = false;
     this.features = [];
+    this.languages = [];
+
+    this.languageId = '';
     this.featureId = 0;
+
     this.navigationState = false;
+    this.loaded = false;
   }
 }

@@ -43,10 +43,6 @@
 
 </div>
 
-<div class="full-screen">
-  <div class="loader"></div>
-</div>
-
-<div *ngIf="app.loaded">
-  <router-outlet></router-outlet>
+<div *ngIf="app.loaded" [@routerTransition]="getState(o)">
+  <router-outlet #o="outlet"></router-outlet>
 </div>

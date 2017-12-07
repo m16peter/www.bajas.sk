@@ -35,7 +35,7 @@ export class UrlService
       return ('');
     }
 
-    console.log('Url language not detected!');
+    console.log('Url language not detected, redirecting...');
     return ('');
   }
 }

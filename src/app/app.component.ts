@@ -2,6 +2,8 @@ import { Component, ChangeDetectorRef, OnInit, AfterViewInit, HostListener } fro
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/retry';
 
+import { routerTransition } from './router.transition';
+
 import { AppCommunicationService } from '@app/app-communication.service';
 import { AppService } from '@app/app.service';
 import { GlobalsService } from '@app/core/globals.service';
@@ -13,6 +15,9 @@ import { App, Language, Feature } from './app.model';
   selector: 'app-root',
   templateUrl: 'app.view.html',
   styleUrls: ['app.style.scss'],
+  animations: [
+    routerTransition
+  ],
   providers: [
     AppCommunicationService
   ]
@@ -37,10 +42,10 @@ export class AppComponent implements OnInit, AfterViewInit
     this.app = new App();
 
     this.appCommunication.onUpdateAppLanguage$
-      .subscribe(() => this.selectLanguage(this.globals.app.activeLanguageId)
+      .subscribe(() => this.selectLanguage(this.globals.app.languageId)
     );
     this.appCommunication.onUpdateAppFeature$
-      .subscribe(() => this.selectFeature(this.globals.app.activeFeature)
+      .subscribe(() => this.selectFeature(this.globals.app.featureId)
     );
   }
 
@@ -67,11 +72,11 @@ export class AppComponent implements OnInit, AfterViewInit
 
         if (this.app.languages.length > 0 && this.app.features.length > 0)
         {
-          // initialize app language
+           // initialize language
           this.selectLanguage(this.appService.initLanguage(this.app.languages));
 
-          // select default feature
-          this.selectFeature(this.app.features[0]);
+           // initialize feature
+          this.selectFeature(0);
 
           this.app.loaded = true;
           this.cdr.detectChanges();
@@ -106,7 +111,7 @@ export class AppComponent implements OnInit, AfterViewInit
 
   public i18n(obj: any, key: string): any
   {
-    return this.i18nService.tryI18n(obj, key, this.globals.app.activeLanguageId);
+    return this.i18nService.tryI18n(obj, key, this.globals.app.languageId);
   }
 
   public selectLanguage(languageId: string): void
@@ -114,21 +119,19 @@ export class AppComponent implements OnInit, AfterViewInit
     if (this.app.languageId !== languageId)
     {
       console.log('Language changed:', this.app.languageId, '->', languageId);
-      this.app.languageId = languageId;
-      this.globals.app.activeLanguageId = languageId;
+      this.globals.app.languageId = this.app.languageId = languageId;
       this.appService.updateLanguage(languageId);
       this.appCommunication.changeAppLanguage();
-      // this.cdr.detectChanges();
+      this.cdr.detectChanges();
     }
   }
 
-  public selectFeature(feature: Feature): void
+  public selectFeature(featureId: number): void
   {
-    if (this.app.featureId !== feature.id)
+    if (this.app.featureId !== featureId)
     {
-      console.log('Feature changed:', this.app.featureId, '->', feature.id);
-      this.globals.app.activeFeature = feature;
-      this.app.featureId = feature.id;
+      console.log('Feature changed:', this.app.featureId, '->', featureId);
+      this.globals.app.featureId = this.app.featureId = featureId;
       this.cdr.detectChanges();
     }
   }
@@ -145,11 +148,16 @@ export class AppComponent implements OnInit, AfterViewInit
 
   public featureStatus(id: number): string
   {
-    return ((id === this.globals.app.activeFeature.id) ? 'feature_active' : '');
+    return ((id === this.app.featureId) ? 'feature_active' : '');
   }
 
   public languageStatus(id: string): string
   {
-    return ((id === this.globals.app.activeLanguageId) ? 'language_active' : '');
+    return ((id === this.app.languageId) ? 'language_active' : '');
+  }
+
+  public getState(outlet)
+  {
+    return outlet.activatedRouteData.state;
   }
 }

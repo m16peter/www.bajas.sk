@@ -33,18 +33,19 @@ export class HomeComponent implements OnInit
     this.pageService.updateTitle(this.globals.seo['page-title']);
     this.pageService.updateDescription(this.globals.seo['meta-description']);
 
-    if (this.globals.json.home.loaded && this.globals.json.app.loaded)
+    const home = this.globals.json.home;
+    const general = this.globals.json.app;
+    const features = this.globals.json.features;
+
+    if (home.loaded && general.loaded && features.loaded)
     {
-      // initialize home component, instead of http-get,
-      // used stored json data...
-      this.home.initialize(this.globals.json.home['data'], this.globals.json.app['data']);
+      // initialize home component,
+      // instead of http-get, use stored json data...
+      this.home.initialize(home['data'], general['data'], features['data']);
 
-      // optimized for faster load,
-      // therefore we assume this is the feature with id of 0
-      this.globals.app.activeFeature = this.globals.json.features['data'][0];
+      // activate feature
+      this.globals.app.featureId = this.home.featureId;
       this.appCommunication.updateAppFeature();
-
-      // this.cdr.detectChanges();
     }
     else
     {
@@ -54,7 +55,23 @@ export class HomeComponent implements OnInit
 
   public i18n(obj: any, key: string): any
   {
-    // i18n
-    return this.i18nService.tryI18n(obj, key, this.globals.app.activeLanguageId);
+    return this.i18nService.tryI18n(obj, key, this.globals.app.languageId);
+  }
+
+  public homeTitle(): string
+  {
+    return (this.i18n(this.home.features[this.globals.app.featureId], 'title'));
+  }
+
+  public newsRoute(): string
+  {
+    for (let i = 0; i < this.home.features.length; i++)
+    {
+      if (this.home.features[i].module === 'news')
+      {
+        return (this.globals.routes.news + this.i18n(this.home.features[i], 'route'));
+      }
+    }
+    return (undefined);
   }
 }

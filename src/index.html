@@ -47,7 +47,7 @@
 
   <!-- init.css -->
   <style rel="stylesheet">
-    .loader{position:absolute;top:calc(50% - 16px);left:calc(50% - 16px);border:2px solid #eee;border-radius:50%;border-top:2px solid #369;width:30px;height:30px;animation:spin 1s linear infinite;}
+    .loader{position:absolute;top:calc(50% - 16px);left:calc(50% - 16px);border:2px solid #eee;border-radius:50%;border-top:2px solid #369;width:30px;height:30px;animation:spin 0.8s linear infinite;}
     @keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
   </style>
 
@@ -58,9 +58,11 @@
 </head>
 <body>
 
-  <app-root>
+  <div class="full-screen">
     <div class="loader"></div>
-  </app-root>
+  </div>
+
+  <app-root></app-root>
 
   <noscript>
     <h1>Ooops, JavaScript not running...</h1>

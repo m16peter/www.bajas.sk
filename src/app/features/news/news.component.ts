@@ -46,13 +46,9 @@ export class NewsComponent implements OnInit, OnDestroy
     private urlService: UrlService
   ) {
     this.news = new News();
-
     this.subscription = this.appCommunication.onChangeAppLanguage$
-      .subscribe(() =>
-        this.router.navigate([
-          this.globals.routes.news + this.i18n(this.globals.app.activeFeature, 'route')
-        ])
-      );
+      .subscribe(() => this.navigateToNews()
+    );
   }
 
   ngOnInit()
@@ -64,8 +60,10 @@ export class NewsComponent implements OnInit, OnDestroy
 
         if (this.news.loaded)
         {
-          // on url params change, verify url language
-          this.detectLanguage(params.get('url'));
+          // on url params change,
+          // validate & verify url language
+          this.news.url = params.get('url');
+          this.detectUrlLanguage(this.news.url);
           return of('');
         }
         else if (this.globals.json.news.loaded)
@@ -76,17 +74,27 @@ export class NewsComponent implements OnInit, OnDestroy
           const features = this.globals.json.features;
           const languages = this.globals.json.languages;
 
-          if (features.loaded && languages.loaded)
+          if (news.loaded && features.loaded && languages.loaded)
           {
+            this.news.url = params.get('url');
             this.news.initialize(news['data'], features['data'], languages['data']);
-            this.detectLanguage(params.get('url'));
-          }
 
+            // activate feature
+            this.globals.app.featureId = this.news.featureId;
+            this.appCommunication.updateAppFeature();
+
+            this.detectUrlLanguage(this.news.url);
+          }
+          else
+          {
+            console.log('Ooops, something went wrong...', this.globals.json);
+            this.news.loaded = false;
+          }
           return of('');
         }
         else
         {
-          // first time make an http-get to load json data
+          // first time make an http-get to load data from json
           this.news.url = params.get('url');
           return from(this.http.get(this.globals.pathTo.news).retry(3));
         }
@@ -110,19 +118,23 @@ export class NewsComponent implements OnInit, OnDestroy
             if (features.loaded && languages.loaded)
             {
               this.news.initialize(news['data'], features['data'], languages['data']);
-              this.detectLanguage(this.news.url);
+
+              // activate feature
+              this.globals.app.featureId = this.news.featureId;
+              this.appCommunication.updateAppFeature();
+
+              this.detectUrlLanguage(this.news.url);
             }
           }
           catch (e)
           {
             console.log('Ooops, something went wrong...', e);
+            this.news.loaded = false;
           }
-
-          // this.detectLanguage(this.news.url);
         }
 
         // seo
-        this.pageService.updateTitle(this.i18n(this.globals.app.activeFeature, 'title'));
+        this.pageService.updateTitle(this.i18n(this.news.features[this.globals.app.featureId], 'title'));
         this.pageService.updateDescription(this.i18n(this.news.content, 'description'));
 
         console.log('-->');
@@ -134,49 +146,41 @@ export class NewsComponent implements OnInit, OnDestroy
     );
   }
 
-  private detectLanguage(url: string): void
+  private detectUrlLanguage(url: string): void
   {
-    // activate feature
-    this.globals.app.activeFeature = this.getFeatureById(this.news.featureId);
-    this.appCommunication.updateAppFeature();
-
-    const feature = this.globals.app.activeFeature;
+    const feature = this.news.features[this.globals.app.featureId];
     const languages = this.news.languages;
     const languageId = this.urlService.detectedUrlLanguage(url, feature, languages);
 
     if (languageId === '')
     {
-      this.router.navigate([this.globals.routes.news + this.i18n(feature, 'route')]);
+      // if the url isn't detected,
+      // navigate to default url
+      this.navigateToNews();
     }
     else
     {
-      this.globals.app.activeLanguageId = languageId;
+      // otherwise emmit the url language...
+      this.globals.app.languageId = languageId;
       this.appCommunication.updateAppLanguage();
     }
-
-    // this.cdr.detectChanges();
-  }
-
-  private getFeatureById(featureId: number): Feature
-  {
-    for (let i = 0; i < this.news.features.length; i++)
-    {
-      if (this.news.features[i].id === featureId)
-      {
-        return (this.news.features[i]);
-      }
-    }
-    return (this.news.features[0]);
   }
 
   public i18n(obj: any, key: string): any
   {
-    return this.i18nService.tryI18n(obj, key, this.globals.app.activeLanguageId);
+    return this.i18nService.tryI18n(obj, key, this.globals.app.languageId);
   }
 
   public scrollTo(position: number): void
   {
     this.scrollService.scrollTo(this.el, position);
+  }
+
+  public navigateToNews(): void
+  {
+    const route = this.globals.routes.news;
+    const params = this.i18n(this.news.features[this.globals.app.featureId], 'route');
+    this.router.navigate([route + params]);
   }
 
   ngOnDestroy()

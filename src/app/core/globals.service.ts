@@ -11,8 +11,8 @@ export class GlobalsService
   {
     'width': 0,
     'height': 0,
-    'activeFeature': new Feature(),
-    'activeLanguageId': ''
+    'featureId': 0,
+    'languageId': ''
   };
 
   // read only

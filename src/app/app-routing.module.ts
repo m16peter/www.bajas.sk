@@ -7,11 +7,17 @@ const routes: Routes =
 [
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
+    data: {
+      state: 'home'
+    }
   },
   {
     path: '01',
-    loadChildren: 'app/features/news/news.module#NewsModule'
+    loadChildren: 'app/features/news/news.module#NewsModule',
+    data: {
+      state: 'news'
+    }
   },
   {
     path: '**',
