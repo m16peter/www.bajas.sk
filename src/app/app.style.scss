@@ -171,15 +171,9 @@
         }
       }
     }
-    &_active {
-      a > span {
-        color: #369;
-
-        &::after {
-          background: #369;
-          transform: scaleX(1);
-        }
-      }
+    &_active a > span::after {
+      background: #369;
+      transform: scaleX(1);
     }
   }
   @media (max-width: 1024px) {

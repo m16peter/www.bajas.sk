@@ -15,12 +15,8 @@ import { App, Language, Feature } from './app.model';
   selector: 'app-root',
   templateUrl: 'app.view.html',
   styleUrls: ['app.style.scss'],
-  animations: [
-    routerTransition
-  ],
-  providers: [
-    AppCommunicationService
-  ]
+  animations: [ routerTransition ],
+  providers: [ AppCommunicationService ]
 })
 
 export class AppComponent implements OnInit, AfterViewInit
@@ -51,40 +47,27 @@ export class AppComponent implements OnInit, AfterViewInit
 
   ngOnInit()
   {
-    this.http.get(this.globals.pathTo.app).retry(3).subscribe((json) =>
+    this.initLanguages();
+    this.initFeatures();
+    this.initGeneral();
+  }
+
+  ngAfterViewInit()
+  {
+    this.handleResize();
+    this.cdr.detectChanges();
+  }
+
+  private initFeatures(): void
+  {
+    this.http.get(this.globals.pathTo.features).retry(3).subscribe((json) =>
     {
       try
       {
-        this.globals.json.app['data'] = json['data']['app'];
-        this.globals.json.app.loaded = true;
-
         this.globals.json.features['data'] = json['data']['features'];
-        this.globals.json.features.loaded = true;
-
-        this.globals.json.languages['data'] = json['data']['languages'];
-        this.globals.json.languages.loaded = true;
-
-        this.globals.json.home['data'] = json['data']['home'];
-        this.globals.json.home.loaded = true;
-
-        this.app.languages = this.globals.json.languages['data'];
         this.app.features = this.globals.json.features['data'];
-
-        if (this.app.languages.length > 0 && this.app.features.length > 0)
-        {
-           // initialize language
-          this.selectLanguage(this.appService.initLanguage(this.app.languages));
-
-           // initialize feature
-          this.selectFeature(0);
-
-          this.app.loaded = true;
-          this.cdr.detectChanges();
-        }
-        else
-        {
-          console.log('Ooops, something went wrong...');
-        }
+        this.globals.json.features.loaded = true;
+        this.initialize();
       }
       catch (e)
       {
@@ -97,10 +80,57 @@ export class AppComponent implements OnInit, AfterViewInit
     });
   }
 
-  ngAfterViewInit()
+  private initLanguages(): void
   {
-    this.handleResize();
-    this.cdr.detectChanges();
+    this.http.get(this.globals.pathTo.languages).retry(3).subscribe((json) =>
+    {
+      try
+      {
+        this.globals.json.languages['data'] = json['data']['languages'];
+        this.app.languages = this.globals.json.languages['data'];
+        this.globals.json.languages.loaded = true;
+        this.initialize();
+      }
+      catch (e)
+      {
+        console.log('Ooops, something went wrong...', e);
+      }
+    },
+    (e) =>
+    {
+      console.log('Ooops, something went wrong...', e);
+    });
+  }
+
+  private initGeneral(): void
+  {
+    this.http.get(this.globals.pathTo.general).retry(3).subscribe((json) =>
+    {
+      try
+      {
+        this.globals.json.general['data'] = json['data']['general'];
+        this.globals.json.general.loaded = true;
+      }
+      catch (e)
+      {
+        console.log('Ooops, something went wrong...', e);
+      }
+    },
+    (e) =>
+    {
+      console.log('Ooops, something went wrong...', e);
+    });
+  }
+
+  private initialize(): void
+  {
+    // initialize language & feature
+    if (this.app.languages.length > 0 && this.app.features.length > 0)
+    {
+      this.selectLanguage(this.appService.initLanguage(this.app.languages));
+      this.selectFeature(0);
+      this.app.loaded = true;
+    }
   }
 
   private handleResize(): void

@@ -1,4 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import 'rxjs/add/operator/retry';
 
 import { AppCommunicationService } from '@app/app-communication.service';
 import { GlobalsService } from '@app/core/globals.service';
@@ -21,6 +23,7 @@ export class HomeComponent implements OnInit
     private appCommunication: AppCommunicationService,
     private cdr: ChangeDetectorRef,
     private globals: GlobalsService,
+    private http: HttpClient,
     private i18nService: I18nService,
     private pageService: PageService
   ) {
@@ -33,23 +36,67 @@ export class HomeComponent implements OnInit
     this.pageService.updateTitle(this.globals.seo['page-title']);
     this.pageService.updateDescription(this.globals.seo['meta-description']);
 
-    const home = this.globals.json.home;
-    const general = this.globals.json.app;
-    const features = this.globals.json.features;
-
-    if (home.loaded && general.loaded && features.loaded)
+    if (this.globals.json.home.loaded)
     {
-      // initialize home component,
-      // instead of http-get, use stored json data...
-      this.home.initialize(home['data'], general['data'], features['data']);
+      const home = this.globals.json.home;
+      const general = this.globals.json.general;
+      const features = this.globals.json.features;
 
-      // activate feature
-      this.globals.app.featureId = this.home.featureId;
-      this.appCommunication.updateAppFeature();
+      if (home.loaded && general.loaded && features.loaded)
+      {
+        // initialize home component,
+        // instead of http-get, use stored json data...
+        this.home.initialize(home['data'], general['data'], features['data']);
+
+        // activate feature
+        this.globals.app.featureId = this.home.featureId;
+        this.appCommunication.updateAppFeature();
+      }
+      else
+      {
+        console.log('Ooops, something went wrong...', this.globals.json.home);
+      }
     }
     else
     {
-      console.log('Ooops, something went wrong...', this.globals.json.home);
+      console.log('<!--');
+      this.http.get(this.globals.pathTo.home).retry(3).subscribe((json) =>
+      {
+        console.log('Json loaded!', json);
+        try
+        {
+          this.globals.json.home['data'] = json['data']['home'];
+          this.globals.json.home.loaded = true;
+
+          const home = this.globals.json.home;
+          const general = this.globals.json.general;
+          const features = this.globals.json.features;
+
+          if (home.loaded && general.loaded && features.loaded)
+          {
+            // initialize home component,
+            // instead of http-get, use stored json data...
+            this.home.initialize(home['data'], general['data'], features['data']);
+
+            // activate feature
+            this.globals.app.featureId = this.home.featureId;
+            this.appCommunication.updateAppFeature();
+          }
+          else
+          {
+            console.log('Ooops, something went wrong...', this.globals.json.home);
+          }
+          console.log('-->');
+        }
+        catch (e)
+        {
+          console.log('Ooops, something went wrong...', e);
+        }
+      },
+      (e) =>
+      {
+        console.log('Ooops, something went wrong...', e);
+      });
     }
   }
 

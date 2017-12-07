@@ -1,6 +1,4 @@
-import { Injectable } from '@angular/core'
-
-import { Feature } from '@app/app.model';
+import { Injectable } from '@angular/core';
 
 // GLOBAL VARIABLES
 @Injectable()
@@ -25,8 +23,11 @@ export class GlobalsService
   // read only
   public pathTo =
   {
-    'app': 'assets/app/app.json',
-    'news': 'assets/app/news.json'
+    'general': 'assets/app/general.json',
+    'features': 'assets/app/features.json',
+    'languages': 'assets/app/languages.json',
+    'home': 'assets/home/home.json',
+    'news': 'assets/news/news.json'
   };
 
   // read only
@@ -39,7 +40,7 @@ export class GlobalsService
   // read only
   public json =
   {
-    'app':
+    'general':
     {
       'loaded': false
     },
@@ -56,18 +57,6 @@ export class GlobalsService
       'loaded': false
     },
     'news':
-    {
-      'loaded': false
-    },
-    'video-album':
-    {
-      'loaded': false
-    },
-    'photo-album':
-    {
-      'loaded': false
-    },
-    'contact':
     {
       'loaded': false
     }
