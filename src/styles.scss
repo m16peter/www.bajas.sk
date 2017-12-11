@@ -90,14 +90,7 @@
     padding: 10px;
   }
   &:hover {
+    color: #369;
     box-shadow: 0 0 15px 5px rgba(0,0,0, 0.1);
-  }
-}
-
-// TODO
-.tooltip {
-
-  > span {
-    display: none;
   }
 }

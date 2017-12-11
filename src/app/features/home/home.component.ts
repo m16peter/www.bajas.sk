@@ -77,7 +77,7 @@ export class HomeComponent implements OnInit
           const features = this.globals.json.features;
 
           // initialize home component
-          if (home.loaded && general.loaded && features.loaded)
+          if (general.loaded && features.loaded)
           {
             this.home.initialize(home['data'], general['data'], features['data']);
             this.communication.updateFeature('home');

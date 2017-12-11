@@ -109,6 +109,7 @@ export class AppComponent implements OnInit, AfterViewInit
         console.log('Json loaded!', [this.globals.pathTo.general, json]);
         this.globals.json.general['data'] = json['data']['general'];
         this.globals.json.general.loaded = true;
+        this.initialize();
       }
       catch (e)
       {
@@ -123,17 +124,23 @@ export class AppComponent implements OnInit, AfterViewInit
 
   private initialize(): void
   {
-    if (this.globals.json.languages.loaded && this.globals.json.features.loaded)
+    if (this.globals.json.languages.loaded)
     {
-      // initialize from stored json data
-      this.app.features = this.globals.json.features['data'];
-      this.app.languages = this.globals.json.languages['data'];
-
-      if (this.app.features.home !== undefined && this.app.languages.length > 0)
+      if (this.globals.json.features.loaded)
       {
-        this.selectLanguage(this.appService.initLanguage(this.app.languages));
-        this.selectFeature('home');
-        this.app.loaded = true;
+        if (!this.app.loaded)
+        {
+          // initialize from stored json data
+          this.app.features = this.globals.json.features['data'];
+          this.app.languages = this.globals.json.languages['data'];
+
+          this.selectLanguage(this.appService.initLanguage(this.app.languages));
+          this.selectFeature('home');
+        }
+        if (this.globals.json.general.loaded)
+        {
+          this.app.loaded = true;
+        }
       }
     }
   }
@@ -181,9 +188,9 @@ export class AppComponent implements OnInit, AfterViewInit
     return ((id === this.app.languageId) ? 'language_active' : '');
   }
 
-  public getState(outlet)
+  public getState(outlet): any
   {
-    return outlet.activatedRouteData.state;
+    return (outlet.activatedRouteData.state);
   }
 
   public route(key: string): string

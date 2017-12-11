@@ -10,8 +10,8 @@
 
   <!-- seo -->
   <title>bajas.sk</title>
-  <meta name="twitter:card" content="Stretnutie Rumunskych veriacich zijucich na Slovensku"/>
-  <meta property="og:description" content="Stretnutie Rumunskych veriacich zijucich na Slovensku"/>
+  <meta name="twitter:card" content="Angular - one framework to rule them all!"/>
+  <meta property="og:description" content="Angular - one framework to rule them all!"/>
   <meta property="og:image" content="assets/app/img/logo.png"/>
 
   <!-- favicons -->
@@ -38,7 +38,7 @@
 
   <!-- init.css -->
   <style rel="stylesheet">
-    #ie {display:none;z-index:1000;margin:auto;}
+    #ie {display:none;z-index:1000;margin:auto;text-align:center;}
     .loader{position:absolute;top:calc(50% - 16px);left:calc(50% - 16px);border:2px solid #eee;border-radius:50%;border-top:2px solid #369;width:30px;height:30px;animation:spin 0.8s linear infinite;}
     @keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
   </style>
@@ -55,9 +55,11 @@
 
   <app-root></app-root>
 
-  <div id="ie" class="full-screen">
+  <div id="ie" class="full-screen layout-column">
+    <div class="flex"></div>
     <h1>Ooops, unsupported browser detected!</h1>
-    <h2>Try this one <a href="https://www.google.com/chrome/browser/desktop/index.html">Chrome for Desktop</a></h2>
+    <h2>Try this one: <a href="https://www.google.com/chrome/browser/desktop/index.html">Chrome for Desktop</a></h2>
+    <div class="flex"></div>
   </div>
 
   <noscript>

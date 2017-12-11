@@ -5,7 +5,11 @@
     {
       "home":
       {
-        "title": "Lorem Ipsum Dolor sit Amet"
+        "title-i18n":
+        {
+          "sk": "Lorem ipsum dolor sit amet",
+          "ro": "Excepteur sint occaecat cupidatat non proident"
+        }
       },
       "news":
       {
