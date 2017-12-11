@@ -1,0 +1,26 @@
+{
+  "data":
+  {
+    "languages":
+    [
+      {
+        "id": "sk",
+        "icon": "assets/app/img/sk.svg",
+        "title-i18n":
+        {
+          "sk": "Slovenský",
+          "ro": "Rumunský"
+        }
+      },
+      {
+        "id": "ro",
+        "icon": "assets/app/img/ro.svg",
+        "title-i18n":
+        {
+          "sk": "Slovacă",
+          "ro": "Română"
+        }
+      }
+    ]
+  }
+}

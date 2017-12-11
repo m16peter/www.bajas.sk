@@ -1,0 +1,25 @@
+{
+  "data":
+  {
+    "features":
+    {
+      "home":
+      {
+        "title": "Lorem Ipsum Dolor sit Amet"
+      },
+      "news":
+      {
+        "route-i18n":
+        {
+          "sk": "novinky",
+          "ro": "noutati"
+        },
+        "title-i18n":
+        {
+          "sk": "Novinky",
+          "ro": "Noutăți"
+        }
+      }
+    }
+  }
+}
