@@ -14,24 +14,8 @@
   <meta property="og:description" content="Stretnutie Rumunskych veriacich zijucich na Slovensku"/>
   <meta property="og:image" content="assets/app/img/logo.png"/>
 
-  <!-- favicons -->
-  <link rel="apple-touch-icon" sizes="57x57" href="assets/favicons/apple-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="60x60" href="assets/favicons/apple-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="assets/favicons/apple-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="76x76" href="assets/favicons/apple-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="assets/favicons/apple-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="120x120" href="assets/favicons/apple-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="144x144" href="assets/favicons/apple-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="assets/favicons/apple-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192"  href="assets/favicons/android-icon-192x192.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="assets/favicons/favicon-96x96.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
-  <link rel="manifest" href="assets/favicons/manifest.json">
-  <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="msapplication-TileImage" content="assets/favicons/ms-icon-144x144.png">
-  <meta name="theme-color" content="#ffffff">
+  <!-- TODO: favicons -->
+  <link rel="icon" type="image/x-icon" href="assets/favicons/favicon.ico">
 
   <!-- reset.css -->
   <style rel="stylesheet">
@@ -47,13 +31,14 @@
 
   <!-- init.css -->
   <style rel="stylesheet">
-    #retarded-browser {display:none;z-index:1000;margin:auto;}
+    #ie {display:none;z-index:1000;margin:auto;}
     .loader{position:absolute;top:calc(50% - 16px);left:calc(50% - 16px);border:2px solid #eee;border-radius:50%;border-top:2px solid #369;width:30px;height:30px;animation:spin 0.8s linear infinite;}
     @keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
   </style>
 
   <!-- basic.css -->
   <style></style>
+
 </head>
 <body>
 
@@ -63,18 +48,20 @@
 
   <app-root></app-root>
 
-  <noscript>
-    <h1>Ooops, JavaScript not running...</h1>
-  </noscript>
-
-  <div id="retarded-browser" class="full-screen">
-    <h1>Oh No, retarded browser detected!</h1>
+  <div id="ie" class="full-screen">
+    <h1>Ooops, unsupported browser detected!</h1>
     <h2>Try this one <a href="https://www.google.com/chrome/browser/desktop/index.html">Chrome for Desktop</a></h2>
   </div>
 
+  <noscript>
+    <h1>Ooops, JavaScript not running...</h1>
+    <h2>Try to enable JavaScript in your web browser, <a href="https://www.enable-javascript.com/" target="_blank">here are the instructions</a></h2>
+  </noscript>
+
   <script type="text/javascript" src="https://cdn.polyfill.io/v2/polyfill.js"></script>
   <script type="text/javascript">
-    function detectIE(){var e=window.navigator.userAgent,r=e.indexOf("MSIE ");if(r>0)return!0;var t=e.indexOf("Trident/");if(t>0)return!0;var n=e.indexOf("Edge/");return n>0?!0:!1}detectIE()&&(document.getElementById("retarded-browser").style.display="flex");
+    function detectIE(){var e=window.navigator.userAgent,r=e.indexOf("MSIE ");if(r>0)return!0;var t=e.indexOf("Trident/");if(t>0)return!0;var n=e.indexOf("Edge/");return n>0?!0:!1}detectIE()&&(document.getElementById("ie").style.display="flex");
   </script>
+
 </body>
 </html>

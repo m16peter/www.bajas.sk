@@ -1,7 +1,9 @@
-import { Component, OnInit, ChangeDetectorRef, OnDestroy, ViewChild } from '@angular/core';
+// angular
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
+// rxjs
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
@@ -10,14 +12,14 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/retry';
 import 'rxjs/add/operator/do';
 
+// app
 import { AppCommunicationService } from '@app/app-communication.service';
 import { GlobalsService } from '@app/core/globals.service';
 import { I18nService } from '@app/core/i18n.service';
 import { PageService } from '@app/core/page.service';
-import { ScrollService } from '@app/core/scroll.service';
 import { UrlService } from '@app/core/url.service';
 
-import { Feature } from '@app/app.model';
+// others
 import { News } from './news.model';
 
 @Component({
@@ -28,31 +30,27 @@ import { News } from './news.model';
 
 export class NewsComponent implements OnInit, OnDestroy
 {
-  public news: News;
+  public news = new News();
   private subscription: Subscription;
 
-  @ViewChild('scrollEl') el;
-
   constructor(
-    private appCommunication: AppCommunicationService,
+    private communication: AppCommunicationService,
     private cdr: ChangeDetectorRef,
     private globals: GlobalsService,
     private http: HttpClient,
-    private i18nService: I18nService,
-    private pageService: PageService,
+    private i18n: I18nService,
+    private page: PageService,
     private route: ActivatedRoute,
     private router: Router,
-    private scrollService: ScrollService,
-    private urlService: UrlService
+    private url: UrlService
   ) {
-    this.news = new News();
-    this.subscription = this.appCommunication.onChangeAppLanguage$
-      .subscribe(() => this.navigateToNews()
-    );
+    this.subscription = this.communication.onLanguageChanged$.subscribe(() => this.navigateToNews());
   }
 
   ngOnInit()
   {
+    let url: any;
+
     this.route.paramMap
       .switchMap((params: ParamMap) =>
       {
@@ -60,34 +58,26 @@ export class NewsComponent implements OnInit, OnDestroy
 
         if (this.news.loaded)
         {
-          // on url params change,
-          // validate & verify url language
-          this.news.url = params.get('url');
-          this.detectUrlLanguage(this.news.url);
+          // on url params change, validate & verify url language
+          this.detectUrlLanguage(params.get('url'));
           return of('');
         }
         else if (this.globals.json.news.loaded)
         {
-          // in case the http-get already loaded json data,
-          // use that data instead of loading it again...
+          // in case the http-get already loaded json data, use that data...
           const news = this.globals.json.news;
           const features = this.globals.json.features;
           const languages = this.globals.json.languages;
 
           if (news.loaded && features.loaded && languages.loaded)
           {
-            this.news.url = params.get('url');
-            this.news.initialize(news['data'], features['data'], languages['data']);
-
-            // activate feature
-            this.globals.app.featureId = this.news.featureId;
-            this.appCommunication.updateAppFeature();
-
-            this.detectUrlLanguage(this.news.url);
+            this.news.initialize(news['data'], features['data']['news'], languages['data']);
+            this.communication.updateFeature('news');
+            this.detectUrlLanguage(params.get('url'));
           }
           else
           {
-            console.log('Ooops, something went wrong...', this.globals.json);
+            console.warn('Ooops, something went wrong...', [news, features, languages]);
             this.news.loaded = false;
           }
           return of('');
@@ -95,7 +85,7 @@ export class NewsComponent implements OnInit, OnDestroy
         else
         {
           // first time make an http-get to load data from json
-          this.news.url = params.get('url');
+          url = params.get('url');
           return from(this.http.get(this.globals.pathTo.news).retry(3));
         }
       })
@@ -103,11 +93,10 @@ export class NewsComponent implements OnInit, OnDestroy
       {
         if (this.news.loaded === false)
         {
-          console.log('Json loaded!', json);
-
+          console.log('Json loaded!', [this.globals.pathTo.news, json]);
           try
           {
-            // store json content globally (http-get once per refresh)
+            // store json content globally
             this.globals.json.news['data'] = json['data'];
             this.globals.json.news.loaded = true;
 
@@ -117,70 +106,43 @@ export class NewsComponent implements OnInit, OnDestroy
 
             if (features.loaded && languages.loaded)
             {
-              this.news.initialize(news['data'], features['data'], languages['data']);
-
-              // activate feature
-              this.globals.app.featureId = this.news.featureId;
-              this.appCommunication.updateAppFeature();
-
-              this.detectUrlLanguage(this.news.url);
+              this.news.initialize(news['data'], features['data']['news'], languages['data']);
+              this.communication.updateFeature('news');
+              this.detectUrlLanguage(url);
             }
           }
           catch (e)
           {
-            console.log('Ooops, something went wrong...', e);
+            console.warn('Ooops, something went wrong...', [e]);
             this.news.loaded = false;
           }
         }
 
         // seo
-        this.pageService.updateTitle(this.i18n(this.news.features[this.globals.app.featureId], 'title'));
-        this.pageService.updateDescription(this.i18n(this.news.content, 'description'));
+        this.page.updateTitle(this.i18n.translate(this.news.feature, 'title'));
+        this.page.updateDescription(this.i18n.translate(this.news.content, 'title'));
 
         console.log('-->');
       },
       (e) =>
       {
-        console.log('Ooops, something went wrong...', e);
+        console.warn('Ooops, something went wrong...', [e]);
+        this.news.loaded = false;
       }
     );
   }
 
   private detectUrlLanguage(url: string): void
   {
-    const feature = this.news.features[this.globals.app.featureId];
-    const languages = this.news.languages;
-    const languageId = this.urlService.detectedUrlLanguage(url, feature, languages);
+    const id = this.url.detectedUrlLanguage(url, this.news.feature, this.news.languages);
 
-    if (languageId === '')
-    {
-      // if the url isn't detected,
-      // navigate to default url
-      this.navigateToNews();
-    }
-    else
-    {
-      // otherwise emmit the url language...
-      this.globals.app.languageId = languageId;
-      this.appCommunication.updateAppLanguage();
-    }
+    // if the url language isn't detected, redirect to default url, otherwise update language...
+    (id === '') ? this.navigateToNews() : this.communication.updateLanguage(id);
   }
 
-  public i18n(obj: any, key: string): any
+  private navigateToNews(): void
   {
-    return this.i18nService.tryI18n(obj, key, this.globals.app.languageId);
-  }
-
-  public scrollTo(position: number): void
-  {
-    this.scrollService.scrollTo(this.el, position);
-  }
-
-  public navigateToNews(): void
-  {
-    const route = this.globals.routes.news;
-    const params = this.i18n(this.news.features[this.globals.app.featureId], 'route');
-    this.router.navigate([route + params]);
+    this.router.navigate([this.globals.routes.news + this.i18n.translate(this.news.feature, 'route')]);
   }
 
   ngOnDestroy()

@@ -1,24 +1,26 @@
 <div class="home full-screen" #scrollEl *ngIf="home.loaded">
 
+  <!-- News -->
   <div class="news layout-row" [style.height.px]="globals.app.height">
 
-    <div class="content layout-row" [style.width.px]="(globals.app.width > 1024) ? (globals.app.width / 2) : globals.app.width">
+    <div class="content layout-row flex">
       <div>
 
-        <div class="h2">{{ homeTitle() }}</div>
-
-        <div class="p">{{ i18n(home.news.content, 'description') }}</div>
+        <div class="h2">{{ i18n.translate(home.news.content, 'title') }}</div>
+        <div class="p">{{ i18n.translate(home.news.content, 'description') }}</div>
 
         <div class="layout-row">
-          <div class="button" routerLink="{{ newsRoute() }}">
-            <span>{{ i18n(home.general, 'more') }}</span>
+          <div class="button" routerLink="{{ route('news') }}">
+            <span>{{ i18n.translate(home.general, 'more') }}</span>
           </div>
         </div>
 
       </div>
     </div>
 
-    <div class="cards flex"></div>
+    <div class="cards" [style.width.px]="(globals.app.width / 2)" *ngIf="globals.app.width > 1024">
+
+    </div>
 
   </div>
 

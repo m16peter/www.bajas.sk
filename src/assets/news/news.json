@@ -1,32 +1,12 @@
 {
   "data":
   {
-    "featureId": 1,
     "content":
     {
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
+      "title": "Lorem ipsum dolor sit amet",
+      "description": "Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
     },
     "cards":
-    {
-      "list":
-      [
-        {
-          "id": 0,
-          "title": "#0 ..."
-        },
-        {
-          "id": 1,
-          "title": "#1 ..."
-        },
-        {
-          "id": 2,
-          "title": "#2 ..."
-        },
-        {
-          "id": 3,
-          "title": "#3 ..."
-        }
-      ]
-    }
+    []
   }
 }

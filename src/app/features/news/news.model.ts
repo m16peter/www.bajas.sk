@@ -1,14 +1,12 @@
-import { Feature, Language } from '@app/app.model';
-
 export class News
 {
-  public cards: any;
+  public cards: any[];
   public content: any;
-  public features: Feature[];
-  public featureId: number;
-  public languages: Language[];
+
+  public feature: any;
+  public languages: any[];
+
   public loaded: boolean;
-  public url: string;
 
   constructor()
   {
@@ -17,32 +15,31 @@ export class News
 
   private init(): void
   {
-    this.cards =
-    {
-      'list': []
-    };
+    this.cards = [];
     this.content =
     {
-      'description': undefined
+      title: undefined,
+      description: undefined
     };
-    this.featureId = undefined;
+
     this.loaded = false;
   }
 
-  public initialize(data: any, features: Feature[], languages: Language[]): void
+  public initialize(data: any, feature: any, languages: any[]): void
   {
     try
     {
       this.cards = data['cards'];
       this.content = data['content'];
-      this.features = features;
-      this.featureId = data['featureId'];
+
+      this.feature = feature;
       this.languages = languages;
+
       this.loaded = true;
     }
     catch (e)
     {
-      console.log('Ooops, something went wrong...');
+      console.warn('Ooops, something went wrong...', [e]);
       this.init();
     }
   }

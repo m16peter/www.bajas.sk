@@ -4,26 +4,26 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class AppCommunicationService
 {
-  private onChangeAppLanguage = new Subject<void>();
-  private onUpdateAppFeature = new Subject<void>();
-  private onUpdateAppLanguage = new Subject<void>();
+  private onLanguageChanged = new Subject<void>();
+  private onUpdateFeature = new Subject<string>();
+  private onUpdateLanguage = new Subject<string>();
 
-  onChangeAppLanguage$ = this.onChangeAppLanguage.asObservable();
-  onUpdateAppFeature$ = this.onUpdateAppFeature.asObservable();
-  onUpdateAppLanguage$ = this.onUpdateAppLanguage.asObservable();
+  onLanguageChanged$ = this.onLanguageChanged.asObservable();
+  onUpdateFeature$ = this.onUpdateFeature.asObservable();
+  onUpdateLanguage$ = this.onUpdateLanguage.asObservable();
 
-  public changeAppLanguage(): void
+  public languageChanged(): void
   {
-    this.onChangeAppLanguage.next();
+    this.onLanguageChanged.next();
   }
 
-  public updateAppFeature(): void
+  public updateFeature(featureKey: string): void
   {
-    this.onUpdateAppFeature.next();
+    this.onUpdateFeature.next(featureKey);
   }
 
-  public updateAppLanguage(): void
+  public updateLanguage(languageId: string): void
   {
-    this.onUpdateAppLanguage.next();
+    this.onUpdateLanguage.next(languageId);
   }
 }

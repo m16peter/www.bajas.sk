@@ -1,12 +1,18 @@
+// angular
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
+// rxjs
 import 'rxjs/add/operator/retry';
 
+// app
 import { AppCommunicationService } from '@app/app-communication.service';
 import { GlobalsService } from '@app/core/globals.service';
 import { I18nService } from '@app/core/i18n.service';
 import { PageService } from '@app/core/page.service';
+import { ScrollService } from '@app/core/scroll.service';
 
+// others
 import { Home } from './home.model';
 
 @Component({
@@ -17,44 +23,41 @@ import { Home } from './home.model';
 
 export class HomeComponent implements OnInit
 {
-  public home: Home;
+  public home = new Home();
 
   constructor(
-    private appCommunication: AppCommunicationService,
+    private communication: AppCommunicationService,
     private cdr: ChangeDetectorRef,
     private globals: GlobalsService,
     private http: HttpClient,
-    private i18nService: I18nService,
-    private pageService: PageService
-  ) {
-    this.home = new Home();
-  }
+    private i18n: I18nService,
+    private page: PageService,
+    private scroll: ScrollService
+  ) {}
 
   ngOnInit()
   {
     // seo
-    this.pageService.updateTitle(this.globals.seo['page-title']);
-    this.pageService.updateDescription(this.globals.seo['meta-description']);
+    this.page.updateTitle(this.globals.browserSetup.pageTitle);
+    this.page.updateDescription(this.globals.browserSetup.metaDescription);
 
+    // initialize home with json data
     if (this.globals.json.home.loaded)
     {
+      // load stored json data
       const home = this.globals.json.home;
       const general = this.globals.json.general;
       const features = this.globals.json.features;
 
+      // initialize home component, instead of http-get, use stored json data...
       if (home.loaded && general.loaded && features.loaded)
       {
-        // initialize home component,
-        // instead of http-get, use stored json data...
         this.home.initialize(home['data'], general['data'], features['data']);
-
-        // activate feature
-        this.globals.app.featureId = this.home.featureId;
-        this.appCommunication.updateAppFeature();
+        this.communication.updateFeature('home');
       }
       else
       {
-        console.log('Ooops, something went wrong...', this.globals.json.home);
+        console.warn('Ooops, something went wrong...', [home, general, features]);
       }
     }
     else
@@ -62,63 +65,43 @@ export class HomeComponent implements OnInit
       console.log('<!--');
       this.http.get(this.globals.pathTo.home).retry(3).subscribe((json) =>
       {
-        console.log('Json loaded!', json);
+        console.log('Json loaded!', [this.globals.pathTo.home, json]);
         try
         {
-          this.globals.json.home['data'] = json['data']['home'];
+          // store json data for later use
+          this.globals.json.home['data'] = json['data'];
           this.globals.json.home.loaded = true;
 
           const home = this.globals.json.home;
           const general = this.globals.json.general;
           const features = this.globals.json.features;
 
+          // initialize home component
           if (home.loaded && general.loaded && features.loaded)
           {
-            // initialize home component,
-            // instead of http-get, use stored json data...
             this.home.initialize(home['data'], general['data'], features['data']);
-
-            // activate feature
-            this.globals.app.featureId = this.home.featureId;
-            this.appCommunication.updateAppFeature();
+            this.communication.updateFeature('home');
           }
           else
           {
-            console.log('Ooops, something went wrong...', this.globals.json.home);
+            console.warn('Ooops, something went wrong...', [home, general, features]);
           }
           console.log('-->');
         }
         catch (e)
         {
-          console.log('Ooops, something went wrong...', e);
+          console.warn('Ooops, something went wrong...', [e, json]);
         }
       },
       (e) =>
       {
-        console.log('Ooops, something went wrong...', e);
+        console.warn('Ooops, something went wrong...', [e]);
       });
     }
   }
 
-  public i18n(obj: any, key: string): any
+  public route(key: string): string
   {
-    return this.i18nService.tryI18n(obj, key, this.globals.app.languageId);
-  }
-
-  public homeTitle(): string
-  {
-    return (this.i18n(this.home.features[this.globals.app.featureId], 'title'));
-  }
-
-  public newsRoute(): string
-  {
-    for (let i = 0; i < this.home.features.length; i++)
-    {
-      if (this.home.features[i].module === 'news')
-      {
-        return (this.globals.routes.news + this.i18n(this.home.features[i], 'route'));
-      }
-    }
-    return (undefined);
+    return (this.globals.routes[key] + this.i18n.translate(this.home.features[key], 'route'));
   }
 }

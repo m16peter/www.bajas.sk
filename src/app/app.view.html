@@ -15,26 +15,35 @@
       <div class="flex"></div>
 
       <div class="language" *ngFor="let language of app.languages">
-        <img
-          src     = "{{ language.icon }}"
-          alt     = "{{ language.id }}"
-          (click) = "selectLanguage(language.id)"
-        />
+
+        <img src="{{ language.icon }}" (click)="selectLanguage(language.id)"/>
+
         <div class="tooltip {{ languageStatus(language.id) }}">
-          <span>{{ i18n(language, 'title') }}</span>
+          <span>{{ i18n.translate(language, 'title') }}</span>
         </div>
+
       </div>
 
     </div>
 
     <div class="features">
-      <div class="feature {{ featureStatus(feature.id) }}" *ngFor="let feature of app.features">
 
-        <a (click)="toggleMenu()" routerLink="{{ parseRoute(feature) }}">
-          <span>{{ i18n(feature, 'title') }}</span>
+      <div class="feature {{ featureStatus('home') }}">
+
+        <a routerLink="{{ globals.routes.home }}" (click)="toggleMenu()">
+          <span>{{ i18n.translate(app.features['home'], 'title') }}</span>
         </a>
 
       </div>
+
+      <div class="feature {{ featureStatus('news') }}">
+
+        <a routerLink="{{ route('news') }}" (click)="toggleMenu()">
+          <span>{{ i18n.translate(app.features['news'], 'title') }}</span>
+        </a>
+
+      </div>
+
     </div>
 
   </div>

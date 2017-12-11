@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
+import { GlobalsService } from '@app/core/globals.service';
 
 @Injectable()
 export class I18nService
 {
-  public tryI18n(obj: any, key: string, language: string): any
+  constructor(private globals: GlobalsService)
+  {}
+
+  public translate(obj: any, key: string): any
   {
     try
     {
       if (obj[key] === undefined)
       {
-        return (obj[key + '-i18n'][language]);
+        return (obj[key + '-i18n'][this.globals.app.languageId]);
       }
       else
       {
@@ -18,12 +22,8 @@ export class I18nService
     }
     catch (e)
     {
-      console.log('Ooops, something went wrong...');
-      // console.log(obj);
-      // console.log(key);
-      // console.log(language);
-      // console.log(e);
-      return (undefined);
+      console.warn('Ooops, something went wrong...', [obj, key, this.globals.app.languageId, e]);
+      return ('');
     }
   }
 }

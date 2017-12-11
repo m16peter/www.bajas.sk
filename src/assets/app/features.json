@@ -2,16 +2,13 @@
   "data":
   {
     "features":
-    [
+    {
+      "home":
       {
-        "id": 0,
-        "module": "home",
-        "route": "",
-        "title": "Stretnutie Rumunskych veriacich zijucich na Slovensku"
+        "title": "Lorem Ipsum Dolor sit Amet"
       },
+      "news":
       {
-        "id": 1,
-        "module": "news",
         "route-i18n":
         {
           "sk": "novinky",
@@ -23,6 +20,6 @@
           "ro": "Noutăți"
         }
       }
-    ]
+    }
   }
 }

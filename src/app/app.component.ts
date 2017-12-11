@@ -1,15 +1,19 @@
+// angular
 import { Component, ChangeDetectorRef, OnInit, AfterViewInit, HostListener } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
+// rxjs
 import 'rxjs/add/operator/retry';
 
-import { routerTransition } from './router.transition';
-
+// app
 import { AppCommunicationService } from '@app/app-communication.service';
 import { AppService } from '@app/app.service';
 import { GlobalsService } from '@app/core/globals.service';
 import { I18nService } from '@app/core/i18n.service';
 
-import { App, Language, Feature } from './app.model';
+// others
+import { routerTransition } from './router.transition';
+import { App } from './app.model';
 
 @Component({
   selector: 'app-root',
@@ -21,28 +25,22 @@ import { App, Language, Feature } from './app.model';
 
 export class AppComponent implements OnInit, AfterViewInit
 {
-  public app: App;
+  public app = new App();
 
   @HostListener('window:resize') onResize() {
     this.handleResize();
   }
 
   constructor(
-    private appCommunication: AppCommunicationService,
+    private communication: AppCommunicationService,
     private appService: AppService,
     private cdr: ChangeDetectorRef,
     private globals: GlobalsService,
     private http: HttpClient,
-    private i18nService: I18nService
+    private i18n: I18nService
   ) {
-    this.app = new App();
-
-    this.appCommunication.onUpdateAppLanguage$
-      .subscribe(() => this.selectLanguage(this.globals.app.languageId)
-    );
-    this.appCommunication.onUpdateAppFeature$
-      .subscribe(() => this.selectFeature(this.globals.app.featureId)
-    );
+    this.communication.onUpdateLanguage$.subscribe((languageId) => this.selectLanguage(languageId));
+    this.communication.onUpdateFeature$.subscribe((featureKey) => this.selectFeature(featureKey));
   }
 
   ngOnInit()
@@ -64,19 +62,19 @@ export class AppComponent implements OnInit, AfterViewInit
     {
       try
       {
+        console.log('Json loaded!', [this.globals.pathTo.features, json]);
         this.globals.json.features['data'] = json['data']['features'];
-        this.app.features = this.globals.json.features['data'];
         this.globals.json.features.loaded = true;
         this.initialize();
       }
       catch (e)
       {
-        console.log('Ooops, something went wrong...', e);
+        console.warn('Ooops, something went wrong...', [e, json]);
       }
     },
     (e) =>
     {
-      console.log('Ooops, something went wrong...', e);
+      console.warn('Ooops, something went wrong...', [e]);
     });
   }
 
@@ -86,19 +84,19 @@ export class AppComponent implements OnInit, AfterViewInit
     {
       try
       {
+        console.log('Json loaded!', [this.globals.pathTo.languages, json]);
         this.globals.json.languages['data'] = json['data']['languages'];
-        this.app.languages = this.globals.json.languages['data'];
         this.globals.json.languages.loaded = true;
         this.initialize();
       }
       catch (e)
       {
-        console.log('Ooops, something went wrong...', e);
+        console.log('Ooops, something went wrong...', [e, json]);
       }
     },
     (e) =>
     {
-      console.log('Ooops, something went wrong...', e);
+      console.log('Ooops, something went wrong...', [e]);
     });
   }
 
@@ -108,28 +106,35 @@ export class AppComponent implements OnInit, AfterViewInit
     {
       try
       {
+        console.log('Json loaded!', [this.globals.pathTo.general, json]);
         this.globals.json.general['data'] = json['data']['general'];
         this.globals.json.general.loaded = true;
       }
       catch (e)
       {
-        console.log('Ooops, something went wrong...', e);
+        console.warn('Ooops, something went wrong...', [e, json]);
       }
     },
     (e) =>
     {
-      console.log('Ooops, something went wrong...', e);
+      console.warn('Ooops, something went wrong...', [e]);
     });
   }
 
   private initialize(): void
   {
-    // initialize language & feature
-    if (this.app.languages.length > 0 && this.app.features.length > 0)
+    if (this.globals.json.languages.loaded && this.globals.json.features.loaded)
     {
-      this.selectLanguage(this.appService.initLanguage(this.app.languages));
-      this.selectFeature(0);
-      this.app.loaded = true;
+      // initialize from stored json data
+      this.app.features = this.globals.json.features['data'];
+      this.app.languages = this.globals.json.languages['data'];
+
+      if (this.app.features.home !== undefined && this.app.languages.length > 0)
+      {
+        this.selectLanguage(this.appService.initLanguage(this.app.languages));
+        this.selectFeature('home');
+        this.app.loaded = true;
+      }
     }
   }
 
@@ -139,36 +144,26 @@ export class AppComponent implements OnInit, AfterViewInit
     this.globals.app.height = window.innerHeight;
   }
 
-  public i18n(obj: any, key: string): any
-  {
-    return this.i18nService.tryI18n(obj, key, this.globals.app.languageId);
-  }
-
   public selectLanguage(languageId: string): void
   {
     if (this.app.languageId !== languageId)
     {
-      console.log('Language changed:', this.app.languageId, '->', languageId);
+      console.log('Language changed:', [this.app.languageId, '->', languageId]);
       this.globals.app.languageId = this.app.languageId = languageId;
       this.appService.updateLanguage(languageId);
-      this.appCommunication.changeAppLanguage();
+      this.communication.languageChanged();
       this.cdr.detectChanges();
     }
   }
 
-  public selectFeature(featureId: number): void
+  public selectFeature(featureKey: string): void
   {
-    if (this.app.featureId !== featureId)
+    if (this.app.featureKey !== featureKey)
     {
-      console.log('Feature changed:', this.app.featureId, '->', featureId);
-      this.globals.app.featureId = this.app.featureId = featureId;
+      console.log('Feature changed:', [this.app.featureKey, '->', featureKey]);
+      this.globals.app.featureKey = this.app.featureKey = featureKey;
       this.cdr.detectChanges();
     }
-  }
-
-  public parseRoute(feature: Feature): string
-  {
-    return (this.appService.getRoute(feature.module) + this.i18n(feature, 'route'));
   }
 
   public toggleMenu(): void
@@ -176,9 +171,9 @@ export class AppComponent implements OnInit, AfterViewInit
     this.app.navigationState = !this.app.navigationState;
   }
 
-  public featureStatus(id: number): string
+  public featureStatus(module: string): string
   {
-    return ((id === this.app.featureId) ? 'feature_active' : '');
+    return ((module === this.app.featureKey) ? 'feature_active' : '');
   }
 
   public languageStatus(id: string): string
@@ -189,5 +184,10 @@ export class AppComponent implements OnInit, AfterViewInit
   public getState(outlet)
   {
     return outlet.activatedRouteData.state;
+  }
+
+  public route(key: string): string
+  {
+    return (this.globals.routes[key] + this.i18n.translate(this.app.features[key], 'route'));
   }
 }

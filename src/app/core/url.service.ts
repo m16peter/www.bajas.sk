@@ -1,17 +1,13 @@
 import { Injectable } from '@angular/core';
 
-import { Feature, Language } from '@app/app.model';
-
 @Injectable()
 export class UrlService
 {
-  public detectedUrlLanguage(url: string, feature: Feature, languages: Language[]): string
+  public detectedUrlLanguage(url: string, feature: any, languages: any[]): string
   {
     try
     {
-      console.log('url:', url);
-      console.log('feature:', feature);
-      console.log('languages:', languages);
+      console.log('Url detection:', [url, feature, languages]);
 
       if (feature['route-i18n'] !== undefined)
       {
@@ -19,7 +15,7 @@ export class UrlService
         {
           if (feature['route-i18n'][languages[i].id] === url)
           {
-            console.log('Url language:', languages[i].id);
+            console.log('Url language:', [languages[i].id]);
             return (languages[i].id);
           }
         }
@@ -31,11 +27,11 @@ export class UrlService
     }
     catch (e)
     {
-      console.log('Ooops, something went wrong...', e);
+      console.log('Ooops, something went wrong...', [e]);
       return ('');
     }
 
-    console.log('Url language not detected, redirecting...');
+    console.log('Url language not detected', ['redirecting']);
     return ('');
   }
 }

@@ -8,8 +8,8 @@
         "icon": "assets/app/img/sk.svg",
         "title-i18n":
         {
-          "sk": "Slovensky",
-          "ro": "Rumunsky"
+          "sk": "Slovenský",
+          "ro": "Rumunský"
         }
       },
       {
@@ -17,8 +17,8 @@
         "icon": "assets/app/img/ro.svg",
         "title-i18n":
         {
-          "sk": "Slovaca",
-          "ro": "Romana"
+          "sk": "Slovacă",
+          "ro": "Română"
         }
       }
     ]

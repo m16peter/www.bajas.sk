@@ -4,61 +4,61 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class GlobalsService
 {
-  // read-write
   public app =
   {
-    'width': 0,
-    'height': 0,
-    'featureId': 0,
-    'languageId': ''
+    width: 0,
+    height: 0,
+    featureKey: '',
+    languageId: ''
   };
 
-  // read only
+  // base routes (read only)
   public routes =
   {
-    'home': '/',
-    'news': '01/'
+    home: '/',
+    news: '01/'
   };
 
-  // read only
+  // path to jsons (read only)
   public pathTo =
   {
-    'general': 'assets/app/general.json',
-    'features': 'assets/app/features.json',
-    'languages': 'assets/app/languages.json',
-    'home': 'assets/home/home.json',
-    'news': 'assets/news/news.json'
+    general: 'assets/app/general.json',
+    features: 'assets/app/features.json',
+    languages: 'assets/app/languages.json',
+    home: 'assets/home/home.json',
+    news: 'assets/news/news.json'
   };
 
-  // read only
-  public seo =
+  // browser setup (read only)
+  public browserSetup =
   {
-    'page-title': 'bajas.sk',
-    'meta-description': 'Stretnutie Rumunskych veriacich zijucich na Slovensku'
+    localStorageId: 'app-language',
+    pageTitle: 'bajas.sk',
+    metaDescription: 'Stretnutie Rumunskych veriacich zijucich na Slovensku'
   };
 
-  // read only
+  // json data (read only)
   public json =
   {
-    'general':
+    general:
     {
-      'loaded': false
+      loaded: false
     },
-    'languages':
+    languages:
     {
-      'loaded': false
+      loaded: false
     },
-    'features':
+    features:
     {
-      'loaded': false
+      loaded: false
     },
-    'home':
+    home:
     {
-      'loaded': false
+      loaded: false
     },
-    'news':
+    news:
     {
-      'loaded': false
+      loaded: false
     }
   };
 }
