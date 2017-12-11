@@ -16,7 +16,7 @@
 
       <div class="language" *ngFor="let language of app.languages">
 
-        <img src="{{ language.icon }}" (click)="selectLanguage(language.id)"/>
+        <img src="{{ language.icon }}" (click)="selectLanguage(language.id)" alt="{{ language.id }}">
 
         <div class="tooltip {{ languageStatus(language.id) }}">
           <span>{{ i18n.translate(language, 'title') }}</span>
