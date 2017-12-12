@@ -18,7 +18,7 @@
       </div>
     </div>
 
-    <div class="news box flex" *ngIf="globals.app.width > 1024">
+    <div class="news box flex" *ngIf="globals.app.width >= 1024">
 
       <button class="btn next" mat-fab color="primary">
         <svg fill="#fff" height="24" viewBox="0 0 24 24" width="24">
@@ -58,7 +58,7 @@
       </div>
     </div>
 
-    <div class="video-album box flex" *ngIf="globals.app.width > 1024">
+    <div class="video-album box flex" *ngIf="globals.app.width >= 1024">
 
       <button class="btn" mat-fab color="primary">
         <svg fill="#fff" height="24" viewBox="0 0 24 24" width="24">
@@ -92,7 +92,7 @@
       </div>
     </div>
 
-    <div class="box flex" *ngIf="globals.app.width > 1024">
+    <div class="box flex" *ngIf="globals.app.width >= 1024">
 
       <div class="card" [style.width.px]="globals.app.cardSize" [style.height.px]="globals.app.cardSize"></div>
 
@@ -119,7 +119,7 @@
       </div>
     </div>
 
-    <div class="box flex" *ngIf="globals.app.width > 1024">
+    <div class="box flex" *ngIf="globals.app.width >= 1024">
 
       <div class="card" [style.width.px]="globals.app.cardSize" [style.height.px]="globals.app.cardSize"></div>
 

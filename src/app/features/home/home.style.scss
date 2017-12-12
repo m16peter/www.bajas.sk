@@ -5,47 +5,75 @@
   will-change: transform;
   transform: translateZ(0);
   background-color: #fff;
+
+  > div {
+    min-height: 300px;
+  }
 }
 
 .content {
+  position: relative;
+  transition: width 100ms ease-in;
 
   > div {
    padding: 50px;
-   margin: auto;
+   margin: auto 0 auto auto;
+
+    &::after {
+      content: '';
+      opacity: 0;
+      position: absolute;
+      width: 100%;
+      height: 0;
+      bottom: -1px;
+      left: 0;
+      border-bottom: 1px dashed #777;
+    }
+    @media (max-width: 1024px) {
+      margin: auto;
+      padding: 30px;
+
+      &::after {
+        opacity: 1;
+      }
+    }
   }
   .h2, .p {
     text-align: right;
     margin: 50px 0;
 
-    @media (max-width: 1024px)
-    {
+    @media (max-width: 1024px) {
       text-align: center;
     }
+    @media (max-width: 600px) {
+      margin: 30px 0;
+    }
+    @media (max-height: 600px) {
+      margin: 20px 0;
+    }
+  }
+  .p {
+    text-indent: 0;
   }
   .btn {
     width: 150px;
     margin-left: auto;
     font-size: 18px;
+    text-transform: uppercase;
 
     &:hover {
       color: #369;
     }
-    @media (max-width: 1024px)
-    {
+    @media (max-width: 1024px) {
       margin: 0 auto;
     }
   }
-  @media (max-width: 1024px)
-  {
+  @media (max-width: 1024px) {
     > div {
-      padding: 50px 100px;
+      padding: 50px;
     }
   }
-  @media (max-width: 600px)
-  {
-    > div {
-      padding: 20px;
-    }
+  @media (max-width: 600px) {
   }
 }
 
@@ -55,6 +83,7 @@
   display: flex;
 
   .card {
+    transition: width 100ms ease-in;
     margin: auto;
     background: #134;
   }

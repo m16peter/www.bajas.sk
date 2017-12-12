@@ -7,13 +7,13 @@
       {
         "title-i18n":
         {
-          "sk": "Lorem ipsum dolor sit amet",
-          "ro": "Excepteur sint occaecat cupidatat non proident"
+          "sk": "Stretnutie Rumunských veriacich žijúcich na Slovensku",
+          "ro": "Întâlnirea credincioșilor români din Slovacia"
         },
         "description-i18n":
         {
-          "sk": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident",
-          "ro": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo"
+          "sk": "Oznamy tikajuce sa stretnutia",
+          "ro": "Anunțuri în legătură cu întălnirea"
         }
       },
       "cards":
@@ -25,13 +25,13 @@
       {
         "title-i18n":
         {
-          "sk": "Lorem ipsum dolor sit amet",
-          "ro": "Excepteur sint occaecat cupidatat non proident"
+          "sk": "Video Album",
+          "ro": "Album Video"
         },
         "description-i18n":
         {
-          "sk": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident",
-          "ro": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo"
+          "sk": "At vero eos et accusamus et iusto odio dignissimos",
+          "ro": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium"
         }
       },
       "album":
@@ -43,8 +43,8 @@
       {
         "title-i18n":
         {
-          "sk": "Lorem ipsum dolor sit amet",
-          "ro": "Excepteur sint occaecat cupidatat non proident"
+          "sk": "Foto Album",
+          "ro": "Album Foto"
         },
         "description-i18n":
         {
@@ -61,8 +61,8 @@
       {
         "title-i18n":
         {
-          "sk": "Lorem ipsum dolor sit amet",
-          "ro": "Excepteur sint occaecat cupidatat non proident"
+          "sk": "Kontakt",
+          "ro": "Contact"
         },
         "description-i18n":
         {
