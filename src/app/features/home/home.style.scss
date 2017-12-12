@@ -27,9 +27,9 @@
       height: 0;
       bottom: -1px;
       left: 0;
-      border-bottom: 1px dashed #777;
+      border-bottom: 2px dashed #777;
     }
-    @media (max-width: 1024px) {
+    @media (max-width: 1023px) {
       margin: auto;
       padding: 30px;
 
@@ -42,7 +42,7 @@
     text-align: right;
     margin: 50px 0;
 
-    @media (max-width: 1024px) {
+    @media (max-width: 1023px) {
       text-align: center;
     }
     @media (max-width: 600px) {
@@ -64,11 +64,11 @@
     &:hover {
       color: #369;
     }
-    @media (max-width: 1024px) {
+    @media (max-width: 1023px) {
       margin: 0 auto;
     }
   }
-  @media (max-width: 1024px) {
+  @media (max-width: 1023px) {
     > div {
       padding: 50px;
     }

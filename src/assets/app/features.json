@@ -7,8 +7,8 @@
       {
         "title-i18n":
         {
-          "sk": "Stretnutie Rumunských veriacich žijúcich na Slovensku",
-          "ro": "Întâlnirea credincioșilor români din Slovacia"
+          "sk": "Stretnutie Rumunských Veriacich",
+          "ro": "Întâlnirea Creștinilor Români"
         }
       },
       "news":
@@ -28,26 +28,26 @@
       {
         "route-i18n":
         {
-          "sk": "video-album",
-          "ro": "album-video"
+          "sk": "video-archiv",
+          "ro": "arhiva-video"
         },
         "title-i18n":
         {
-          "sk": "Video Album",
-          "ro": "Album Video"
+          "sk": "Video Archív",
+          "ro": "Arhivă Video"
         }
       },
       "photoAlbum":
       {
         "route-i18n":
         {
-          "sk": "foto-album",
-          "ro": "album-foto"
+          "sk": "foto-archiv",
+          "ro": "arhiva-foto"
         },
         "title-i18n":
         {
-          "sk": "Foto Album",
-          "ro": "Album Foto"
+          "sk": "Foto Archív",
+          "ro": "Arhivă Foto"
         }
       },
       "contact":

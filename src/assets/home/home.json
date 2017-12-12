@@ -7,8 +7,8 @@
       {
         "title-i18n":
         {
-          "sk": "Stretnutie Rumunských veriacich žijúcich na Slovensku",
-          "ro": "Întâlnirea credincioșilor români din Slovacia"
+          "sk": "Stretnutie Rumunských Veriacich",
+          "ro": "Întâlnirea Creștinilor Români"
         },
         "description-i18n":
         {
@@ -25,16 +25,16 @@
       {
         "title-i18n":
         {
-          "sk": "Video Album",
-          "ro": "Album Video"
+          "sk": "Video Archív",
+          "ro": "Arhivă Video"
         },
         "description-i18n":
         {
-          "sk": "At vero eos et accusamus et iusto odio dignissimos",
-          "ro": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium"
+          "sk": "Archív nahrávok stretnuti",
+          "ro": "Arhivă înregistrări a întălnirilor"
         }
       },
-      "album":
+      "albums":
       []
     },
     "photo-album":
@@ -43,16 +43,16 @@
       {
         "title-i18n":
         {
-          "sk": "Foto Album",
-          "ro": "Album Foto"
+          "sk": "Foto Archív",
+          "ro": "Arhivă Foto"
         },
         "description-i18n":
         {
-          "sk": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident",
-          "ro": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo"
+          "sk": "Archív fotiek z oblasti Bajas",
+          "ro": "Arhivă foto din zona Sacalasău Nou"
         }
       },
-      "album":
+      "albums":
       []
     },
     "contact":
