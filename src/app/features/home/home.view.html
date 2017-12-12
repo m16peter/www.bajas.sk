@@ -1,24 +1,127 @@
 <div class="home full-screen" #scrollEl *ngIf="home.loaded">
 
   <!-- News -->
-  <div class="news layout-row" [style.height.px]="globals.app.height">
+  <div class="layout-row" [style.height.px]="globals.app.height">
 
-    <div class="content layout-row flex">
+    <div class="content layout-row" [style.width.px]="globals.app.boxSize">
       <div>
 
         <div class="h2">{{ i18n.translate(home.news.content, 'title') }}</div>
         <div class="p">{{ i18n.translate(home.news.content, 'description') }}</div>
 
         <div class="layout-row">
-          <div class="button" routerLink="{{ route('news') }}">
+          <a class="btn" mat-raised-button routerLink="{{ route('news') }}">
             <span>{{ i18n.translate(home.general, 'more') }}</span>
-          </div>
+          </a>
         </div>
 
       </div>
     </div>
 
-    <div class="cards" [style.width.px]="(globals.app.width / 2)" *ngIf="globals.app.width > 1024">
+    <div class="news box flex" *ngIf="globals.app.width > 1024">
+
+      <button class="btn next" mat-fab color="primary">
+        <svg fill="#fff" height="24" viewBox="0 0 24 24" width="24">
+          <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
+          <path d="M0 0h24v24H0z" fill="none"/>
+        </svg>
+      </button>
+      <button class="btn previous" mat-fab color="primary">
+        <svg fill="#fff" height="24" viewBox="0 0 24 24" width="24">
+          <path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z"/>
+          <path d="M0-.75h24v24H0z" fill="none"/>
+        </svg>
+      </button>
+
+      <div class="card" [style.width.px]="globals.app.cardSize" [style.height.px]="globals.app.cardSize"></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Video Album -->
+  <div class="layout-row" [style.height.px]="globals.app.height">
+
+    <div class="content layout-row" [style.width.px]="globals.app.boxSize">
+      <div>
+
+        <div class="h2">{{ i18n.translate(home.videoAlbum.content, 'title') }}</div>
+        <div class="p">{{ i18n.translate(home.videoAlbum.content, 'description') }}</div>
+
+        <div class="layout-row">
+          <a class="btn" mat-raised-button routerLink="{{ route('videoAlbum') }}">
+            <span>{{ i18n.translate(home.general, 'more') }}</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="video-album box flex" *ngIf="globals.app.width > 1024">
+
+      <button class="btn" mat-fab color="primary">
+        <svg fill="#fff" height="24" viewBox="0 0 24 24" width="24">
+          <path d="M8 5v14l11-7z"/>
+          <path d="M0 0h24v24H0z" fill="none"/>
+        </svg>
+      </button>
+
+      <div class="card" [style.width.px]="globals.app.cardSize" [style.height.px]="globals.app.cardSize"></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Photo Album -->
+  <div class="layout-row" [style.height.px]="globals.app.height">
+
+    <div class="content layout-row" [style.width.px]="globals.app.boxSize">
+      <div>
+
+        <div class="h2">{{ i18n.translate(home.photoAlbum.content, 'title') }}</div>
+        <div class="p">{{ i18n.translate(home.photoAlbum.content, 'description') }}</div>
+
+        <div class="layout-row">
+          <a class="btn" mat-raised-button routerLink="{{ route('photoAlbum') }}">
+            <span>{{ i18n.translate(home.general, 'more') }}</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="box flex" *ngIf="globals.app.width > 1024">
+
+      <div class="card" [style.width.px]="globals.app.cardSize" [style.height.px]="globals.app.cardSize"></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Contact -->
+  <div class="layout-row" [style.height.px]="globals.app.height">
+
+    <div class="content layout-row" [style.width.px]="globals.app.boxSize">
+      <div>
+
+        <div class="h2">{{ i18n.translate(home.contact.content, 'title') }}</div>
+        <div class="p">{{ i18n.translate(home.contact.content, 'description') }}</div>
+
+        <div class="layout-row">
+          <a class="btn" mat-raised-button routerLink="{{ route('contact') }}">
+            <span>{{ i18n.translate(home.general, 'more') }}</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="box flex" *ngIf="globals.app.width > 1024">
+
+      <div class="card" [style.width.px]="globals.app.cardSize" [style.height.px]="globals.app.cardSize"></div>
 
     </div>
 

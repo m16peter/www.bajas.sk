@@ -149,6 +149,25 @@ export class AppComponent implements OnInit, AfterViewInit
   {
     this.globals.app.width = window.innerWidth;
     this.globals.app.height = window.innerHeight;
+    this.globals.app.boxSize = boxSize(this.globals.app.width);
+    this.globals.app.cardSize = cardSize(this.globals.app.width, this.globals.app.height);
+
+    function boxSize(w)
+    {
+      return ((w < 1024) ? (w) : (w / 2));
+    }
+
+    function cardSize(w, h)
+    {
+      w = ((w - 200) / 2);
+      h = (h - 100);
+
+      if (w < h)
+      {
+        return (w);
+      }
+      return(h);
+    }
   }
 
   public selectLanguage(languageId: string): void

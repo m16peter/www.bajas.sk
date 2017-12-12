@@ -20,6 +20,27 @@ const routes: Routes =
     }
   },
   {
+    path: '02',
+    loadChildren: 'app/features/video-album/video-album.module#VideoAlbumModule',
+    data: {
+      state: 'video-album'
+    }
+  },
+  {
+    path: '03',
+    loadChildren: 'app/features/photo-album/photo-album.module#PhotoAlbumModule',
+    data: {
+      state: 'photo-album'
+    }
+  },
+  {
+    path: '04',
+    loadChildren: 'app/features/contact/contact.module#ContactModule',
+    data: {
+      state: 'contact'
+    }
+  },
+  {
     path: '**',
     pathMatch: 'full',
     redirectTo: ''

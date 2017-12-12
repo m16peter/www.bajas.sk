@@ -24,6 +24,7 @@
 
     <div class="features">
 
+      <!-- HOME -->
       <div class="feature {{ featureStatus('home') }}">
 
         <a routerLink="{{ globals.routes.home }}" (click)="toggleMenu()">
@@ -32,10 +33,38 @@
 
       </div>
 
+      <!-- NEWS -->
       <div class="feature {{ featureStatus('news') }}">
 
         <a routerLink="{{ route('news') }}" (click)="toggleMenu()">
           <span>{{ i18n.translate(app.features['news'], 'title') }}</span>
+        </a>
+
+      </div>
+
+      <!-- VIDEO ALBUM -->
+      <div class="feature {{ featureStatus('videoAlbum') }}">
+
+        <a routerLink="{{ route('videoAlbum') }}" (click)="toggleMenu()">
+          <span>{{ i18n.translate(app.features['videoAlbum'], 'title') }}</span>
+        </a>
+
+      </div>
+
+      <!-- PHOTO ALBUM -->
+      <div class="feature {{ featureStatus('photoAlbum') }}">
+
+        <a routerLink="{{ route('photoAlbum') }}" (click)="toggleMenu()">
+          <span>{{ i18n.translate(app.features['photoAlbum'], 'title') }}</span>
+        </a>
+
+      </div>
+
+      <!-- CONTACT -->
+      <div class="feature {{ featureStatus('contact') }}">
+
+        <a routerLink="{{ route('contact') }}" (click)="toggleMenu()">
+          <span>{{ i18n.translate(app.features['contact'], 'title') }}</span>
         </a>
 
       </div>

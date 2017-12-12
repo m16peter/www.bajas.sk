@@ -11,27 +11,4 @@
 ### Build
 `npm run build`
 
-
-## Documentation
-
-### navigation
-
-##### TODO: add description
-
-### i18n
-
-##### TODO: add description
-
-### eager loaded module
-
-##### TODO: add description
-
-### lazy loaded module
-
-##### TODO: add description
-
-### Other
-
-##### TODO: add description
-
 ### [Demo](https://m16peter.github.io/ngx/#/)
