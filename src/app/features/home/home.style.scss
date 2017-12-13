@@ -164,9 +164,11 @@
 }
 
 .video-album {
-  .video {
+
+  bnb-video {
+    display: flex;
     position: relative;
-    transition: width 100ms ease-in;
+    transition: all 100ms ease-in;
     margin: auto;
   }
   .btn {

@@ -2,31 +2,28 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MatButtonModule } from '@angular/material';
+import { YoutubePlayerModule } from 'ngx-youtube-player';
 
-// import { YoutubePlayerModule } from 'ngx-youtube-player';
-
-import{ YoutubePlayerComponent } from './youtube-player/youtube-player.component';
+import { VideoComponent } from './video/video.component';
 
 @NgModule({
   imports: [
     CommonModule,
 
     MatButtonModule,
-
-    // YoutubePlayerModule,
-
-    YoutubePlayerComponent
+    YoutubePlayerModule
   ],
   declarations:
-  [],
+  [
+    VideoComponent
+  ],
   exports: [
     CommonModule,
 
     MatButtonModule,
+    YoutubePlayerModule,
 
-    // YoutubePlayerModule,
-
-    YoutubePlayerComponent
+    VideoComponent
   ]
 })
 

@@ -14,6 +14,7 @@ import { ScrollService } from '@app/core/scroll.service';
 
 // others
 import { Home } from './home.model';
+import { Video } from '@app/shared/video/video.model';
 
 @Component({
   selector: 'app-home',
@@ -24,6 +25,7 @@ import { Home } from './home.model';
 export class HomeComponent implements OnInit
 {
   public home = new Home();
+  public video = new Video();
 
   constructor(
     private communication: AppCommunicationService,
@@ -80,6 +82,7 @@ export class HomeComponent implements OnInit
           if (general.loaded && features.loaded)
           {
             this.home.initialize(home['data'], general['data'], features['data']);
+            this.video.initialize(this.home.videoArchive.video);
             this.communication.updateFeature('home');
           }
           else
@@ -137,5 +140,10 @@ export class HomeComponent implements OnInit
     {
       return ('card_previous');
     }
+  }
+
+  public toggleVideoState(): void
+  {
+    this.video.isActive = !this.video.isActive;
   }
 }

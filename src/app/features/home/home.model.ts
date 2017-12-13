@@ -28,8 +28,7 @@ export class Home
 
     this.box =
     {
-      'cardId': 0,
-      'videoState': 0
+      cardId: 0
     };
     this.loaded = false;
   }

@@ -68,24 +68,27 @@
 
     <div class="video-album box flex" *ngIf="globals.app.width >= 1024">
 
-      <button class="btn" mat-fab color="primary">
-        <svg *ngIf="(true)" fill="#fff" height="24" viewBox="0 0 24 24" width="24">
+      <button class="btn" mat-fab color="primary" (click)="toggleVideoState()">
+
+        <!-- play -->
+        <svg *ngIf="!(video.isActive)" fill="#fff" height="24" viewBox="0 0 24 24" width="24">
           <path d="M8 5v14l11-7z"/>
           <path d="M0 0h24v24H0z" fill="none"/>
         </svg>
+
+        <!-- stop -->
+        <svg *ngIf="(video.isActive)" fill="#fff" height="24" viewBox="0 0 24 24" width="24">
+          <path d="M0 0h24v24H0z" fill="none"/>
+          <path d="M6 6h12v12H6z"/>
+        </svg>
+
       </button>
 
-      <div class="video" [style.width.px]="globals.app.cardSize" [style.height.px]="globals.app.cardSize">
-
-        <!-- <bnb-youtube-player
-          [id]    = "home.videoArchive.video.id"
-          [img]   = "home.videoArchive.video.img"
-          [title] = "i18n.translate(home.videoArchive.video, 'title')"
-          [topic] = "i18n.translate(home.videoArchive.video, 'topic')"
-          [state] = "home.box.videoState"
-        ></bnb-youtube-player> -->
-
-      </div>
+      <bnb-video
+        [style.width.px]  = "globals.app.cardSize"
+        [style.height.px] = "globals.app.cardSize"
+        [video]           = "video"
+      ></bnb-video>
 
     </div>
 
