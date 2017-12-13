@@ -20,17 +20,17 @@ import { PageService } from '@app/core/page.service';
 import { UrlService } from '@app/core/url.service';
 
 // others
-import { News } from './news.model';
+import { PhotoArchive } from './photo-archive.model';
 
 @Component({
-  selector: 'app-news',
-  templateUrl: 'news.view.html',
-  styleUrls: ['news.style.scss']
+  selector: 'app-photo-archive',
+  templateUrl: 'photo-archive.view.html',
+  styleUrls: ['photo-archive.style.scss']
 })
 
-export class NewsComponent implements OnInit, OnDestroy
+export class PhotoArchiveComponent implements OnInit, OnDestroy
 {
-  public news = new News();
+  public photoArchive = new PhotoArchive();
   private subscription: Subscription;
 
   constructor(
@@ -44,7 +44,7 @@ export class NewsComponent implements OnInit, OnDestroy
     private router: Router,
     private url: UrlService
   ) {
-    this.subscription = this.communication.onLanguageChanged$.subscribe(() => this.navigateToNews());
+    this.subscription = this.communication.onLanguageChanged$.subscribe(() => this.navigateToPhotoArchive());
   }
 
   ngOnInit()
@@ -56,29 +56,29 @@ export class NewsComponent implements OnInit, OnDestroy
       {
         console.log('<!--');
 
-        if (this.news.loaded)
+        if (this.photoArchive.loaded)
         {
           // on url params change, validate & verify url language
           this.detectUrlLanguage(params.get('url'));
           return of('');
         }
-        else if (this.globals.json.news.loaded)
+        else if (this.globals.json.photoArchive.loaded)
         {
           // in case the http-get already loaded json data, use that data...
-          const news = this.globals.json.news;
+          const photoArchive = this.globals.json.photoArchive;
           const features = this.globals.json.features;
           const languages = this.globals.json.languages;
 
-          if (news.loaded && features.loaded && languages.loaded)
+          if (photoArchive.loaded && features.loaded && languages.loaded)
           {
-            this.news.initialize(news['data'], features['data']['news'], languages['data']);
-            this.communication.updateFeature('news');
+            this.photoArchive.initialize(photoArchive['data'], features['data']['photoArchive'], languages['data']);
+            this.communication.updateFeature('photoArchive');
             this.detectUrlLanguage(params.get('url'));
           }
           else
           {
-            console.warn('Ooops, something went wrong...', [news, features, languages]);
-            this.news.loaded = false;
+            console.warn('Ooops, something went wrong...', [photoArchive, features, languages]);
+            this.photoArchive.loaded = false;
           }
           return of('');
         }
@@ -86,63 +86,63 @@ export class NewsComponent implements OnInit, OnDestroy
         {
           // first time make an http-get to load data from json
           url = params.get('url');
-          return from(this.http.get(this.globals.pathTo.news).retry(3));
+          return from(this.http.get(this.globals.pathTo.photoArchive).retry(3));
         }
       })
       .subscribe((json) =>
       {
-        if (this.news.loaded === false)
+        if (this.photoArchive.loaded === false)
         {
-          console.log('Json loaded!', [this.globals.pathTo.news, json]);
+          console.log('Json loaded!', [this.globals.pathTo.photoArchive, json]);
           try
           {
             // store json content globally
-            this.globals.json.news['data'] = json['data'];
-            this.globals.json.news.loaded = true;
+            this.globals.json.photoArchive['data'] = json['data'];
+            this.globals.json.photoArchive.loaded = true;
 
-            const news = this.globals.json.news;
+            const photoArchive = this.globals.json.photoArchive;
             const features = this.globals.json.features;
             const languages = this.globals.json.languages;
 
             if (features.loaded && languages.loaded)
             {
-              this.news.initialize(news['data'], features['data']['news'], languages['data']);
-              this.communication.updateFeature('news');
+              this.photoArchive.initialize(photoArchive['data'], features['data']['photoArchive'], languages['data']);
+              this.communication.updateFeature('photoArchive');
               this.detectUrlLanguage(url);
             }
           }
           catch (e)
           {
             console.warn('Ooops, something went wrong...', [e]);
-            this.news.loaded = false;
+            this.photoArchive.loaded = false;
           }
         }
 
         // seo
-        this.page.updateTitle(this.i18n.translate(this.news.feature, 'title'));
-        this.page.updateDescription(this.i18n.translate(this.news.content, 'title'));
+        this.page.updateTitle(this.i18n.translate(this.photoArchive.feature, 'title'));
+        this.page.updateDescription(this.i18n.translate(this.photoArchive.content, 'title'));
 
         console.log('-->');
       },
       (e) =>
       {
         console.warn('Ooops, something went wrong...', [e]);
-        this.news.loaded = false;
+        this.photoArchive.loaded = false;
       }
     );
   }
 
   private detectUrlLanguage(url: string): void
   {
-    const id = this.url.detectedUrlLanguage(url, this.news.feature, this.news.languages);
+    const id = this.url.detectedUrlLanguage(url, this.photoArchive.feature, this.photoArchive.languages);
 
     // if the url language isn't detected, redirect to default url, otherwise update language...
-    (id === '') ? this.navigateToNews() : this.communication.updateLanguage(id);
+    (id === '') ? this.navigateToPhotoArchive() : this.communication.updateLanguage(id);
   }
 
-  private navigateToNews(): void
+  private navigateToPhotoArchive(): void
   {
-    this.router.navigate([this.globals.routes.news + this.i18n.translate(this.news.feature, 'route')]);
+    this.router.navigate([this.globals.routes.photoArchive + this.i18n.translate(this.photoArchive.feature, 'route')]);
   }
 
   ngOnDestroy()

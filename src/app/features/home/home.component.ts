@@ -104,4 +104,38 @@ export class HomeComponent implements OnInit
   {
     return (this.globals.routes[key] + this.i18n.translate(this.home.features[key], 'route'));
   }
+
+  public next(): void
+  {
+    this.home.box.cardId++;
+  }
+
+  public previous(): void
+  {
+    this.home.box.cardId--;
+  }
+
+  public cardStatus(i: number): string
+  {
+    if (i < this.home.box.cardId)
+    {
+      return ('card_next');
+    }
+    if (this.home.box.cardId === i)
+    {
+      return ('card_1');
+    }
+    else if (this.home.box.cardId + 1 === i)
+    {
+      return ('card_2');
+    }
+    else if (this.home.box.cardId + 2 === i)
+    {
+      return ('card_3');
+    }
+    else
+    {
+      return ('card_previous');
+    }
+  }
 }

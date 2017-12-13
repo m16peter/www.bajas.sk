@@ -1,6 +1,6 @@
-export class VideoAlbum
+export class PhotoArchive
 {
-  public albums: any[];
+  public album: any;
   public content: any;
 
   public feature: any;
@@ -15,7 +15,7 @@ export class VideoAlbum
 
   private init(): void
   {
-    this.albums = [];
+    this.album = {};
     this.content =
     {
       title: undefined,
@@ -29,7 +29,7 @@ export class VideoAlbum
   {
     try
     {
-      this.albums = data['albums'];
+      this.album = data['album'];
       this.content = data['content'];
 
       this.feature = feature;

@@ -7,6 +7,16 @@
       {
         "sk": "viac",
         "ro": "mai mult"
+      },
+      "no-more-announcements-i18n":
+      {
+        "sk": "žiadne dialšie oznamy",
+        "ro": "niciun alt anunț"
+      },
+      "no-announcements-i18n":
+      {
+        "sk": "žiadne oznamy",
+        "ro": "niciun anunț"
       }
     }
   }

@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { NewsComponent } from './news.component';
+import { VideoArchiveComponent } from './video-archive.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: NewsComponent
+    component: VideoArchiveComponent
   },
   {
     path: ':url',
-    component: NewsComponent
+    component: VideoArchiveComponent
   }
 ];
 
@@ -23,5 +23,5 @@ const routes: Routes = [
   ]
 })
 
-export class NewsRoutingModule
+export class VideoArchiveRoutingModule
 {}

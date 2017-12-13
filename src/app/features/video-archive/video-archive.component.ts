@@ -20,17 +20,17 @@ import { PageService } from '@app/core/page.service';
 import { UrlService } from '@app/core/url.service';
 
 // others
-import { PhotoAlbum } from './photo-album.model';
+import { VideoArchive } from './video-archive.model';
 
 @Component({
-  selector: 'app-photo-album',
-  templateUrl: 'photo-album.view.html',
-  styleUrls: ['photo-album.style.scss']
+  selector: 'app-video-archive',
+  templateUrl: 'video-archive.view.html',
+  styleUrls: ['video-archive.style.scss']
 })
 
-export class PhotoAlbumComponent implements OnInit, OnDestroy
+export class VideoArchiveComponent implements OnInit, OnDestroy
 {
-  public photoAlbum = new PhotoAlbum();
+  public videoArchive = new VideoArchive();
   private subscription: Subscription;
 
   constructor(
@@ -44,7 +44,7 @@ export class PhotoAlbumComponent implements OnInit, OnDestroy
     private router: Router,
     private url: UrlService
   ) {
-    this.subscription = this.communication.onLanguageChanged$.subscribe(() => this.navigateToPhotoAlbum());
+    this.subscription = this.communication.onLanguageChanged$.subscribe(() => this.navigateToVideoArchive());
   }
 
   ngOnInit()
@@ -56,29 +56,29 @@ export class PhotoAlbumComponent implements OnInit, OnDestroy
       {
         console.log('<!--');
 
-        if (this.photoAlbum.loaded)
+        if (this.videoArchive.loaded)
         {
           // on url params change, validate & verify url language
           this.detectUrlLanguage(params.get('url'));
           return of('');
         }
-        else if (this.globals.json.photoAlbum.loaded)
+        else if (this.globals.json.videoArchive.loaded)
         {
           // in case the http-get already loaded json data, use that data...
-          const photoAlbum = this.globals.json.photoAlbum;
+          const videoArchive = this.globals.json.videoArchive;
           const features = this.globals.json.features;
           const languages = this.globals.json.languages;
 
-          if (photoAlbum.loaded && features.loaded && languages.loaded)
+          if (videoArchive.loaded && features.loaded && languages.loaded)
           {
-            this.photoAlbum.initialize(photoAlbum['data'], features['data']['photoAlbum'], languages['data']);
-            this.communication.updateFeature('photoAlbum');
+            this.videoArchive.initialize(videoArchive['data'], features['data']['videoArchive'], languages['data']);
+            this.communication.updateFeature('videoArchive');
             this.detectUrlLanguage(params.get('url'));
           }
           else
           {
-            console.warn('Ooops, something went wrong...', [photoAlbum, features, languages]);
-            this.photoAlbum.loaded = false;
+            console.warn('Ooops, something went wrong...', [videoArchive, features, languages]);
+            this.videoArchive.loaded = false;
           }
           return of('');
         }
@@ -86,63 +86,63 @@ export class PhotoAlbumComponent implements OnInit, OnDestroy
         {
           // first time make an http-get to load data from json
           url = params.get('url');
-          return from(this.http.get(this.globals.pathTo.photoAlbum).retry(3));
+          return from(this.http.get(this.globals.pathTo.videoArchive).retry(3));
         }
       })
       .subscribe((json) =>
       {
-        if (this.photoAlbum.loaded === false)
+        if (this.videoArchive.loaded === false)
         {
-          console.log('Json loaded!', [this.globals.pathTo.photoAlbum, json]);
+          console.log('Json loaded!', [this.globals.pathTo.videoArchive, json]);
           try
           {
             // store json content globally
-            this.globals.json.photoAlbum['data'] = json['data'];
-            this.globals.json.photoAlbum.loaded = true;
+            this.globals.json.videoArchive['data'] = json['data'];
+            this.globals.json.videoArchive.loaded = true;
 
-            const photoAlbum = this.globals.json.photoAlbum;
+            const videoArchive = this.globals.json.videoArchive;
             const features = this.globals.json.features;
             const languages = this.globals.json.languages;
 
             if (features.loaded && languages.loaded)
             {
-              this.photoAlbum.initialize(photoAlbum['data'], features['data']['photoAlbum'], languages['data']);
-              this.communication.updateFeature('photoAlbum');
+              this.videoArchive.initialize(videoArchive['data'], features['data']['videoArchive'], languages['data']);
+              this.communication.updateFeature('videoArchive');
               this.detectUrlLanguage(url);
             }
           }
           catch (e)
           {
             console.warn('Ooops, something went wrong...', [e]);
-            this.photoAlbum.loaded = false;
+            this.videoArchive.loaded = false;
           }
         }
 
         // seo
-        this.page.updateTitle(this.i18n.translate(this.photoAlbum.feature, 'title'));
-        this.page.updateDescription(this.i18n.translate(this.photoAlbum.content, 'title'));
+        this.page.updateTitle(this.i18n.translate(this.videoArchive.feature, 'title'));
+        this.page.updateDescription(this.i18n.translate(this.videoArchive.content, 'title'));
 
         console.log('-->');
       },
       (e) =>
       {
         console.warn('Ooops, something went wrong...', [e]);
-        this.photoAlbum.loaded = false;
+        this.videoArchive.loaded = false;
       }
     );
   }
 
   private detectUrlLanguage(url: string): void
   {
-    const id = this.url.detectedUrlLanguage(url, this.photoAlbum.feature, this.photoAlbum.languages);
+    const id = this.url.detectedUrlLanguage(url, this.videoArchive.feature, this.videoArchive.languages);
 
     // if the url language isn't detected, redirect to default url, otherwise update language...
-    (id === '') ? this.navigateToPhotoAlbum() : this.communication.updateLanguage(id);
+    (id === '') ? this.navigateToVideoArchive() : this.communication.updateLanguage(id);
   }
 
-  private navigateToPhotoAlbum(): void
+  private navigateToVideoArchive(): void
   {
-    this.router.navigate([this.globals.routes.photoAlbum + this.i18n.translate(this.photoAlbum.feature, 'route')]);
+    this.router.navigate([this.globals.routes.videoArchive + this.i18n.translate(this.videoArchive.feature, 'route')]);
   }
 
   ngOnDestroy()

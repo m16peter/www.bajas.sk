@@ -2,11 +2,13 @@ export class Home
 {
   public features: any;
   public general: any;
-  public news: any;
-  public videoAlbum: any;
-  public photoAlbum: any;
+
+  public announcements: any;
+  public videoArchive: any;
+  public photoArchive: any;
   public contact: any;
 
+  public box: any;
   public loaded: boolean;
 
   constructor()
@@ -18,24 +20,30 @@ export class Home
   {
     this.features = [];
     this.general = {};
-    this.news = {};
-    this.videoAlbum = {};
-    this.photoAlbum = {};
+
+    this.announcements = {};
+    this.videoArchive = {};
+    this.photoArchive = {};
     this.contact = {};
 
+    this.box =
+    {
+      'cardId': 0,
+      'videoState': 0
+    };
     this.loaded = false;
   }
 
   public initialize(data: any, general: any, features: any): void
   {
-    console.log(data);
     try
     {
       this.features = features;
       this.general = general;
-      this.news = data['news'];
-      this.videoAlbum = data['video-album'];
-      this.photoAlbum = data['photo-album'];
+
+      this.announcements = data['announcements'];
+      this.videoArchive = data['video-archive'];
+      this.photoArchive = data['photo-archive'];
       this.contact = data['contact'];
 
       this.loaded = true;

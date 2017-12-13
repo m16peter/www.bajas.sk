@@ -11,20 +11,7 @@
           "ro": "Întâlnirea Creștinilor Români"
         }
       },
-      "news":
-      {
-        "route-i18n":
-        {
-          "sk": "novinky",
-          "ro": "noutati"
-        },
-        "title-i18n":
-        {
-          "sk": "Novinky",
-          "ro": "Noutăți"
-        }
-      },
-      "videoAlbum":
+      "videoArchive":
       {
         "route-i18n":
         {
@@ -37,7 +24,7 @@
           "ro": "Arhivă Video"
         }
       },
-      "photoAlbum":
+      "photoArchive":
       {
         "route-i18n":
         {
@@ -48,19 +35,6 @@
         {
           "sk": "Foto Archív",
           "ro": "Arhivă Foto"
-        }
-      },
-      "contact":
-      {
-        "route-i18n":
-        {
-          "sk": "kontakt",
-          "ro": "contact"
-        },
-        "title-i18n":
-        {
-          "sk": "Kontakt",
-          "ro": "Contact"
         }
       }
     }

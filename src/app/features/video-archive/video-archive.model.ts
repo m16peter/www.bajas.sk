@@ -1,7 +1,7 @@
-export class Contact
+export class VideoArchive
 {
-  public cards: any[];
   public content: any;
+  public video: any;
 
   public feature: any;
   public languages: any[];
@@ -15,11 +15,17 @@ export class Contact
 
   private init(): void
   {
-    this.cards = [];
     this.content =
     {
       title: undefined,
       description: undefined
+    };
+    this.video =
+    {
+      id: undefined,
+      img: undefined,
+      title: undefined,
+      topic: undefined
     };
 
     this.loaded = false;
@@ -29,8 +35,8 @@ export class Contact
   {
     try
     {
-      this.cards = data['cards'];
       this.content = data['content'];
+      this.video = data['video'];
 
       this.feature = feature;
       this.languages = languages;

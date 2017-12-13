@@ -18,10 +18,8 @@ export class GlobalsService
   public routes =
   {
     home: '/',
-    news: '01/',
-    videoAlbum: '02/',
-    photoAlbum: '03/',
-    contact: '04/'
+    videoArchive: '01/',
+    photoArchive: '02/'
   };
 
   // path to jsons (read only)
@@ -31,18 +29,16 @@ export class GlobalsService
     features: 'assets/app/features.json',
     languages: 'assets/app/languages.json',
     home: 'assets/home/home.json',
-    news: 'assets/news/news.json',
-    videoAlbum: 'assets/video-album/video-album.json',
-    photoAlbum: 'assets/photo-album/photo-album.json',
-    contact: 'assets/contact/contact.json'
+    videoArchive: 'assets/video-archive/video-archive.json',
+    photoArchive: 'assets/photo-archive/photo-archive.json'
   };
 
   // browser setup (read only)
   public browserSetup =
   {
     localStorageId: 'app-language',
-    pageTitle: 'bajas.sk',
-    metaDescription: 'Stretnutie Rumunskych veriacich zijucich na Slovensku'
+    pageTitle: 'BAJAS.SK',
+    metaDescription: 'Stretnutie Rumunských Veriacich.'
   };
 
   // json data (read only)
@@ -52,9 +48,7 @@ export class GlobalsService
     languages: { loaded: false },
     features: { loaded: false },
     home: { loaded: false },
-    news: { loaded: false },
-    videoAlbum: { loaded: false },
-    photoAlbum: { loaded: false },
-    contact: { loaded: false }
+    videoArchive: { loaded: false },
+    photoArchive: { loaded: false }
   };
 }

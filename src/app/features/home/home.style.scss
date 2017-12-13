@@ -16,7 +16,7 @@
   transition: width 100ms ease-in;
 
   > div {
-   padding: 50px;
+   padding: 50px 50px 0 50px;
    margin: auto 0 auto auto;
 
     &::after {
@@ -31,11 +31,14 @@
     }
     @media (max-width: 1023px) {
       margin: auto;
-      padding: 30px;
+      padding: 50px;
 
       &::after {
         opacity: 1;
       }
+    }
+    @media (max-width: 1023px) {
+      padding: 100px 0 0 0;
     }
   }
   .h2, .p {
@@ -82,32 +85,91 @@
   background-color: #dee;
   display: flex;
 
-  .card {
+  .cards {
+    position: relative;
     transition: width 100ms ease-in;
     margin: auto;
-    background: #134;
+
+    .card {
+      display: flex;
+      position: absolute;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      transition: all 200ms ease-out;
+
+      > span {
+        position: relative;
+        padding: 0 50px;
+        line-height: 150%;
+        margin: auto auto auto 0;
+      }
+      &_1 {
+        transform: translate3d(20px, 20px, 0);
+        width: calc(100% - 40px);
+        height: calc(100% - 40px);
+        z-index: 3;
+      }
+      &_2 {
+        transform: translate3d(30px, 50px, 0);
+        width: calc(100% - 60px);
+        height: calc(100% - 60px);
+        z-index: 2;
+      }
+      &_3 {
+        transform: translate3d(40px, 80px, 0);
+        width: calc(100% - 80px);
+        height: calc(100% - 80px);
+        z-index: 1;
+      }
+      &_previous {
+        transform: translate3d(40px, 80px, 0);
+        width: calc(100% - 80px);
+        height: calc(100% - 80px);
+        z-index: 0;
+      }
+      &_next {
+        transform: translate3d(20px, -100%, 0) scale(1.2);
+        width: calc(100% - 40px);
+        height: calc(100% - 40px);
+        opacity: 0;
+        z-index: 4;
+      }
+      &_last {
+        transform: translate3d(40px, 40px, 0);
+        width: calc(100% - 80px);
+        height: calc(100% - 80px);
+        z-index: 1;
+        background: rgba(0,0,0, 0.2);
+        color: #fff;
+
+        > span {
+          text-transform: uppercase;
+          font-size: 32px;
+        }
+      }
+    }
   }
-}
-
-.news {
-
   .btn {
     position: absolute;
     left: -28px;
-  }
-  .previous {
-    top: calc(50% + 28px);
+    z-index: 5;
   }
   .next {
     top: calc(50% - 84px);
   }
+  .previous {
+    top: calc(50% + 28px);
+  }
 }
 
 .video-album {
-
+  .video {
+    position: relative;
+    transition: width 100ms ease-in;
+    margin: auto;
+  }
   .btn {
-    position: absolute;
     top: calc(50% - 28px);
-    left: -28px;
   }
 }

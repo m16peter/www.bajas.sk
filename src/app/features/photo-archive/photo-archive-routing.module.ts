@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { VideoAlbumComponent } from './video-album.component';
+import { PhotoArchiveComponent } from './photo-archive.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: VideoAlbumComponent
+    component: PhotoArchiveComponent
   },
   {
     path: ':url',
-    component: VideoAlbumComponent
+    component: PhotoArchiveComponent
   }
 ];
 
@@ -23,5 +23,5 @@ const routes: Routes = [
   ]
 })
 
-export class VideoAlbumRoutingModule
+export class PhotoArchiveRoutingModule
 {}

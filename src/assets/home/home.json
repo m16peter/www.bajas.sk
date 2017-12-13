@@ -1,7 +1,7 @@
 {
   "data":
   {
-    "news":
+    "announcements":
     {
       "content":
       {
@@ -12,14 +12,40 @@
         },
         "description-i18n":
         {
-          "sk": "Oznamy tikajuce sa stretnutia",
-          "ro": "Anunțuri în legătură cu întălnirea"
+          "sk": "Oznamy tikajuce sa stretnutia. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum",
+          "ro": "Anunțuri în legătură cu întălnirea. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium"
         }
       },
       "cards":
-      []
+      [
+        {
+          "title": "Et harum quidem rerum facilis est et expedita distinctio",
+          "background": "#9733EE",
+          "color": "#FFF"
+        },
+        {
+          "title": "Et harum quidem rerum facilis est et expedita distinctio",
+          "background": "#F09819",
+          "color": "#FFF"
+        },
+        {
+          "title": "Et harum quidem rerum facilis est et expedita distinctio",
+          "background": "#27ae60",
+          "color": "#FFF"
+        },
+        {
+          "title": "Et harum quidem rerum facilis est et expedita distinctio",
+          "background": "#800080",
+          "color": "#FFF"
+        },
+        {
+          "title": "Et harum quidem rerum facilis est et expedita distinctio",
+          "background": "#26a0da",
+          "color": "#FFF"
+        }
+      ]
     },
-    "video-album":
+    "video-archive":
     {
       "content":
       {
@@ -30,14 +56,19 @@
         },
         "description-i18n":
         {
-          "sk": "Archív nahrávok stretnuti",
-          "ro": "Arhivă înregistrări a întălnirilor"
+          "sk": "Archív nahrávok stretnuti. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum",
+          "ro": "Arhivă înregistrări a întălnirilor. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium"
         }
       },
-      "albums":
-      []
+      "video":
+      {
+        "id": "RBumgq5yVrA",
+        "img": "url('assets/video-archive/img/img.png')",
+        "title": "01.23.4567",
+        "topic": "Ja som cesta, pravda i život. Nik neprichádza k Otcovi, ak len nie skrze mňa."
+      }
     },
-    "photo-album":
+    "photo-archive":
     {
       "content":
       {
@@ -48,11 +79,11 @@
         },
         "description-i18n":
         {
-          "sk": "Archív fotiek z oblasti Bajas",
-          "ro": "Arhivă foto din zona Sacalasău Nou"
+          "sk": "Archív fotiek z oblasti Bajaš. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum",
+          "ro": "Arhivă foto din zona Sacalasău Nou. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium"
         }
       },
-      "albums":
+      "album":
       []
     },
     "contact":
@@ -66,8 +97,8 @@
         },
         "description-i18n":
         {
-          "sk": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident",
-          "ro": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo"
+          "sk": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum",
+          "ro": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium"
         }
       },
       "cards":

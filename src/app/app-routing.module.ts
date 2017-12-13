@@ -14,30 +14,16 @@ const routes: Routes =
   },
   {
     path: '01',
-    loadChildren: 'app/features/news/news.module#NewsModule',
+    loadChildren: 'app/features/video-archive/video-archive.module#VideoArchiveModule',
     data: {
-      state: 'news'
+      state: 'video-archive'
     }
   },
   {
     path: '02',
-    loadChildren: 'app/features/video-album/video-album.module#VideoAlbumModule',
+    loadChildren: 'app/features/photo-archive/photo-archive.module#PhotoArchiveModule',
     data: {
-      state: 'video-album'
-    }
-  },
-  {
-    path: '03',
-    loadChildren: 'app/features/photo-album/photo-album.module#PhotoAlbumModule',
-    data: {
-      state: 'photo-album'
-    }
-  },
-  {
-    path: '04',
-    loadChildren: 'app/features/contact/contact.module#ContactModule',
-    data: {
-      state: 'contact'
+      state: 'photo-archive'
     }
   },
   {
