@@ -140,8 +140,8 @@
         width: calc(100% - 80px);
         height: calc(100% - 80px);
         z-index: 1;
-        background: rgba(0,0,0, 0.2);
-        color: #fff;
+        background: rgba(0,0,0, 0.1);
+        color: #eef;
 
         > span {
           text-transform: uppercase;
@@ -166,12 +166,67 @@
 .video-album {
 
   bnb-video {
-    display: flex;
     position: relative;
     transition: all 100ms ease-in;
     margin: auto;
   }
   .btn {
     top: calc(50% - 28px);
+  }
+}
+
+.photo-album {
+
+  .album {
+    position: relative;
+    transition: width 100ms ease-in;
+    margin: auto;
+
+    &:hover {
+
+      .img_2 {
+        transform: rotate(-4deg);
+      }
+      .img_3 {
+        transform: rotate(4deg);
+      }
+    }
+  }
+  .img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border: 4px solid #FFF;
+    box-shadow: 0 0 4px rgba(0,0,0, 0.1);
+    border-radius: 6px;
+    transition: all 500ms;
+    transform-origin: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    transform: translateZ(0);
+    cursor: pointer;
+
+    &_1 {
+      z-index: 3;
+    }
+    &_2 {
+      z-index: 2;
+    }
+    &_3 {
+      z-index: 1;
+    }
+    &_next {
+      z-index: 0;
+      transform: rotate(4deg);
+      opacity: 0;
+    }
+    &_previous {
+      z-index: 4;
+      transform: translateX(100%) rotate(16deg);
+      opacity: 0;
+    }
   }
 }

@@ -89,9 +89,7 @@
         [style.height.px] = "globals.app.cardSize"
         [video]           = "video"
       ></bnb-video>
-
     </div>
-
   </div>
 
   <!-- Photo Archive -->
@@ -112,9 +110,17 @@
       </div>
     </div>
 
-    <div class="box flex" *ngIf="globals.app.width >= 1024">
+    <div class="photo-album box flex" *ngIf="globals.app.width >= 1024">
 
-      <div class="card" [style.width.px]="globals.app.cardSize" [style.height.px]="globals.app.cardSize"></div>
+      <div class="album" [style.width.px]="globals.app.cardSize" [style.height.px]="globals.app.cardSize">
+
+        <div (click)="nextPhoto()" *ngFor="let photo of home.photoArchive.album; let i = index">
+
+          <div class="img {{ photoStatus(i) }}" [style.background-image]="photo"></div>
+
+        </div>
+
+      </div>
 
     </div>
 

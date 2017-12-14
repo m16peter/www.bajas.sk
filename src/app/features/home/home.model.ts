@@ -28,7 +28,8 @@ export class Home
 
     this.box =
     {
-      cardId: 0
+      cardId: 0,
+      photoId: 0
     };
     this.loaded = false;
   }

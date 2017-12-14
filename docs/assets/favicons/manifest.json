@@ -1,5 +1,6 @@
 {
-    "name": "ngx",
+    "name": "Angular 5",
+    "short_name": "ngx",
     "icons": [
         {
             "src": "/assets/favicons/android-chrome-192x192.png",

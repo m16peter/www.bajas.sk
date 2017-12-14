@@ -55,6 +55,7 @@ export class HomeComponent implements OnInit
       if (home.loaded && general.loaded && features.loaded)
       {
         this.home.initialize(home['data'], general['data'], features['data']);
+        this.video.initialize(this.home.videoArchive.video);
         this.communication.updateFeature('home');
       }
       else
@@ -145,5 +146,42 @@ export class HomeComponent implements OnInit
   public toggleVideoState(): void
   {
     this.video.isActive = !this.video.isActive;
+  }
+
+  public photoStatus(i: number): string
+  {
+
+    if (this.home.box.photoId === i)
+    {
+      return ('img_1');
+    }
+    else if (i === ((this.home.box.photoId > 0) ? (this.home.box.photoId - 1) : (this.home.photoArchive.album.length - 1)))
+    {
+      return ('img_previous');
+    }
+    else if (i === ((this.home.box.photoId < this.home.photoArchive.album.length - 1) ? (this.home.box.photoId + 1) : 0))
+    {
+      return ('img_2');
+    }
+    else if (i === ((this.home.box.photoId + 1 < this.home.photoArchive.album.length - 1) ? (this.home.box.photoId + 2) : (this.home.box.photoId + 2 - this.home.photoArchive.album.length)))
+    {
+      return ('img_3');
+    }
+    else
+    {
+      return ('img_next');
+    }
+  }
+
+  public nextPhoto(): void
+  {
+    if (this.home.box.photoId < (this.home.photoArchive.album.length - 1))
+    {
+      this.home.box.photoId++;
+    }
+    else
+    {
+      this.home.box.photoId = 0;
+    }
   }
 }

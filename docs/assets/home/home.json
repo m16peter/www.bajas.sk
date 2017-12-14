@@ -84,7 +84,14 @@
         }
       },
       "album":
-      []
+      [
+        "url('assets/photo-archive/img/balloon.jpg')",
+        "url('assets/photo-archive/img/elbe.jpg')",
+        "url('assets/photo-archive/img/landscape.jpg')",
+        "url('assets/photo-archive/img/nature.jpg')",
+        "url('assets/photo-archive/img/small-river.jpg')",
+        "url('assets/photo-archive/img/winter-landscape.jpg')"
+      ]
     },
     "contact":
     {

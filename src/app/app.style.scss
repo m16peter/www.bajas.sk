@@ -193,7 +193,7 @@
 .click-catcher {
   background-color: rgba(0,0,0, 0.5);
   will-change: transform;
-  transition: opacity 200ms ease-out;
+  transition: all 50ms ease-out;
   transform: translateX(100%);
   opacity: 0;
   cursor: pointer;
@@ -227,6 +227,6 @@
   .click-catcher {
     transform: translateZ(0);
     opacity: 1;
-    transition: opacity 400ms ease-out;
+    transition: all 400ms ease-out;
   }
 }
