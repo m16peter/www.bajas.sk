@@ -1,6 +1,5 @@
 // angular
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 
 // rxjs
 import 'rxjs/add/operator/retry';
@@ -27,15 +26,22 @@ export class HomeComponent implements OnInit
   public home = new Home();
   public video = new Video();
 
+  @ViewChild('scrollEl') el;
+
   constructor(
     private communication: AppCommunicationService,
     private cdr: ChangeDetectorRef,
     private globals: GlobalsService,
-    private http: HttpClient,
     private i18n: I18nService,
     private page: PageService,
     private scroll: ScrollService
-  ) {}
+  ) {
+    this.communication.onScrollTo$
+      .subscribe((section: number) =>
+        this.scroll.scrollTo(this.el, (this.el.nativeElement.clientHeight * section)
+      )
+    );
+  }
 
   ngOnInit()
   {
@@ -43,97 +49,62 @@ export class HomeComponent implements OnInit
     this.page.updateTitle(this.globals.browserSetup.pageTitle);
     this.page.updateDescription(this.globals.browserSetup.metaDescription);
 
-    // initialize home with json data
-    if (this.globals.json.home.loaded)
-    {
-      // load stored json data
-      const home = this.globals.json.home;
-      const general = this.globals.json.general;
-      const features = this.globals.json.features;
+    // load stored json data
+    const home = this.globals.json.home;
+    const general = this.globals.json.general;
+    const features = this.globals.json.features;
 
-      // initialize home component, instead of http-get, use stored json data...
-      if (home.loaded && general.loaded && features.loaded)
-      {
-        this.home.initialize(home['data'], general['data'], features['data']);
-        this.video.initialize(this.home.videoArchive.video);
-        this.communication.updateFeature('home');
-      }
-      else
-      {
-        console.warn('Ooops, something went wrong...', [home, general, features]);
-      }
+    // initialize home component, use stored json data...
+    if (home.loaded && general.loaded && features.loaded)
+    {
+      this.home.initialize(home['data'], general['data'], features['data']);
+      this.video.initialize(this.home.videoArchive.video);
+      this.communication.updateFeature('home');
     }
     else
     {
-      console.log('<!--');
-      this.http.get(this.globals.pathTo.home).retry(3).subscribe((json) =>
-      {
-        console.log('Json loaded!', [this.globals.pathTo.home, json]);
-        try
-        {
-          // store json data for later use
-          this.globals.json.home['data'] = json['data'];
-          this.globals.json.home.loaded = true;
-
-          const home = this.globals.json.home;
-          const general = this.globals.json.general;
-          const features = this.globals.json.features;
-
-          // initialize home component
-          if (general.loaded && features.loaded)
-          {
-            this.home.initialize(home['data'], general['data'], features['data']);
-            this.video.initialize(this.home.videoArchive.video);
-            this.communication.updateFeature('home');
-          }
-          else
-          {
-            console.warn('Ooops, something went wrong...', [home, general, features]);
-          }
-          console.log('-->');
-        }
-        catch (e)
-        {
-          console.warn('Ooops, something went wrong...', [e, json]);
-        }
-      },
-      (e) =>
-      {
-        console.warn('Ooops, something went wrong...', [e]);
-      });
+      console.warn('Ooops, something went wrong...', [home, general, features]);
     }
   }
 
   public route(key: string): string
   {
-    return (this.globals.routes[key] + this.i18n.translate(this.home.features[key], 'route'));
+    const route = this.i18n.translate(this.home.features[key], 'route');
+
+    if (route !== undefined)
+    {
+      return (this.globals.routes[key] + route);
+    }
+    return ('/');
   }
 
-  public next(): void
+  public nextCard(): void
   {
     this.home.box.cardId++;
   }
 
-  public previous(): void
+  public previousCard(): void
   {
     this.home.box.cardId--;
   }
 
   public cardStatus(i: number): string
   {
-    if (i < this.home.box.cardId)
+    const index = this.home.box.cardId;
+
+    if (i < index)
     {
       return ('card_next');
     }
-    if (this.home.box.cardId === i)
+    if (index === i)
     {
       return ('card_1');
     }
-    else if (this.home.box.cardId + 1 === i)
+    else if (index + 1 === i)
     {
       return ('card_2');
     }
-    else if (this.home.box.cardId + 2 === i)
+    else if (index + 2 === i)
     {
       return ('card_3');
     }
@@ -150,20 +121,22 @@ export class HomeComponent implements OnInit
 
   public photoStatus(i: number): string
   {
+    const len = this.home.photoArchive.album.length - 1;
+    const index = this.home.box.photoId;
 
-    if (this.home.box.photoId === i)
+    if (index === i)
     {
       return ('img_1');
     }
-    else if (i === ((this.home.box.photoId > 0) ? (this.home.box.photoId - 1) : (this.home.photoArchive.album.length - 1)))
+    else if (i === ((index > 0) ? (index - 1) : len))
     {
       return ('img_previous');
     }
-    else if (i === ((this.home.box.photoId < this.home.photoArchive.album.length - 1) ? (this.home.box.photoId + 1) : 0))
+    else if (i === ((index < len) ? (index + 1) : 0))
     {
       return ('img_2');
     }
-    else if (i === ((this.home.box.photoId + 1 < this.home.photoArchive.album.length - 1) ? (this.home.box.photoId + 2) : (this.home.box.photoId + 2 - this.home.photoArchive.album.length)))
+    else if (i === (((index + 1) < len) ? (index + 2) : (index - len + 1)))
     {
       return ('img_3');
     }
@@ -175,13 +148,14 @@ export class HomeComponent implements OnInit
 
   public nextPhoto(): void
   {
-    if (this.home.box.photoId < (this.home.photoArchive.album.length - 1))
-    {
-      this.home.box.photoId++;
-    }
-    else
-    {
-      this.home.box.photoId = 0;
-    }
+    const index = this.home.box.photoId;
+    const len = this.home.photoArchive.album.length - 1;
+
+    this.home.box.photoId = (index < len) ? (index + 1) : 0;
+  }
+
+  public scrollTo(): void
+  {
+
   }
 }

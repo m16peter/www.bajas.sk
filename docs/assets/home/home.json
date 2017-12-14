@@ -20,28 +20,23 @@
       [
         {
           "title": "Et harum quidem rerum facilis est et expedita distinctio",
-          "background": "#9733EE",
-          "color": "#FFF"
+          "background": "#9733EE"
+        },
+        {
+          "title": "Et harum quidem rerum facilis",
+          "background": "#F09819"
         },
         {
           "title": "Et harum quidem rerum facilis est et expedita distinctio",
-          "background": "#F09819",
-          "color": "#FFF"
+          "background": "#27ae60"
+        },
+        {
+          "title": "Et harum quidem rerum facilis",
+          "background": "#800080"
         },
         {
           "title": "Et harum quidem rerum facilis est et expedita distinctio",
-          "background": "#27ae60",
-          "color": "#FFF"
-        },
-        {
-          "title": "Et harum quidem rerum facilis est et expedita distinctio",
-          "background": "#800080",
-          "color": "#FFF"
-        },
-        {
-          "title": "Et harum quidem rerum facilis est et expedita distinctio",
-          "background": "#26a0da",
-          "color": "#FFF"
+          "background": "#26a0da"
         }
       ]
     },

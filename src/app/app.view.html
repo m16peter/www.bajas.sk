@@ -25,30 +25,39 @@
     <div class="features">
 
       <!-- Home -->
-      <div class="feature {{ featureStatus('home') }}">
+      <div class="feature">
+        <img src="{{ app.features['home'].icon }}" alt="" height="50" width="50"/>
 
-        <a routerLink="{{ globals.routes.home }}" (click)="toggleMenu()">
+        <div class="link" (click)="scrollTo(0)">
           <span>{{ i18n.translate(app.features['home'], 'title') }}</span>
-        </a>
-
+        </div>
       </div>
 
       <!-- Video Archive -->
-      <div class="feature {{ featureStatus('videoArchive') }}">
+      <div class="feature">
+        <img src="{{ app.features['videoArchive'].icon }}" alt="" height="50" width="50"/>
 
-        <a href="https://www.youtube.com/channel/UCe1467eB7gZ9cBBk7jzRwkw/videos" target="_blank" (click)="toggleMenu()">
+        <div class="link" (click)="scrollTo(1)">
           <span>{{ i18n.translate(app.features['videoArchive'], 'title') }}</span>
-        </a>
-
+        </div>
       </div>
 
       <!-- Photo Archive -->
-      <div class="feature {{ featureStatus('photoArchive') }}">
+      <div class="feature">
+        <img src="{{ app.features['photoArchive'].icon }}" alt="" height="50" width="50"/>
 
-        <a href="https://photos.app.goo.gl/NOh2cDhhDrH95owj1" target="_blank" (click)="toggleMenu()">
+        <div class="link" (click)="scrollTo(2)">
           <span>{{ i18n.translate(app.features['photoArchive'], 'title') }}</span>
-        </a>
+        </div>
+      </div>
 
+      <!-- Contact -->
+      <div class="feature">
+        <img src="{{ app.features['contact'].icon }}" alt="" height="50" width="50"/>
+
+        <div class="link" (click)="scrollTo(3)">
+          <span>{{ i18n.translate(app.features['contact'], 'title') }}</span>
+        </div>
       </div>
 
     </div>

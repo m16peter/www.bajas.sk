@@ -5,6 +5,7 @@
     {
       "home":
       {
+        "icon": "assets/app/img/angular.svg",
         "title-i18n":
         {
           "sk": "Stretnutie Rumunských Veriacich",
@@ -13,11 +14,8 @@
       },
       "videoArchive":
       {
-        "route-i18n":
-        {
-          "sk": "video-archiv",
-          "ro": "arhiva-video"
-        },
+        "icon": "assets/video-archive/img/youtube.svg",
+        "redirect": "https://www.youtube.com/channel/UCe1467eB7gZ9cBBk7jzRwkw/videos",
         "title-i18n":
         {
           "sk": "Video Archív",
@@ -26,15 +24,21 @@
       },
       "photoArchive":
       {
-        "route-i18n":
-        {
-          "sk": "foto-archiv",
-          "ro": "arhiva-foto"
-        },
+        "icon": "assets/photo-archive/img/google-photos.svg",
+        "redirect": "https://photos.app.goo.gl/NOh2cDhhDrH95owj1",
         "title-i18n":
         {
           "sk": "Foto Archív",
           "ro": "Arhivă Foto"
+        }
+      },
+      "contact":
+      {
+        "icon": "assets/app/img/contact-card.svg",
+        "title-i18n":
+        {
+          "sk": "Kontakt",
+          "ro": "Contact"
         }
       }
     }

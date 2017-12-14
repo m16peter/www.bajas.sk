@@ -17,9 +17,7 @@ export class GlobalsService
   // base routes (read only)
   public routes =
   {
-    home: '/',
-    videoArchive: '01/',
-    photoArchive: '02/'
+    home: '/'
   };
 
   // path to jsons (read only)
@@ -28,17 +26,15 @@ export class GlobalsService
     general: 'assets/app/general.json',
     features: 'assets/app/features.json',
     languages: 'assets/app/languages.json',
-    home: 'assets/home/home.json',
-    videoArchive: 'assets/video-archive/video-archive.json',
-    photoArchive: 'assets/photo-archive/photo-archive.json'
+    home: 'assets/home/home.json'
   };
 
   // browser setup (read only)
   public browserSetup =
   {
     localStorageId: 'app-language',
-    pageTitle: 'BAJAS.SK',
-    metaDescription: 'Stretnutie Rumunských Veriacich.'
+    pageTitle: 'Angular 5',
+    metaDescription: 'Angular - one framework to rule them all!'
   };
 
   // json data (read only)
@@ -47,8 +43,6 @@ export class GlobalsService
     general: { loaded: false },
     languages: { loaded: false },
     features: { loaded: false },
-    home: { loaded: false },
-    videoArchive: { loaded: false },
-    photoArchive: { loaded: false }
+    home: { loaded: false }
   };
 }

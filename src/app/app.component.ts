@@ -39,8 +39,11 @@ export class AppComponent implements OnInit, AfterViewInit
     private http: HttpClient,
     private i18n: I18nService
   ) {
-    this.communication.onUpdateLanguage$.subscribe((languageId) => this.selectLanguage(languageId));
-    this.communication.onUpdateFeature$.subscribe((featureKey) => this.selectFeature(featureKey));
+    this.communication.onUpdateLanguage$
+      .subscribe((languageId) => this.selectLanguage(languageId));
+
+    this.communication.onUpdateFeature$
+      .subscribe((featureKey) => this.selectFeature(featureKey));
   }
 
   ngOnInit()
@@ -48,6 +51,7 @@ export class AppComponent implements OnInit, AfterViewInit
     this.initLanguages();
     this.initFeatures();
     this.initGeneral();
+    this.initHome();
   }
 
   ngAfterViewInit()
@@ -122,24 +126,46 @@ export class AppComponent implements OnInit, AfterViewInit
     });
   }
 
+  private initHome(): void
+  {
+    this.http.get(this.globals.pathTo.home).retry(3).subscribe((json) =>
+    {
+      try
+      {
+        console.log('Json loaded!', [this.globals.pathTo.home, json]);
+        this.globals.json.home['data'] = json['data'];
+        this.globals.json.home.loaded = true;
+        this.initialize();
+      }
+      catch (e)
+      {
+        console.warn('Ooops, something went wrong...', [e, json]);
+      }
+    },
+    (e) =>
+    {
+      console.warn('Ooops, something went wrong...', [e]);
+    });
+  }
+
   private initialize(): void
   {
     if (this.globals.json.languages.loaded)
     {
       if (this.globals.json.features.loaded)
       {
-        if (!this.app.loaded)
-        {
-          // initialize from stored json data
-          this.app.features = this.globals.json.features['data'];
-          this.app.languages = this.globals.json.languages['data'];
-
-          this.selectLanguage(this.appService.initLanguage(this.app.languages));
-          this.selectFeature('home');
-        }
         if (this.globals.json.general.loaded)
         {
-          this.app.loaded = true;
+          if (this.globals.json.home.loaded)
+          {
+            // initialize from stored json data
+            this.app.features = this.globals.json.features['data'];
+            this.app.languages = this.globals.json.languages['data'];
+
+            this.selectLanguage(this.appService.initLanguage(this.app.languages));
+            this.selectFeature('home');
+            this.app.loaded = true;
+          }
         }
       }
     }
@@ -149,15 +175,15 @@ export class AppComponent implements OnInit, AfterViewInit
   {
     this.globals.app.width = window.innerWidth;
     this.globals.app.height = window.innerHeight;
-    this.globals.app.boxSize = boxSize(this.globals.app.width);
-    this.globals.app.cardSize = cardSize(this.globals.app.width, this.globals.app.height);
+    this.globals.app.boxSize = box(this.globals.app.width);
+    this.globals.app.cardSize = card(this.globals.app.width, this.globals.app.height);
 
-    function boxSize(w)
+    function box(w)
     {
       return ((w < 1024) ? (w) : (w / 2));
     }
 
-    function cardSize(w, h)
+    function card(w, h)
     {
       w = ((w - 200) / 2);
       h = (h - 100);
@@ -197,11 +223,6 @@ export class AppComponent implements OnInit, AfterViewInit
     this.app.navigationState = !this.app.navigationState;
   }
 
-  public featureStatus(module: string): string
-  {
-    return ((module === this.app.featureKey) ? 'feature_active' : '');
-  }
-
   public languageStatus(id: string): string
   {
     return ((id === this.app.languageId) ? 'language_active' : '');
@@ -214,6 +235,18 @@ export class AppComponent implements OnInit, AfterViewInit
 
   public route(key: string): string
   {
-    return (this.globals.routes[key] + this.i18n.translate(this.app.features[key], 'route'));
+    const route = this.i18n.translate(this.app.features[key], 'route');
+
+    if (route !== undefined)
+    {
+      return (this.globals.routes[key] + route);
+    }
+    return ('/');
+  }
+
+  public scrollTo(section: number): void
+  {
+    this.toggleMenu();
+    this.communication.scrollTo(section);
   }
 }

@@ -130,7 +130,7 @@
     cursor: pointer;
 
     &:hover {
-      a > span {
+      a > span, .link > span {
         color: #000;
 
         &::after {
@@ -139,7 +139,10 @@
         }
       }
     }
-    a {
+    img {
+      margin: auto;
+    }
+    .link, a {
       position: relative;
       width: 100%;
       min-height: 50px;
