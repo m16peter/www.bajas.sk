@@ -1,9 +1,9 @@
 <div class="home full-screen" #scrollEl *ngIf="home.loaded">
 
   <!-- News -->
-  <div class="layout-row" [style.height.px]="globals.app.height">
+  <div class="section layout-row" [style.height.px]="(globals.app.width >= 1024 && globals.app.height >= 500) ? globals.app.height : (globals.app.height * 2)">
 
-    <div class="content layout-row" [style.width.px]="globals.app.boxSize">
+    <div class="content layout-row" [style.width]="(globals.app.width >= 1024 && globals.app.height >= 500) ? (globals.app.boxSize + 'px') : 'auto'" [style.height.px]="globals.app.height">
       <div>
 
         <div class="h2">{{ i18n.translate(home.announcements.content, 'title') }}</div>
@@ -12,7 +12,7 @@
       </div>
     </div>
 
-    <div class="announcements box flex" *ngIf="globals.app.width >= 1024">
+    <div class="announcements box flex" [style.height.px]="globals.app.height">
 
       <button class="btn next" mat-fab color="primary" [disabled]="!(home.box.cardId < home.announcements.cards.length)" (click)="nextCard()">
         <svg fill="#fff" height="24" viewBox="0 0 24 24" width="24">
@@ -49,9 +49,9 @@
   </div>
 
   <!-- Video Archive -->
-  <div class="layout-row" [style.height.px]="globals.app.height">
+  <div class="section layout-row" [style.height.px]="(globals.app.width >= 1024 && globals.app.height >= 500) ? globals.app.height : (globals.app.height * 2)">
 
-    <div class="content layout-row" [style.width.px]="globals.app.boxSize">
+    <div class="content layout-row" [style.width]="(globals.app.width >= 1024 && globals.app.height >= 500) ? (globals.app.boxSize + 'px') : 'auto'" [style.height.px]="globals.app.height">
       <div>
 
         <div class="h2">{{ i18n.translate(home.videoArchive.content, 'title') }}</div>
@@ -66,7 +66,7 @@
       </div>
     </div>
 
-    <div class="video-album box flex" *ngIf="globals.app.width >= 1024">
+    <div class="video-album box flex" [style.height.px]="globals.app.height">
 
       <button class="btn" mat-fab color="primary" (click)="toggleVideoState()">
 
@@ -89,13 +89,15 @@
         [style.height.px] = "globals.app.cardSize"
         [video]           = "video"
       ></bnb-video>
+
     </div>
+
   </div>
 
   <!-- Photo Archive -->
-  <div class="layout-row" [style.height.px]="globals.app.height">
+  <div class="section layout-row" [style.height.px]="(globals.app.width >= 1024 && globals.app.height >= 500) ? globals.app.height : (globals.app.height * 2)">
 
-    <div class="content layout-row" [style.width.px]="globals.app.boxSize">
+    <div class="content layout-row" [style.width]="(globals.app.width >= 1024 && globals.app.height >= 500) ? (globals.app.boxSize + 'px') : 'auto'" [style.height.px]="globals.app.height">
       <div>
 
         <div class="h2">{{ i18n.translate(home.photoArchive.content, 'title') }}</div>
@@ -110,7 +112,7 @@
       </div>
     </div>
 
-    <div class="photo-album box flex" *ngIf="globals.app.width >= 1024">
+    <div class="photo-album box flex" [style.height.px]="globals.app.height">
 
       <div class="album" [style.width.px]="globals.app.cardSize" [style.height.px]="globals.app.cardSize">
 
@@ -127,9 +129,9 @@
   </div>
 
   <!-- Contact -->
-  <div class="layout-row" [style.height.px]="globals.app.height">
+  <div class="section layout-row" [style.height.px]="(globals.app.width >= 1024 && globals.app.height >= 500) ? globals.app.height : (globals.app.height * 2)">
 
-    <div class="content layout-row" [style.width.px]="globals.app.boxSize">
+    <div class="content layout-row" [style.width]="(globals.app.width >= 1024 && globals.app.height >= 500) ? (globals.app.boxSize + 'px') : 'auto'" [style.height.px]="globals.app.height">
       <div>
 
         <div class="h2">{{ i18n.translate(home.contact.content, 'title') }}</div>
@@ -138,7 +140,7 @@
       </div>
     </div>
 
-    <div class="contact box flex" *ngIf="globals.app.width >= 1024">
+    <div class="contact box flex" [style.height.px]="globals.app.height">
 
       <div class="cards layout-column" [style.width.px]="globals.app.cardSize" [style.height.px]="globals.app.cardSize">
 

@@ -25,37 +25,37 @@
     <div class="features">
 
       <!-- Home -->
-      <div class="feature">
+      <div class="feature" (click)="scrollTo(0)">
         <img src="{{ app.features['home'].icon }}" alt="" height="50" width="50"/>
 
-        <div class="link" (click)="scrollTo(0)">
+        <div class="link">
           <span>{{ i18n.translate(app.features['home'], 'title') }}</span>
         </div>
       </div>
 
       <!-- Video Archive -->
-      <div class="feature">
+      <div class="feature" (click)="scrollTo(1)">
         <img src="{{ app.features['videoArchive'].icon }}" alt="" height="50" width="50"/>
 
-        <div class="link" (click)="scrollTo(1)">
+        <div class="link">
           <span>{{ i18n.translate(app.features['videoArchive'], 'title') }}</span>
         </div>
       </div>
 
       <!-- Photo Archive -->
-      <div class="feature">
+      <div class="feature" (click)="scrollTo(2)">
         <img src="{{ app.features['photoArchive'].icon }}" alt="" height="50" width="50"/>
 
-        <div class="link" (click)="scrollTo(2)">
+        <div class="link">
           <span>{{ i18n.translate(app.features['photoArchive'], 'title') }}</span>
         </div>
       </div>
 
       <!-- Contact -->
-      <div class="feature">
+      <div class="feature" (click)="scrollTo(3)">
         <img src="{{ app.features['contact'].icon }}" alt="" height="50" width="50"/>
 
-        <div class="link" (click)="scrollTo(3)">
+        <div class="link">
           <span>{{ i18n.translate(app.features['contact'], 'title') }}</span>
         </div>
       </div>

@@ -185,8 +185,14 @@ export class AppComponent implements OnInit, AfterViewInit
 
     function card(w, h)
     {
-      w = ((w - 200) / 2);
       h = (h - 100);
+
+      if (w < 1024) {
+        w = (w - 100);
+      }
+      else {
+        w = ((w - 200) / 2);
+      }
 
       if (w < h)
       {

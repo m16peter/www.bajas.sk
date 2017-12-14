@@ -22,7 +22,7 @@
 
     .h2 {
       text-align: center;
-      padding: 100px 50px;
+      padding: 50px;
     }
     .p {
       padding: 50px;
@@ -42,6 +42,33 @@
         transform: scaleY(0);
         opacity: 0;
       }
+    }
+  }
+  @media(max-width: 1023px) {
+    .h2, .p {
+      padding: 20px;
+    }
+  }
+  @media(max-width: 767px) {
+    .h2, .p {
+      padding: 5px;
+    }
+    .h2 {
+      font-size: 16px;
+    }
+    .p {
+      font-size: 13px;
+    }
+  }
+  @media(max-height: 499px) {
+    .h2, .p {
+      padding: 5px;
+    }
+    .h2 {
+      font-size: 16px;
+    }
+    .p {
+      font-size: 13px;
     }
   }
 }

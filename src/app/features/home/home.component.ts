@@ -38,8 +38,16 @@ export class HomeComponent implements OnInit
   ) {
     this.communication.onScrollTo$
       .subscribe((section: number) =>
-        this.scroll.scrollTo(this.el, (this.el.nativeElement.clientHeight * section)
-      )
+      {
+        let position = (this.el.nativeElement.clientHeight * section);
+
+        if (this.globals.app.width < 1024 || this.globals.app.height < 500)
+        {
+          position *= 2;
+        }
+
+        this.scroll.scrollTo(this.el, position);
+      }
     );
   }
 
