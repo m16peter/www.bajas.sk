@@ -1,0 +1,16 @@
+{
+  "data":
+  {
+    "languages":
+    [
+      {
+        "id": "sk",
+        "icon": "assets/app/img/sk.svg"
+      },
+      {
+        "id": "ro",
+        "icon": "assets/app/img/ro.svg"
+      }
+    ]
+  }
+}
