@@ -36,7 +36,7 @@
       <!-- Video Archive -->
       <div class="feature {{ featureStatus('videoArchive') }}">
 
-        <a routerLink="{{ route('videoArchive') }}" (click)="toggleMenu()">
+        <a href="https://www.youtube.com/channel/UCe1467eB7gZ9cBBk7jzRwkw/videos" target="_blank" (click)="toggleMenu()">
           <span>{{ i18n.translate(app.features['videoArchive'], 'title') }}</span>
         </a>
 
@@ -45,7 +45,7 @@
       <!-- Photo Archive -->
       <div class="feature {{ featureStatus('photoArchive') }}">
 
-        <a routerLink="{{ route('photoArchive') }}" (click)="toggleMenu()">
+        <a href="https://photos.app.goo.gl/NOh2cDhhDrH95owj1" target="_blank" (click)="toggleMenu()">
           <span>{{ i18n.translate(app.features['photoArchive'], 'title') }}</span>
         </a>
 

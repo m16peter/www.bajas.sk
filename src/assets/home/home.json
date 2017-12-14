@@ -62,10 +62,10 @@
       },
       "video":
       {
-        "id": "RBumgq5yVrA",
+        "id": "5AtvsW5GRF0",
         "image": "url('assets/video-archive/img/way.jpeg')",
-        "title": "01.23.4567",
-        "topic": "Ja som cesta, pravda i život. Nik neprichádza k Otcovi, ak len nie skrze mňa."
+        "title": "TEST",
+        "topic": "Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus"
       }
     },
     "photo-archive":
@@ -104,12 +104,18 @@
         },
         "description-i18n":
         {
-          "sk": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum",
-          "ro": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium"
+          "sk": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+          "ro": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
         }
       },
       "cards":
-      []
+      [
+        {
+          "name": "Finibus Bonorum",
+          "phone": "+421 123 456 789",
+          "mail": "finibus.bonorum@gmail.com"
+        }
+      ]
     }
   }
 }

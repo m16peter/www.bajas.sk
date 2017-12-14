@@ -2,11 +2,11 @@
   overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  will-change: transform;
-  transform: translateZ(0);
   background-color: #fff;
 
   > div {
+    will-change: transform;
+    transform: translateZ(0);
     min-height: 300px;
   }
 }
@@ -85,6 +85,17 @@
   background-color: #dee;
   display: flex;
 
+  .btn {
+    will-change: transform;
+    transform: translateZ(0);
+    position: absolute;
+    left: -28px;
+    z-index: 5;
+  }
+}
+
+.announcements {
+
   .cards {
     position: relative;
     transition: width 100ms ease-in;
@@ -96,7 +107,9 @@
       overflow: hidden;
       top: 0;
       left: 0;
-      transition: all 200ms ease-out;
+      transition: all 300ms ease-out;
+      will-change: transform;
+      transform: translateZ(0);
 
       > span {
         position: relative;
@@ -105,43 +118,44 @@
         margin: auto auto auto 0;
       }
       &_1 {
-        transform: translate3d(20px, 20px, 0);
-        width: calc(100% - 40px);
+        transform: translate3d(0, 20px, 0);
+        width: 100%;
         height: calc(100% - 40px);
         z-index: 3;
       }
       &_2 {
-        transform: translate3d(30px, 50px, 0);
-        width: calc(100% - 60px);
+        transform: translate3d(10px, 50px, 0);
+        width: calc(100% - 20px);
         height: calc(100% - 60px);
         z-index: 2;
       }
       &_3 {
-        transform: translate3d(40px, 80px, 0);
-        width: calc(100% - 80px);
+        transform: translate3d(20px, 80px, 0);
+        width: calc(100% - 40px);
         height: calc(100% - 80px);
         z-index: 1;
       }
       &_previous {
-        transform: translate3d(40px, 80px, 0);
-        width: calc(100% - 80px);
+        transform: translate3d(20px, 80px, 0);
+        width: calc(100% - 40px);
         height: calc(100% - 80px);
         z-index: 0;
       }
       &_next {
-        transform: translate3d(20px, -100%, 0) scale(1.2);
-        width: calc(100% - 40px);
+        transform: translate3d(0, -150%, 0) scale(1.2);
+        width: 100%;
         height: calc(100% - 40px);
         opacity: 0;
         z-index: 4;
       }
       &_last {
-        transform: translate3d(40px, 40px, 0);
-        width: calc(100% - 80px);
+        transform: translate3d(20px, 40px, 0);
+        width: calc(100% - 40px);
         height: calc(100% - 80px);
         z-index: 1;
         background: rgba(0,0,0, 0.1);
         color: #eef;
+        box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
 
         > span {
           text-transform: uppercase;
@@ -149,11 +163,6 @@
         }
       }
     }
-  }
-  .btn {
-    position: absolute;
-    left: -28px;
-    z-index: 5;
   }
   .next {
     top: calc(50% - 84px);
@@ -181,6 +190,8 @@
     position: relative;
     transition: width 100ms ease-in;
     margin: auto;
+    will-change: transform;
+    transform: translateZ(0);
 
     &:hover {
 
@@ -199,13 +210,14 @@
     top: 0;
     left: 0;
     border: 4px solid #FFF;
-    box-shadow: 0 0 4px rgba(0,0,0, 0.1);
+    box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
     border-radius: 6px;
     transition: all 500ms;
     transform-origin: 50% 50%;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    will-change: transform;
     transform: translateZ(0);
     cursor: pointer;
 
@@ -225,8 +237,42 @@
     }
     &_previous {
       z-index: 4;
-      transform: translateX(100%) rotate(16deg);
+      transform: translateX(200%) rotate(16deg);
       opacity: 0;
+    }
+  }
+}
+
+.contact {
+
+  .cards {
+    position: relative;
+    transition: width 100ms ease-in;
+    margin: auto;
+
+    .card {
+      display: flex;
+      position: absolute;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      transition: all 300ms ease-out;
+      will-change: transform;
+      transform: translateZ(0);
+      box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+      background: rgba(0,0,0, 0.1);
+      width: 100%;
+      height: 100%;
+
+      .icon {
+        fill: #000;
+      }
+      .p {
+        font-size: 20px;
+        line-height: 150%;
+        color: #eef;
+        text-indent: 0;
+      }
     }
   }
 }

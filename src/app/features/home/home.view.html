@@ -12,7 +12,7 @@
       </div>
     </div>
 
-    <div class="box flex" *ngIf="globals.app.width >= 1024">
+    <div class="announcements box flex" *ngIf="globals.app.width >= 1024">
 
       <button class="btn next" mat-fab color="primary" [disabled]="!(home.box.cardId < home.announcements.cards.length)" (click)="next()">
         <svg fill="#fff" height="24" viewBox="0 0 24 24" width="24">
@@ -58,7 +58,7 @@
         <div class="p">{{ i18n.translate(home.videoArchive.content, 'description') }}</div>
 
         <div class="layout-row">
-          <a class="btn" mat-raised-button routerLink="{{ route('videoArchive') }}">
+          <a class="btn" mat-raised-button href="https://www.youtube.com/channel/UCe1467eB7gZ9cBBk7jzRwkw/videos" target="_blank">
             <span>{{ i18n.translate(home.general, 'more') }}</span>
           </a>
         </div>
@@ -102,7 +102,7 @@
         <div class="p">{{ i18n.translate(home.photoArchive.content, 'description') }}</div>
 
         <div class="layout-row">
-          <a class="btn" mat-raised-button routerLink="{{ route('photoArchive') }}">
+          <a class="btn" mat-raised-button href="https://photos.app.goo.gl/NOh2cDhhDrH95owj1" target="_blank">
             <span>{{ i18n.translate(home.general, 'more') }}</span>
           </a>
         </div>
@@ -138,9 +138,30 @@
       </div>
     </div>
 
-    <div class="box flex" *ngIf="globals.app.width >= 1024">
+    <div class="contact box flex" *ngIf="globals.app.width >= 1024">
 
-      <div class="card" [style.width.px]="globals.app.cardSize" [style.height.px]="globals.app.cardSize"></div>
+      <div class="cards layout-column" [style.width.px]="globals.app.cardSize" [style.height.px]="globals.app.cardSize">
+
+        <div class="card" *ngFor="let card of home.contact.cards">
+
+          <div class="layout-row">
+
+            <svg class="icon" viewBox="0 0 24 24" width="100%" height="auto">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+              <path d="M0 0h24v24H0z" fill="none"/>
+            </svg>
+
+            <div class="layout-column layout-center">
+              <div class="p txt">{{ card.name }}</div>
+              <div class="p txt">{{ card.phone }}</div>
+              <div class="p txt">{{ card.mail }}</div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
 
     </div>
 
