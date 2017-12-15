@@ -4,11 +4,16 @@
   <div class="section layout-row" [style.height.px]="(globals.app.width >= 1024 && globals.app.height >= 500) ? globals.app.height : (globals.app.height * 2)">
 
     <div class="content layout-row" [style.width]="(globals.app.width >= 1024 && globals.app.height >= 500) ? (globals.app.boxSize + 'px') : 'auto'" [style.height.px]="globals.app.height">
-      <div>
+      <div class="layout-column">
+        <div class="flex"></div>
+        <div class="flex"></div>
 
         <div class="h2">{{ i18n.translate(home.announcements.content, 'title') }}</div>
+        <div class="flex"></div>
         <div class="p">{{ i18n.translate(home.announcements.content, 'description') }}</div>
 
+        <div class="flex"></div>
+        <div class="flex"></div>
       </div>
     </div>
 
@@ -28,7 +33,7 @@
         </svg>
       </button>
 
-      <div class="cards" [style.width.px]="globals.app.cardSize" [style.height.px]="globals.app.cardSize">
+      <div class="cards" [style.width.px]="globals.app.cardSize.w" [style.height.px]="globals.app.cardSize.h">
 
         <div class="card card_last" *ngIf="(home.announcements.cards.length > 0)">
           <span>{{ i18n.translate(home.general, 'no-more-announcements') }}</span>
@@ -52,17 +57,26 @@
   <div class="section layout-row" [style.height.px]="(globals.app.width >= 1024 && globals.app.height >= 500) ? globals.app.height : (globals.app.height * 2)">
 
     <div class="content layout-row" [style.width]="(globals.app.width >= 1024 && globals.app.height >= 500) ? (globals.app.boxSize + 'px') : 'auto'" [style.height.px]="globals.app.height">
-      <div>
+      <div class="layout-column">
+        <div class="flex"></div>
+        <div class="flex"></div>
 
         <div class="h2">{{ i18n.translate(home.videoArchive.content, 'title') }}</div>
+        <div class="flex"></div>
         <div class="p">{{ i18n.translate(home.videoArchive.content, 'description') }}</div>
 
-        <div class="layout-row">
-          <a class="btn" mat-raised-button href="{{ home.features['videoArchive'].redirect }}" rel="noopener" target="_blank">
-            <span>{{ i18n.translate(home.general, 'more') }}</span>
-          </a>
+        <div class="flex"></div>
+        <div>
+          <div class="layout-row">
+            <a class="btn" mat-raised-button href="{{ home.features['videoArchive'].redirect }}" rel="noopener" target="_blank">
+              <span>{{ i18n.translate(home.general, 'more') }}</span>
+            </a>
+          </div>
         </div>
 
+
+        <div class="flex"></div>
+        <div class="flex"></div>
       </div>
     </div>
 
@@ -85,8 +99,8 @@
       </button>
 
       <bnb-video
-        [style.width.px]  = "globals.app.cardSize"
-        [style.height.px] = "globals.app.cardSize"
+        [style.width.px]  = "globals.app.cardSize.w"
+        [style.height.px] = "globals.app.cardSize.h"
         [video]           = "video"
       ></bnb-video>
 
@@ -98,23 +112,31 @@
   <div class="section layout-row" [style.height.px]="(globals.app.width >= 1024 && globals.app.height >= 500) ? globals.app.height : (globals.app.height * 2)">
 
     <div class="content layout-row" [style.width]="(globals.app.width >= 1024 && globals.app.height >= 500) ? (globals.app.boxSize + 'px') : 'auto'" [style.height.px]="globals.app.height">
-      <div>
+      <div class="layout-column">
+        <div class="flex"></div>
+        <div class="flex"></div>
 
         <div class="h2">{{ i18n.translate(home.photoArchive.content, 'title') }}</div>
+        <div class="flex"></div>
         <div class="p">{{ i18n.translate(home.photoArchive.content, 'description') }}</div>
 
-        <div class="layout-row">
-          <a class="btn" mat-raised-button href="{{ home.features['photoArchive'].redirect }}" rel="noopener" target="_blank">
-            <span>{{ i18n.translate(home.general, 'more') }}</span>
-          </a>
+        <div class="flex"></div>
+        <div>
+          <div class="layout-row">
+            <a class="btn" mat-raised-button href="{{ home.features['photoArchive'].redirect }}" rel="noopener" target="_blank">
+              <span>{{ i18n.translate(home.general, 'more') }}</span>
+            </a>
+          </div>
         </div>
 
+        <div class="flex"></div>
+        <div class="flex"></div>
       </div>
     </div>
 
     <div class="photo-album box flex" [style.height.px]="globals.app.height">
 
-      <div class="album" [style.width.px]="globals.app.cardSize" [style.height.px]="globals.app.cardSize">
+      <div class="album" [style.width.px]="globals.app.cardSize.w" [style.height.px]="globals.app.cardSize.h">
 
         <div (click)="nextPhoto()" *ngFor="let photo of home.photoArchive.album; let i = index">
 
@@ -132,17 +154,22 @@
   <div class="section layout-row" [style.height.px]="(globals.app.width >= 1024 && globals.app.height >= 500) ? globals.app.height : (globals.app.height * 2)">
 
     <div class="content layout-row" [style.width]="(globals.app.width >= 1024 && globals.app.height >= 500) ? (globals.app.boxSize + 'px') : 'auto'" [style.height.px]="globals.app.height">
-      <div>
+      <div class="layout-column">
+        <div class="flex"></div>
+        <div class="flex"></div>
 
         <div class="h2">{{ i18n.translate(home.contact.content, 'title') }}</div>
+        <div class="flex"></div>
         <div class="p">{{ i18n.translate(home.contact.content, 'description') }}</div>
 
+        <div class="flex"></div>
+        <div class="flex"></div>
       </div>
     </div>
 
     <div class="contact box flex" [style.height.px]="globals.app.height">
 
-      <div class="cards layout-column" [style.width.px]="globals.app.cardSize" [style.height.px]="globals.app.cardSize">
+      <div class="cards layout-column" [style.width.px]="globals.app.cardSize.w" [style.height.px]="globals.app.cardSize.h">
 
         <div class="card" *ngFor="let card of home.contact.cards">
 

@@ -12,14 +12,14 @@ import { GlobalsService } from '@app/core/globals.service';
 import { I18nService } from '@app/core/i18n.service';
 
 // others
-import { routerTransition } from './router.transition';
+// import { routerTransition } from './router.transition';
 import { App } from './app.model';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.view.html',
   styleUrls: ['app.style.scss'],
-  animations: [ routerTransition ],
+  // animations: [ routerTransition ],
   providers: [ AppCommunicationService ]
 })
 
@@ -175,30 +175,29 @@ export class AppComponent implements OnInit, AfterViewInit
   {
     this.globals.app.width = window.innerWidth;
     this.globals.app.height = window.innerHeight;
-    this.globals.app.boxSize = box(this.globals.app.width);
-    this.globals.app.cardSize = card(this.globals.app.width, this.globals.app.height);
+    this.globals.app.boxSize = box(this.globals.app.width, this.globals.app.height);
+    this.globals.app.cardSize.w = cardW(this.globals.app.width, this.globals.app.height);
+    this.globals.app.cardSize.h = cardH(this.globals.app.width, this.globals.app.height);
 
-    function box(w)
+    function box(w, h)
     {
-      return ((w < 1024) ? (w) : (w / 2));
+      return ((w < 1024 || h < 500) ? (w) : (w / 2));
     }
 
-    function card(w, h)
+    function cardW(w, h)
     {
-      h = (h - 100);
+      if (w < 1024 || h < 500) {
+        return (w - 100);
+      }
+      return((w - 200) / 2);
+    }
 
-      if (w < 1024) {
-        w = (w - 100);
+    function cardH(w, h)
+    {
+      if (w < 1024 && h >= 500) {
+        return (h - 200);
       }
-      else {
-        w = ((w - 200) / 2);
-      }
-
-      if (w < h)
-      {
-        return (w);
-      }
-      return(h);
+      return (h - 100);
     }
   }
 

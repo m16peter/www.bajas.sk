@@ -3,6 +3,8 @@
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   background-color: #fff;
+  will-change: transform;
+  transform: translateZ(0);
 
   .section {
     will-change: transform;
@@ -24,10 +26,10 @@
 
   > div {
    padding: 50px;
-   margin: auto 0 auto auto;
+   margin: 0 0 0 auto;
 
     @media (max-width: 1023px) {
-      margin: auto;
+      margin: 0 auto;
       padding: 50px;
 
       .h2 {
@@ -38,7 +40,7 @@
       }
     }
     @media (max-width: 767px) {
-      margin: auto;
+      margin: 0 auto;
       padding: 50px 20px 10px 50px;
 
       .h2 {
@@ -51,7 +53,7 @@
       }
     }
     @media (max-height: 499px) {
-      margin: auto;
+      margin: 0 auto;
       padding: 50px 20px 10px 50px;
 
       .h2 {
@@ -183,6 +185,7 @@
         width: calc(100% - 40px);
         height: calc(100% - 80px);
         z-index: 1;
+        color: #eef;
         background: rgba(0,0,0, 0.1);
         box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
 
@@ -202,23 +205,9 @@
   }
   .next {
     top: calc(50% - 84px);
-
-    @media (max-width: 767px) {
-      top: 14px;
-    }
-    @media (max-height: 499px) {
-      top: 14px;
-    }
   }
   .previous {
     top: calc(50% + 28px);
-
-    @media (max-width: 767px) {
-      top: calc(100% - 70px);
-    }
-    @media (max-height: 499px) {
-      top: calc(100% - 70px);
-    }
   }
 }
 
@@ -325,7 +314,7 @@
         padding: 0 20px;
         font-size: 20px;
         line-height: 200%;
-        color: #fff;
+        color: #555;
         text-indent: 0;
       }
       @media(max-width: 767px) {

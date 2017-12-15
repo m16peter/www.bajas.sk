@@ -11,7 +11,7 @@ export class GlobalsService
     featureKey: '',
     languageId: '',
     boxSize: 0,
-    cardSize: 0
+    cardSize: { w: 0, h: 0 }
   };
 
   // base routes (read only)
