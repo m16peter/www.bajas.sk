@@ -73,6 +73,7 @@
 
 </div>
 
-<div *ngIf="app.loaded" [@routerTransition]="getState(o)">
+<!--  [@routerTransition]="getState(o)" -->
+<div *ngIf="app.loaded">
   <router-outlet #o="outlet"></router-outlet>
 </div>

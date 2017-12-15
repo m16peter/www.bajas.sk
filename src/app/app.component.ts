@@ -233,10 +233,10 @@ export class AppComponent implements OnInit, AfterViewInit
     return ((id === this.app.languageId) ? 'language_active' : '');
   }
 
-  public getState(outlet): any
-  {
-    return (outlet.activatedRouteData.state);
-  }
+  // public getState(outlet): any
+  // {
+  //   return (outlet.activatedRouteData.state);
+  // }
 
   public route(key: string): string
   {
