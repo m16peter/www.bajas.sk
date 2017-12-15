@@ -19,14 +19,14 @@
 
     <div class="announcements box flex" [style.height.px]="globals.app.height">
 
-      <button class="btn next" mat-fab color="primary" [disabled]="!(home.box.cardId < home.announcements.cards.length)" (click)="nextCard()">
+      <button aria-label="next card" class="btn next" mat-fab color="primary" [disabled]="!(home.box.cardId < home.announcements.cards.length)" (click)="nextCard()">
         <svg fill="#fff" height="24" viewBox="0 0 24 24" width="24">
           <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
           <path d="M0 0h24v24H0z" fill="none"/>
         </svg>
       </button>
 
-      <button class="btn previous" mat-fab color="primary" [disabled]="!(home.box.cardId > 0)" (click)="previousCard()">
+      <button aria-label="previous card" class="btn previous" mat-fab color="primary" [disabled]="!(home.box.cardId > 0)" (click)="previousCard()">
         <svg fill="#fff" height="24" viewBox="0 0 24 24" width="24">
           <path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z"/>
           <path d="M0-.75h24v24H0z" fill="none"/>
@@ -82,7 +82,7 @@
 
     <div class="video-album box flex" [style.height.px]="globals.app.height">
 
-      <button class="btn" mat-fab color="primary" (click)="toggleVideoState()">
+      <button aria-label="play/stop video" class="btn" mat-fab color="primary" (click)="toggleVideoState()">
 
         <!-- play -->
         <svg *ngIf="!(video.isActive)" fill="#fff" height="24" viewBox="0 0 24 24" width="24">

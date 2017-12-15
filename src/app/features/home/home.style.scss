@@ -44,11 +44,11 @@
       padding: 50px 20px 10px 50px;
 
       .h2 {
-        font-size: 20px;
+        font-size: 24px;
         margin: 20px 0;
       }
       .p {
-        font-size: 14px;
+        font-size: 16px;
         margin: 20px 0;
       }
     }
@@ -61,7 +61,7 @@
         margin: 20px 0;
       }
       .p {
-        font-size: 14px;
+        font-size: 16px;
         margin: 20px 0;
       }
     }
@@ -136,13 +136,13 @@
         @media (max-width: 767px) {
           text-align: center;
           margin: auto;
-          font-size: 14px;
+          font-size: 16px;
           padding: 10px;
         }
         @media (max-height: 499px) {
           text-align: center;
           margin: auto;
-          font-size: 14px;
+          font-size: 16px;
           padding: 10px;
         }
       }
@@ -225,22 +225,21 @@
 
 .photo-album {
 
+  &:hover {
+
+    .img_2 {
+      transform: rotate(-4deg);
+    }
+    .img_3 {
+      transform: rotate(4deg);
+    }
+  }
   .album {
     position: relative;
     transition: width 100ms ease-in;
     margin: auto;
     will-change: transform;
     transform: translateZ(0);
-
-    &:hover {
-
-      .img_2 {
-        transform: rotate(-4deg);
-      }
-      .img_3 {
-        transform: rotate(4deg);
-      }
-    }
   }
   .img {
     position: absolute;
@@ -324,7 +323,7 @@
         .p {
           text-align: center;
           padding: 0;
-          font-size: 14px;
+          font-size: 16px;
         }
       }
       @media(max-height: 499px) {
@@ -334,7 +333,7 @@
         .p {
           text-align: center;
           padding: 0;
-          font-size: 14px;
+          font-size: 16px;
         }
       }
     }

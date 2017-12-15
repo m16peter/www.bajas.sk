@@ -58,7 +58,7 @@
       "video":
       {
         "id": "5AtvsW5GRF0",
-        "image": "url('assets/video-archive/img/way.jpeg')",
+        "image": "url('assets/video-archive/img/way.jpg')",
         "title": "TEST",
         "topic": "Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus"
       }
@@ -80,12 +80,13 @@
       },
       "album":
       [
-        "url('assets/photo-archive/img/balloon.jpg')",
+        "url('assets/photo-archive/img/pexels_photo.jpeg')",
+        "url('assets/photo-archive/img/road.jpg')",
+        "url('assets/photo-archive/img/pexels.jpeg')",
         "url('assets/photo-archive/img/elbe.jpg')",
         "url('assets/photo-archive/img/landscape.jpg')",
-        "url('assets/photo-archive/img/nature.jpg')",
-        "url('assets/photo-archive/img/small-river.jpg')",
-        "url('assets/photo-archive/img/winter-landscape.jpg')"
+        "url('assets/photo-archive/img/small_river.jpg')",
+        "url('assets/photo-archive/img/winter_landscape.jpg')"
       ]
     },
     "contact":
