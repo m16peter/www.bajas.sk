@@ -46,6 +46,7 @@
   <!-- basic.css -->
   <style></style>
 
+  <script type="text/javascript" src="https://cdn.polyfill.io/v2/polyfill.js"></script>
 </head>
 <body>
 
@@ -55,22 +56,10 @@
 
   <app-root></app-root>
 
-  <div id="ie" class="full-screen layout-column">
-    <div class="flex"></div>
-    <h1>Ooops, unsupported browser detected!</h1>
-    <h2>Try this one: <a href="https://www.google.com/chrome/browser/desktop/index.html">Chrome for Desktop</a></h2>
-    <div class="flex"></div>
-  </div>
-
   <noscript>
     <h1>Ooops, JavaScript not running...</h1>
     <h2>Try to enable JavaScript in your web browser, <a href="https://www.enable-javascript.com/" target="_blank" rel="noopener">here are the instructions</a></h2>
   </noscript>
-
-  <script type="text/javascript" src="https://cdn.polyfill.io/v2/polyfill.js"></script>
-  <script type="text/javascript">
-    function detectIE(){var e=window.navigator.userAgent,r=e.indexOf("MSIE ");if(r>0)return!0;var t=e.indexOf("Trident/");if(t>0)return!0;var n=e.indexOf("Edge/");return n>0?!0:!1}detectIE()&&(document.getElementById("ie").style.display="flex");
-  </script>
 
 </body>
 </html>

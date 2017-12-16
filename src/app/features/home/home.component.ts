@@ -13,7 +13,7 @@ import { ScrollService } from '@app/core/scroll.service';
 
 // others
 import { Home } from './home.model';
-import { Video } from '@app/shared/video/video.model';
+import { Video } from './video/video.model';
 
 @Component({
   selector: 'app-home',
@@ -75,25 +75,20 @@ export class HomeComponent implements OnInit
     }
   }
 
-  public route(key: string): string
-  {
-    const route = this.i18n.translate(this.home.features[key], 'route');
-
-    if (route !== undefined)
-    {
-      return (this.globals.routes[key] + route);
-    }
-    return ('/');
-  }
-
   public nextCard(): void
   {
-    this.home.box.cardId++;
+    if (!this.isDisabledNext())
+    {
+      this.home.box.cardId++;
+    }
   }
 
   public previousCard(): void
   {
-    this.home.box.cardId--;
+    if (!this.isDisabledPrevious())
+    {
+      this.home.box.cardId--;
+    }
   }
 
   public cardStatus(i: number): string
@@ -162,8 +157,13 @@ export class HomeComponent implements OnInit
     this.home.box.photoId = (index < len) ? (index + 1) : 0;
   }
 
-  public scrollTo(): void
+  public isDisabledNext(): boolean
   {
+    return (!(this.home.box.cardId < this.home.announcements.cards.length));
+  }
 
+  public isDisabledPrevious(): boolean
+  {
+    return (!(this.home.box.cardId > 0));
   }
 }

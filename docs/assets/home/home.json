@@ -81,12 +81,10 @@
       "album":
       [
         "url('assets/photo-archive/img/pexels_photo.jpeg')",
-        "url('assets/photo-archive/img/road.jpg')",
         "url('assets/photo-archive/img/pexels.jpeg')",
         "url('assets/photo-archive/img/elbe.jpg')",
         "url('assets/photo-archive/img/landscape.jpg')",
-        "url('assets/photo-archive/img/small_river.jpg')",
-        "url('assets/photo-archive/img/winter_landscape.jpg')"
+        "url('assets/photo-archive/img/small_river.jpg')"
       ]
     },
     "contact":

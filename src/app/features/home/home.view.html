@@ -19,32 +19,40 @@
 
     <div class="announcements box flex" [style.height.px]="globals.app.height">
 
-      <button aria-label="next card" class="btn next" mat-fab color="primary" [disabled]="!(home.box.cardId < home.announcements.cards.length)" (click)="nextCard()">
+      <div class="fab next {{ isDisabledNext() ? 'disabled' : '' }}" (click)="nextCard()">
         <svg fill="#fff" height="24" viewBox="0 0 24 24" width="24">
           <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
           <path d="M0 0h24v24H0z" fill="none"/>
         </svg>
-      </button>
+      </div>
 
-      <button aria-label="previous card" class="btn previous" mat-fab color="primary" [disabled]="!(home.box.cardId > 0)" (click)="previousCard()">
+      <div class="fab previous {{ isDisabledPrevious() ? 'disabled' : '' }}" (click)="previousCard()">
         <svg fill="#fff" height="24" viewBox="0 0 24 24" width="24">
           <path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z"/>
           <path d="M0-.75h24v24H0z" fill="none"/>
         </svg>
-      </button>
+      </div>
+      <div class="hidden">.</div>
 
       <div class="cards" [style.width.px]="globals.app.cardSize.w" [style.height.px]="globals.app.cardSize.h">
 
-        <div class="card card_last" *ngIf="(home.announcements.cards.length > 0)">
+
+        <div class="card layout-column card_last" *ngIf="(home.announcements.cards.length > 0)">
+          <div class="flex"></div>
           <span>{{ i18n.translate(home.general, 'no-more-announcements') }}</span>
+          <div class="flex"></div>
         </div>
 
-        <div class="card card_last" *ngIf="!(home.announcements.cards.length > 0)">
+        <div class="card layout-column card_last" *ngIf="!(home.announcements.cards.length > 0)">
+          <div class="flex"></div>
           <span>{{ i18n.translate(home.general, 'no-announcements') }}</span>
+          <div class="flex"></div>
         </div>
 
-        <div class="card {{ cardStatus(i) }}" [style.background]="card.background" *ngFor="let card of home.announcements.cards; let i=index">
+        <div class="card layout-column {{ cardStatus(i) }}" [style.background]="card.background" *ngFor="let card of home.announcements.cards; let i=index">
+          <div class="flex"></div>
           <span class="h3">{{ i18n.translate(card, 'title') }}</span>
+          <div class="flex"></div>
         </div>
 
       </div>
@@ -67,13 +75,10 @@
 
         <div class="flex"></div>
         <div>
-          <div class="layout-row">
-            <a class="btn" mat-raised-button href="{{ home.features['videoArchive'].redirect }}" rel="noopener" target="_blank">
-              <span>{{ i18n.translate(home.general, 'more') }}</span>
-            </a>
-          </div>
+          <a class="btn" href="{{ home.features['videoArchive'].redirect }}" rel="noopener" target="_blank">
+            <span>{{ i18n.translate(home.general, 'more') }}</span>
+          </a>
         </div>
-
 
         <div class="flex"></div>
         <div class="flex"></div>
@@ -82,7 +87,7 @@
 
     <div class="video-album box flex" [style.height.px]="globals.app.height">
 
-      <button aria-label="play/stop video" class="btn" mat-fab color="primary" (click)="toggleVideoState()">
+      <div class="fab" (click)="toggleVideoState()">
 
         <!-- play -->
         <svg *ngIf="!(video.isActive)" fill="#fff" height="24" viewBox="0 0 24 24" width="24">
@@ -96,7 +101,9 @@
           <path d="M6 6h12v12H6z"/>
         </svg>
 
-      </button>
+        <!-- TODO: loader -->
+
+      </div>
 
       <bnb-video
         [style.width.px]  = "globals.app.cardSize.w"
@@ -122,11 +129,9 @@
 
         <div class="flex"></div>
         <div>
-          <div class="layout-row">
-            <a class="btn" mat-raised-button href="{{ home.features['photoArchive'].redirect }}" rel="noopener" target="_blank">
-              <span>{{ i18n.translate(home.general, 'more') }}</span>
-            </a>
-          </div>
+          <a class="btn" href="{{ home.features['photoArchive'].redirect }}" rel="noopener" target="_blank">
+            <span>{{ i18n.translate(home.general, 'more') }}</span>
+          </a>
         </div>
 
         <div class="flex"></div>
@@ -181,9 +186,11 @@
             </svg>
 
             <div class="layout-column layout-center">
-              <div class="p txt">{{ card.name }}</div>
-              <div class="p txt">{{ card.phone }}</div>
-              <div class="p txt">{{ card.mail }}</div>
+              <div class="flex"></div>
+              <div class="p">{{ card.name }}</div>
+              <div class="p">{{ card.phone }}</div>
+              <div class="p">{{ card.mail }}</div>
+              <div class="flex"></div>
             </div>
 
           </div>

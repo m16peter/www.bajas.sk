@@ -12,14 +12,12 @@ import { GlobalsService } from '@app/core/globals.service';
 import { I18nService } from '@app/core/i18n.service';
 
 // others
-// import { routerTransition } from './router.transition';
 import { App } from './app.model';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.view.html',
   styleUrls: ['app.style.scss'],
-  // animations: [ routerTransition ],
   providers: [ AppCommunicationService ]
 })
 
@@ -232,11 +230,6 @@ export class AppComponent implements OnInit, AfterViewInit
   {
     return ((id === this.app.languageId) ? 'language_active' : '');
   }
-
-  // public getState(outlet): any
-  // {
-  //   return (outlet.activatedRouteData.state);
-  // }
 
   public route(key: string): string
   {

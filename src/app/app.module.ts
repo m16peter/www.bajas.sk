@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CoreModule } from '@app/core/core.module';
-import { SharedModule } from '@app/shared/shared.module';
 
+import { YoutubePlayerModule } from 'ngx-youtube-player';
+import { VideoComponent } from '@app/features/home/video/video.component';
 import { HomeComponent } from '@app/features/home/home.component';
 
 import { AppCommunicationService } from './app-communication.service';
@@ -15,13 +15,13 @@ import { AppComponent } from './app.component';
 @NgModule({
   imports: [
     BrowserModule,
-    // BrowserAnimationsModule,
+    YoutubePlayerModule,
     CoreModule,
-    SharedModule,
     AppRoutingModule
   ],
   declarations: [
     AppComponent,
+    VideoComponent,
     HomeComponent
   ],
   bootstrap: [
