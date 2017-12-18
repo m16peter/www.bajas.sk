@@ -172,30 +172,31 @@ export class AppComponent implements OnInit, AfterViewInit
   private handleResize(): void
   {
     this.globals.app.width = window.innerWidth;
-    this.globals.app.height = window.innerHeight;
+    this.globals.app.height = minH(window.innerHeight, 500);
     this.globals.app.boxSize = box(this.globals.app.width, this.globals.app.height);
     this.globals.app.cardSize.w = cardW(this.globals.app.width, this.globals.app.height);
     this.globals.app.cardSize.h = cardH(this.globals.app.width, this.globals.app.height);
 
-    function box(w, h)
-    {
-      return ((w < 1024 || h < 500) ? (w) : (w / 2));
+    function box(w, h) {
+      return (w < 1024 ? (w) : (w / 2));
     }
-
-    function cardW(w, h)
-    {
-      if (w < 1024 || h < 500) {
-        return (w - 100);
+    function cardW(w, h) {
+      if (w < 1024) {
+        return (w - 50);
       }
       return((w - 200) / 2);
     }
-
-    function cardH(w, h)
-    {
-      if (w < 1024 && h >= 500) {
+    function cardH(w, h) {
+      if (w < 1024) {
         return (h - 200);
       }
       return (h - 100);
+    }
+    function minH(x, y) {
+      if (x < y) {
+        return (y);
+      }
+      return (x);
     }
   }
 
@@ -245,6 +246,6 @@ export class AppComponent implements OnInit, AfterViewInit
   public scrollTo(section: number): void
   {
     this.toggleMenu();
-    this.communication.scrollTo(section);
+    setTimeout(() => this.communication.scrollTo(section), 100);
   }
 }

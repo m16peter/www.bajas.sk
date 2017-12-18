@@ -38,7 +38,6 @@
 
   <!-- init.css -->
   <style rel="stylesheet">
-    #ie {display:none;z-index:1000;margin:auto;text-align:center;}
     .loader{position:absolute;top:calc(50% - 16px);left:calc(50% - 16px);border:2px solid #eee;border-radius:50%;border-top:2px solid #369;width:30px;height:30px;animation:spin 0.8s linear infinite;}
     @keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
   </style>
@@ -46,15 +45,15 @@
   <!-- basic.css -->
   <style></style>
 
-  <script type="text/javascript" src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+  <script type="text/javascript" src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
 </head>
 <body>
 
-  <div class="full-screen">
-    <div class="loader"></div>
-  </div>
-
-  <app-root></app-root>
+  <app-root>
+    <div class="full-screen">
+      <div class="loader"></div>
+    </div>
+  </app-root>
 
   <noscript>
     <h1>Ooops, JavaScript not running...</h1>

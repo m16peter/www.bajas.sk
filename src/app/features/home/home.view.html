@@ -1,9 +1,9 @@
 <div class="home full-screen" #scrollEl *ngIf="home.loaded">
 
   <!-- News -->
-  <div class="section layout-row" [style.height.px]="(globals.app.width >= 1024 && globals.app.height >= 500) ? globals.app.height : (globals.app.height * 2)">
+  <div class="section layout-column" [style.height.px]="sectionHeight()">
 
-    <div class="content layout-row" [style.width]="(globals.app.width >= 1024 && globals.app.height >= 500) ? (globals.app.boxSize + 'px') : 'auto'" [style.height.px]="globals.app.height">
+    <div class="content layout-row" [style.width]="contentWidth()" [style.height.px]="globals.app.height">
       <div class="layout-column">
         <div class="flex"></div>
         <div class="flex"></div>
@@ -12,7 +12,6 @@
         <div class="flex"></div>
         <div class="p">{{ i18n.translate(home.announcements.content, 'description') }}</div>
 
-        <div class="flex"></div>
         <div class="flex"></div>
       </div>
     </div>
@@ -36,14 +35,13 @@
 
       <div class="cards" [style.width.px]="globals.app.cardSize.w" [style.height.px]="globals.app.cardSize.h">
 
-
-        <div class="card layout-column card_last" *ngIf="(home.announcements.cards.length > 0)">
+        <div class="card layout-column card_last {{ isDisabledNext() ? 'card_active' : '' }}" *ngIf="(home.announcements.cards.length > 0)">
           <div class="flex"></div>
           <span>{{ i18n.translate(home.general, 'no-more-announcements') }}</span>
           <div class="flex"></div>
         </div>
 
-        <div class="card layout-column card_last" *ngIf="!(home.announcements.cards.length > 0)">
+        <div class="card layout-column card_last card_active" *ngIf="!(home.announcements.cards.length > 0)">
           <div class="flex"></div>
           <span>{{ i18n.translate(home.general, 'no-announcements') }}</span>
           <div class="flex"></div>
@@ -62,9 +60,9 @@
   </div>
 
   <!-- Video Archive -->
-  <div class="section layout-row" [style.height.px]="(globals.app.width >= 1024 && globals.app.height >= 500) ? globals.app.height : (globals.app.height * 2)">
+  <div class="section layout-column" [style.height.px]="sectionHeight()">
 
-    <div class="content layout-row" [style.width]="(globals.app.width >= 1024 && globals.app.height >= 500) ? (globals.app.boxSize + 'px') : 'auto'" [style.height.px]="globals.app.height">
+    <div class="content layout-row" [style.width]="contentWidth()" [style.height.px]="globals.app.height">
       <div class="layout-column">
         <div class="flex"></div>
         <div class="flex"></div>
@@ -81,7 +79,6 @@
         </div>
 
         <div class="flex"></div>
-        <div class="flex"></div>
       </div>
     </div>
 
@@ -90,18 +87,19 @@
       <div class="fab" (click)="toggleVideoState()">
 
         <!-- play -->
-        <svg *ngIf="!(video.isActive)" fill="#fff" height="24" viewBox="0 0 24 24" width="24">
+        <svg *ngIf="(!video.isActive && !video.isLoading)" fill="#fff" height="24" viewBox="0 0 24 24" width="24">
           <path d="M8 5v14l11-7z"/>
           <path d="M0 0h24v24H0z" fill="none"/>
         </svg>
 
         <!-- stop -->
-        <svg *ngIf="(video.isActive)" fill="#fff" height="24" viewBox="0 0 24 24" width="24">
+        <svg *ngIf="(video.isActive && !video.isLoading)" fill="#fff" height="24" viewBox="0 0 24 24" width="24">
           <path d="M0 0h24v24H0z" fill="none"/>
           <path d="M6 6h12v12H6z"/>
         </svg>
 
-        <!-- TODO: loader -->
+        <!-- loader -->
+        <div *ngIf="(video.isLoading)" class="loader"></div>
 
       </div>
 
@@ -116,9 +114,9 @@
   </div>
 
   <!-- Photo Archive -->
-  <div class="section layout-row" [style.height.px]="(globals.app.width >= 1024 && globals.app.height >= 500) ? globals.app.height : (globals.app.height * 2)">
+  <div class="section layout-column" [style.height.px]="sectionHeight()">
 
-    <div class="content layout-row" [style.width]="(globals.app.width >= 1024 && globals.app.height >= 500) ? (globals.app.boxSize + 'px') : 'auto'" [style.height.px]="globals.app.height">
+    <div class="content layout-row" [style.width]="contentWidth()" [style.height.px]="globals.app.height">
       <div class="layout-column">
         <div class="flex"></div>
         <div class="flex"></div>
@@ -134,7 +132,6 @@
           </a>
         </div>
 
-        <div class="flex"></div>
         <div class="flex"></div>
       </div>
     </div>
@@ -156,9 +153,9 @@
   </div>
 
   <!-- Contact -->
-  <div class="section layout-row" [style.height.px]="(globals.app.width >= 1024 && globals.app.height >= 500) ? globals.app.height : (globals.app.height * 2)">
+  <div class="section layout-column" [style.height.px]="sectionHeight()">
 
-    <div class="content layout-row" [style.width]="(globals.app.width >= 1024 && globals.app.height >= 500) ? (globals.app.boxSize + 'px') : 'auto'" [style.height.px]="globals.app.height">
+    <div class="content layout-row" [style.width]="contentWidth()" [style.height.px]="globals.app.height">
       <div class="layout-column">
         <div class="flex"></div>
         <div class="flex"></div>
@@ -167,7 +164,6 @@
         <div class="flex"></div>
         <div class="p">{{ i18n.translate(home.contact.content, 'description') }}</div>
 
-        <div class="flex"></div>
         <div class="flex"></div>
       </div>
     </div>
@@ -178,9 +174,9 @@
 
         <div class="card" *ngFor="let card of home.contact.cards">
 
-          <div class="layout-row">
+          <div class="layout-column">
 
-            <svg class="icon" viewBox="0 0 24 24" width="100%">
+            <svg class="icon flex" viewBox="0 0 24 24">
               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
               <path d="M0 0h24v24H0z" fill="none"/>
             </svg>

@@ -119,7 +119,16 @@ export class HomeComponent implements OnInit
 
   public toggleVideoState(): void
   {
-    this.video.isActive = !this.video.isActive;
+    if (this.video.isActive)
+    {
+      this.video.isActive = false;
+      this.video.isLoading = false;
+    }
+    else
+    {
+      this.video.isActive = true;
+      this.video.isLoading = true;
+    }
   }
 
   public photoStatus(i: number): string
@@ -165,5 +174,23 @@ export class HomeComponent implements OnInit
   public isDisabledPrevious(): boolean
   {
     return (!(this.home.box.cardId > 0));
+  }
+
+  public contentWidth(): string
+  {
+    if (this.globals.app.width >= 1024)
+    {
+      return (this.globals.app.boxSize + 'px');
+    }
+    return ('auto');
+  }
+
+  public sectionHeight(): number
+  {
+    if (this.globals.app.width >= 1024)
+    {
+      return (this.globals.app.height);
+    }
+    return (this.globals.app.height * 2);
   }
 }

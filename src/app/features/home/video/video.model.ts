@@ -6,6 +6,7 @@ export class Video
   public topic: string;
   public state: number;
   public isActive: boolean;
+  public isLoading: boolean;
 
   constructor()
   {
@@ -15,6 +16,7 @@ export class Video
     this.topic = '';
     this.state = 0;
     this.isActive = false;
+    this.isLoading = false;
   }
 
   public initialize(data: any): void

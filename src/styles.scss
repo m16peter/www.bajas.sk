@@ -1,26 +1,3 @@
-.h1 {
-  line-height: 125%;
-  font-size: 128px;
-  margin: 100px 0;
-  text-align: center;
-}
-.h2 {
-  font-size: 38px;
-  line-height: 125%;
-  margin: 40px 0;
-}
-.h3 {
-  font-size: 32px;
-  line-height: 100%;
-  margin: 20px 0;
-}
-.p {
-  line-height: 150%;
-  text-align: justify;
-  text-indent: 50px;
-  font-size: 18px;
-  margin: 5px 0;
-}
 .layout-row {
   display: flex;
   height: 100%;
@@ -64,13 +41,13 @@
   width: 50px;
   height: 50px;
   background: rgba(103, 58, 183, 1);
-  transition: all 100ms ease-out;
+  transition: all 300ms ease-out;
   border-radius: 25px;
   box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
   cursor: pointer;
 
   &:active {
-    background: rgba(103, 58, 183, 0.5);
+    background: rgba(103, 58, 183, 0.8);
   }
 }
 .disabled {
@@ -82,5 +59,10 @@
   }
 }
 .hidden {
-  opacity: 0;
+  visibility: hidden;
+  display: none;
+
+  @media (min-width: 1024px) {
+    display: block;
+  }
 }

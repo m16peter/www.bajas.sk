@@ -28,7 +28,18 @@ export class VideoComponent
 
     if (this.video.state === 0)
     {
-      this.stop();
+      this.video.isActive = false;
+      this.video.isLoading = false;
+    }
+    else if (this.video.state < 0)
+    {
+      this.video.isActive = true;
+      this.video.isLoading = true;
+    }
+    else
+    {
+      this.video.isActive = true;
+      this.video.isLoading = false;
     }
   }
 
