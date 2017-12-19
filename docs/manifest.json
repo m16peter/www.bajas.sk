@@ -1,6 +1,7 @@
 {
   "short_name": "ngx",
   "name": "Angular 5",
+  "start_url": "/",
   "theme_color": "#ffffff",
   "background_color": "#ffffff",
   "orientation": "portrait",

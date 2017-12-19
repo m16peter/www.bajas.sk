@@ -30,7 +30,7 @@ export class Video
     }
     catch (e)
     {
-      console.warn('Ooops, something went wrong...', [data]);
+      // console.warn('Ooops, something went wrong...', [data]);
     }
   }
 }

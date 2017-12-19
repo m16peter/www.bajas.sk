@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="sk">
+<html>
 <head>
 
   <!-- basic -->
@@ -28,7 +28,6 @@
   <meta name="theme-color" content="#ffffff">
   <link rel="manifest" href="/manifest.json">
 
-  <!-- reset.css -->
   <style rel="stylesheet">
     * a:hover,* a:active,* a:focus,a{text-decoration:none;}
     *:active,*:focus{outline:none!important;}
@@ -38,16 +37,10 @@
     a{background-color:transparent;-webkit-text-decoration-skip:objects;}
     img{border-style:none;}
     svg:not(:root){overflow:hidden;}
-  </style>
-
-  <!-- init.css -->
-  <style rel="stylesheet">
     .loader{position:absolute;top:calc(50% - 16px);left:calc(50% - 16px);border:2px solid #eee;border-radius:50%;border-top:2px solid #369;width:30px;height:30px;animation:spin 0.8s linear infinite;}
     @keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
   </style>
 
-  <!-- basic.css -->
-  <style></style>
 </head>
 <body>
 
@@ -64,17 +57,7 @@
 
   <script type="text/javascript" src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
 
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/service-worker.js')
-      .then((registration) => {
-        console.log('SW registered');
-      })
-      .catch((err) => {
-        console.log('SW error', err);
-      });
-    }
-  </script>
+  <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/service-worker.js').then((registration)=>{console.log('SW registered');}).catch((err)=>{console.log('SW error', err);});}</script>
 
 </body>
 </html>

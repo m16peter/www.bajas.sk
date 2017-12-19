@@ -64,19 +64,19 @@ export class AppComponent implements OnInit, AfterViewInit
     {
       try
       {
-        console.log('Json loaded!', [this.globals.pathTo.features, json]);
+        // console.log('Json loaded!', [this.globals.pathTo.features, json]);
         this.globals.json.features['data'] = json['data']['features'];
         this.globals.json.features.loaded = true;
         this.initialize();
       }
       catch (e)
       {
-        console.warn('Ooops, something went wrong...', [e, json]);
+        // console.warn('Ooops, something went wrong...', [e, json]);
       }
     },
     (e) =>
     {
-      console.warn('Ooops, something went wrong...', [e]);
+      // console.warn('Ooops, something went wrong...', [e]);
     });
   }
 
@@ -86,19 +86,19 @@ export class AppComponent implements OnInit, AfterViewInit
     {
       try
       {
-        console.log('Json loaded!', [this.globals.pathTo.languages, json]);
+        // console.log('Json loaded!', [this.globals.pathTo.languages, json]);
         this.globals.json.languages['data'] = json['data']['languages'];
         this.globals.json.languages.loaded = true;
         this.initialize();
       }
       catch (e)
       {
-        console.log('Ooops, something went wrong...', [e, json]);
+        // console.log('Ooops, something went wrong...', [e, json]);
       }
     },
     (e) =>
     {
-      console.log('Ooops, something went wrong...', [e]);
+      // console.log('Ooops, something went wrong...', [e]);
     });
   }
 
@@ -108,19 +108,19 @@ export class AppComponent implements OnInit, AfterViewInit
     {
       try
       {
-        console.log('Json loaded!', [this.globals.pathTo.general, json]);
+        // console.log('Json loaded!', [this.globals.pathTo.general, json]);
         this.globals.json.general['data'] = json['data']['general'];
         this.globals.json.general.loaded = true;
         this.initialize();
       }
       catch (e)
       {
-        console.warn('Ooops, something went wrong...', [e, json]);
+        // console.warn('Ooops, something went wrong...', [e, json]);
       }
     },
     (e) =>
     {
-      console.warn('Ooops, something went wrong...', [e]);
+      // console.warn('Ooops, something went wrong...', [e]);
     });
   }
 
@@ -130,19 +130,19 @@ export class AppComponent implements OnInit, AfterViewInit
     {
       try
       {
-        console.log('Json loaded!', [this.globals.pathTo.home, json]);
+        // console.log('Json loaded!', [this.globals.pathTo.home, json]);
         this.globals.json.home['data'] = json['data'];
         this.globals.json.home.loaded = true;
         this.initialize();
       }
       catch (e)
       {
-        console.warn('Ooops, something went wrong...', [e, json]);
+        // console.warn('Ooops, something went wrong...', [e, json]);
       }
     },
     (e) =>
     {
-      console.warn('Ooops, something went wrong...', [e]);
+      // console.warn('Ooops, something went wrong...', [e]);
     });
   }
 
@@ -172,7 +172,7 @@ export class AppComponent implements OnInit, AfterViewInit
   private handleResize(): void
   {
     this.globals.app.width = window.innerWidth;
-    this.globals.app.height = minH(window.innerHeight, 500);
+    this.globals.app.height = window.innerHeight;
     this.globals.app.boxSize = box(this.globals.app.width, this.globals.app.height);
     this.globals.app.cardSize.w = cardW(this.globals.app.width, this.globals.app.height);
     this.globals.app.cardSize.h = cardH(this.globals.app.width, this.globals.app.height);
@@ -187,16 +187,13 @@ export class AppComponent implements OnInit, AfterViewInit
       return((w - 200) / 2);
     }
     function cardH(w, h) {
-      if (w < 1024) {
+      if (w < 1024 && h < 500) {
+        return (h - 100);
+      } else if (w < 1024) {
         return (h - 200);
+      } else {
+        return (h - 100);
       }
-      return (h - 100);
-    }
-    function minH(x, y) {
-      if (x < y) {
-        return (y);
-      }
-      return (x);
     }
   }
 
@@ -204,7 +201,7 @@ export class AppComponent implements OnInit, AfterViewInit
   {
     if (this.app.languageId !== languageId)
     {
-      console.log('Language changed:', [this.app.languageId, '->', languageId]);
+      // console.log('Language changed:', [this.app.languageId, '->', languageId]);
       this.globals.app.languageId = this.app.languageId = languageId;
       this.appService.updateLanguage(languageId);
       this.communication.languageChanged();
@@ -216,7 +213,7 @@ export class AppComponent implements OnInit, AfterViewInit
   {
     if (this.app.featureKey !== featureKey)
     {
-      console.log('Feature changed:', [this.app.featureKey, '->', featureKey]);
+      // console.log('Feature changed:', [this.app.featureKey, '->', featureKey]);
       this.globals.app.featureKey = this.app.featureKey = featureKey;
       this.cdr.detectChanges();
     }

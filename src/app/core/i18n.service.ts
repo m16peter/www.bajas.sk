@@ -22,7 +22,7 @@ export class I18nService
     }
     catch (e)
     {
-      console.warn('Ooops, something went wrong...', [obj, key, this.globals.app.languageId, e]);
+      // console.warn('Ooops, something went wrong...', [obj, key, this.globals.app.languageId, e]);
       return ('');
     }
   }

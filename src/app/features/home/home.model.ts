@@ -50,7 +50,7 @@ export class Home
     }
     catch (e)
     {
-      console.warn('Ooops, something went wrong...', [e]);
+      // console.warn('Ooops, something went wrong...', [e]);
       this.init();
     }
   }

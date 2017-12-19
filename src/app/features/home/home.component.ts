@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit
     }
     else
     {
-      console.warn('Ooops, something went wrong...', [home, general, features]);
+      // console.warn('Ooops, something went wrong...', [home, general, features]);
     }
   }
 

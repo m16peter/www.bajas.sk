@@ -24,7 +24,7 @@ export class AppService
 
       if (language !== undefined)
       {
-        console.log('language:', [language, 'source: local-storage']);
+        // console.log('language:', [language, 'source: local-storage']);
         this.updateLanguage(language);
         return (language);
       }
@@ -45,14 +45,14 @@ export class AppService
 
       if (language !== undefined)
       {
-        console.log('language:', [language, 'source: browser']);
+        // console.log('language:', [language, 'source: browser']);
         this.updateLanguage(language);
         return (language);
       }
     }
 
     // Just set the first available language as default
-    console.log('language:', [languages[0].id, 'source: json']);
+    // console.log('language:', [languages[0].id, 'source: json']);
     this.updateLanguage(languages[0].id);
     return (languages[0].id);
   }
