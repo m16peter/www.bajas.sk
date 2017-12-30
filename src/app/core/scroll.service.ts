@@ -39,14 +39,14 @@ export class ScrollService
   }
 
   public scrollTo(el: any, position: number): void
-	{
+  {
     this.ngZone.runOutsideAngular(() =>
     {
       this.element = el;
-  		let now = this.element.nativeElement.scrollTop;
+      let now = this.element.nativeElement.scrollTop;
 
-  		if (position < now)
-  		{
+      if (position < now)
+      {
         requestAnimationFrame(() => this.scrollUp(position, now));
       }
       else if (position > now)
@@ -54,5 +54,5 @@ export class ScrollService
         requestAnimationFrame(() => this.scrollDown(position, now));
       }
     });
-	}
+  }
 }

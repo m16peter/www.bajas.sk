@@ -37,11 +37,8 @@ export class AppComponent implements OnInit, AfterViewInit
     private http: HttpClient,
     private i18n: I18nService
   ) {
-    this.communication.onUpdateLanguage$
-      .subscribe((languageId) => this.selectLanguage(languageId));
-
-    this.communication.onUpdateFeature$
-      .subscribe((featureKey) => this.selectFeature(featureKey));
+    this.communication.onUpdateLanguage$.subscribe((languageId) => this.selectLanguage(languageId));
+    this.communication.onUpdateFeature$.subscribe((featureKey) => this.selectFeature(featureKey));
   }
 
   ngOnInit()
@@ -71,12 +68,12 @@ export class AppComponent implements OnInit, AfterViewInit
       }
       catch (e)
       {
-        // console.warn('Ooops, something went wrong...', [e, json]);
+        console.warn('Ooops, something went wrong...');
       }
     },
     (e) =>
     {
-      // console.warn('Ooops, something went wrong...', [e]);
+      console.warn('Ooops, something went wrong...');
     });
   }
 
@@ -93,12 +90,12 @@ export class AppComponent implements OnInit, AfterViewInit
       }
       catch (e)
       {
-        // console.log('Ooops, something went wrong...', [e, json]);
+        console.warn('Ooops, something went wrong...');
       }
     },
     (e) =>
     {
-      // console.log('Ooops, something went wrong...', [e]);
+      console.warn('Ooops, something went wrong...');
     });
   }
 
@@ -115,12 +112,12 @@ export class AppComponent implements OnInit, AfterViewInit
       }
       catch (e)
       {
-        // console.warn('Ooops, something went wrong...', [e, json]);
+        console.warn('Ooops, something went wrong...');
       }
     },
     (e) =>
     {
-      // console.warn('Ooops, something went wrong...', [e]);
+      console.warn('Ooops, something went wrong...');
     });
   }
 
@@ -137,12 +134,12 @@ export class AppComponent implements OnInit, AfterViewInit
       }
       catch (e)
       {
-        // console.warn('Ooops, something went wrong...', [e, json]);
+        console.warn('Ooops, something went wrong...');
       }
     },
     (e) =>
     {
-      // console.warn('Ooops, something went wrong...', [e]);
+      console.warn('Ooops, something went wrong...');
     });
   }
 
@@ -173,27 +170,15 @@ export class AppComponent implements OnInit, AfterViewInit
   {
     this.globals.app.width = window.innerWidth;
     this.globals.app.height = window.innerHeight;
-    this.globals.app.boxSize = box(this.globals.app.width, this.globals.app.height);
-    this.globals.app.cardSize.w = cardW(this.globals.app.width, this.globals.app.height);
+    this.globals.app.boxSize = ((this.globals.app.width < 1024) ? this.globals.app.width : (this.globals.app.width / 2));
+    this.globals.app.cardSize.w = cardW(this.globals.app.width);
     this.globals.app.cardSize.h = cardH(this.globals.app.width, this.globals.app.height);
 
-    function box(w, h) {
-      return (w < 1024 ? (w) : (w / 2));
-    }
-    function cardW(w, h) {
-      if (w < 1024) {
-        return (w - 50);
-      }
-      return((w - 200) / 2);
+    function cardW(w) {
+      return ((w < 1024) ? (w - 75) : ((w - 200) / 2));
     }
     function cardH(w, h) {
-      if (w < 1024 && h < 500) {
-        return (h - 100);
-      } else if (w < 1024) {
-        return (h - 200);
-      } else {
-        return (h - 100);
-      }
+      return ((w < 1024 && h < 500) ? (h - 100) : (w < 1024) ? (h - 200) : (h - 100));
     }
   }
 
@@ -227,17 +212,6 @@ export class AppComponent implements OnInit, AfterViewInit
   public languageStatus(id: string): string
   {
     return ((id === this.app.languageId) ? 'language_active' : '');
-  }
-
-  public route(key: string): string
-  {
-    const route = this.i18n.translate(this.app.features[key], 'route');
-
-    if (route !== undefined)
-    {
-      return (this.globals.routes[key] + route);
-    }
-    return ('/');
   }
 
   public scrollTo(section: number): void

@@ -14,12 +14,12 @@ export class PageService
 
   updateDescription(description: string): void
   {
-		this.meta.addTags(
+    this.meta.addTags(
       [
         {
-    			name: 'description',
-    			content: description
-    		}
+          name: 'description',
+          content: description
+        }
       ]
     );
   }
