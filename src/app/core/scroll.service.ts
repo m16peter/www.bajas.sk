@@ -1,56 +1,41 @@
 import { Injectable, NgZone } from '@angular/core';
 
 @Injectable()
-export class ScrollService
-{
+export class ScrollService {
   private element: any;
 
-  constructor(private ngZone: NgZone)
-  {}
+  constructor(private ngZone: NgZone) {}
 
-  private scrollUp(position: number, now: number): void
-  {
+  private scrollUp(position: number, now: number): void {
     now -= Math.ceil((now - position) / 10 + 10);
 
-    if (position < now)
-    {
+    if (position < now) {
       this.element.nativeElement.scrollTop = now;
       requestAnimationFrame(() => this.scrollUp(position, now));
-    }
-    else
-    {
+    } else {
       this.element.nativeElement.scrollTop = position;
     }
   }
 
-  private scrollDown(position: number, now: number)
-  {
+  private scrollDown(position: number, now: number) {
     now += Math.ceil((position - now) / 10 + 10);
 
-    if (position > now)
-    {
+    if (position > now) {
       this.element.nativeElement.scrollTop = now;
       requestAnimationFrame(() => this.scrollDown(position, now));
-    }
-    else
-    {
+    } else {
       this.element.nativeElement.scrollTop = position;
     }
   }
 
-  public scrollTo(el: any, position: number): void
-  {
-    this.ngZone.runOutsideAngular(() =>
-    {
+  public scrollTo(el: any, position: number): void {
+    this.ngZone.runOutsideAngular(() => {
       this.element = el;
-      let now = this.element.nativeElement.scrollTop;
+      const now = this.element.nativeElement.scrollTop;
 
-      if (position < now)
-      {
+      if (position < now) {
         requestAnimationFrame(() => this.scrollUp(position, now));
-      }
-      else if (position > now)
-      {
+      } else if (position > now) {
         requestAnimationFrame(() => this.scrollDown(position, now));
       }
     });

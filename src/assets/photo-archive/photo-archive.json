@@ -1,0 +1,17 @@
+{
+  "data": {
+    "content": {
+      "title-i18n": {
+        "sk": "Foto Archív",
+        "ro": "Arhivă Foto"
+      },
+      "description-i18n": {
+        "sk":
+          "Archív fotiek z oblasti Bajas. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.",
+        "ro":
+          "Arhivă foto din zona Sacalasău Nou. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo."
+      }
+    },
+    "albums": []
+  }
+}

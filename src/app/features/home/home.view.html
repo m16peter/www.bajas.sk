@@ -1,4 +1,4 @@
-<div class="home full-screen" #scrollEl *ngIf="home.loaded">
+<div class="home full-screen" #scrollEl *ngIf="home.loaded" [style.background-image]="globals.url('home.jpg')">
 
   <!-- News -->
   <div class="section layout-column" [style.height.px]="sectionHeight()">
@@ -20,15 +20,15 @@
 
       <div class="fab next {{ isDisabledNext() ? 'disabled' : '' }}" (click)="nextCard()">
         <svg fill="#fff" height="24" viewBox="0 0 24 24" width="24">
-          <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
-          <path d="M0 0h24v24H0z" fill="none"/>
+          <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
+          <path d="M0 0h24v24H0z" fill="none" />
         </svg>
       </div>
 
       <div class="fab previous {{ isDisabledPrevious() ? 'disabled' : '' }}" (click)="previousCard()">
         <svg fill="#fff" height="24" viewBox="0 0 24 24" width="24">
-          <path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z"/>
-          <path d="M0-.75h24v24H0z" fill="none"/>
+          <path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z" />
+          <path d="M0-.75h24v24H0z" fill="none" />
         </svg>
       </div>
       <div class="hidden">.</div>
@@ -47,9 +47,9 @@
           <div class="flex"></div>
         </div>
 
-        <div class="card layout-column {{ cardStatus(i) }}" [style.background]="card.background" *ngFor="let card of home.announcements.cards; let i=index">
+        <div class="card layout-column {{ cardStatus(i) }}" *ngFor="let card of home.announcements.cards; let i = index" [style.background]="card.background">
           <div class="flex"></div>
-          <span class="h3">{{ i18n.translate(card, 'title') }}</span>
+          <span class="h3" *ngFor="let line of card.lines">{{ i18n.translate(line, 'line') }}</span>
           <div class="flex"></div>
         </div>
 
@@ -73,9 +73,10 @@
 
         <div class="flex"></div>
         <div>
-          <a class="btn" href="{{ home.features['videoArchive'].redirect }}" rel="noopener" target="_blank">
+          <!-- href="{{ home.features['videoArchive'].redirect }}" rel="noopener" target="_blank" -->
+          <div class="btn" routerLink="{{ globals.route('videoArchive') }}">
             <span>{{ i18n.translate(home.general, 'more') }}</span>
-          </a>
+          </div>
         </div>
 
         <div class="flex"></div>
@@ -88,14 +89,14 @@
 
         <!-- play -->
         <svg *ngIf="(!video.isActive && !video.isLoading)" fill="#fff" height="24" viewBox="0 0 24 24" width="24">
-          <path d="M8 5v14l11-7z"/>
-          <path d="M0 0h24v24H0z" fill="none"/>
+          <path d="M8 5v14l11-7z" />
+          <path d="M0 0h24v24H0z" fill="none" />
         </svg>
 
         <!-- stop -->
         <svg *ngIf="(video.isActive && !video.isLoading)" fill="#fff" height="24" viewBox="0 0 24 24" width="24">
-          <path d="M0 0h24v24H0z" fill="none"/>
-          <path d="M6 6h12v12H6z"/>
+          <path d="M0 0h24v24H0z" fill="none" />
+          <path d="M6 6h12v12H6z" />
         </svg>
 
         <!-- loader -->
@@ -103,11 +104,7 @@
 
       </div>
 
-      <bnb-video
-        [style.width.px]  = "globals.app.cardSize.w"
-        [style.height.px] = "globals.app.cardSize.h"
-        [video]           = "video"
-      ></bnb-video>
+      <app-video [style.width.px]="globals.app.cardSize.w" [style.height.px]="globals.app.cardSize.h" [video]="video"></app-video>
 
     </div>
 
@@ -127,9 +124,10 @@
 
         <div class="flex"></div>
         <div>
-          <a class="btn" href="{{ home.features['photoArchive'].redirect }}" rel="noopener" target="_blank">
+          <!-- href="{{ home.features['photoArchive'].redirect }}" rel="noopener" target="_blank" -->
+          <div class="btn" routerLink="{{ globals.route('videoArchive') }}">
             <span>{{ i18n.translate(home.general, 'more') }}</span>
-          </a>
+          </div>
         </div>
 
         <div class="flex"></div>
@@ -162,7 +160,7 @@
 
         <div class="h2">{{ i18n.translate(home.contact.content, 'title') }}</div>
         <div class="flex"></div>
-        <div class="p">{{ i18n.translate(home.contact.content, 'description') }}</div>
+        <div class="p" *ngFor="let line of home.contact.content.description">{{ i18n.translate(line, 'line') }}</div>
 
         <div class="flex"></div>
       </div>
@@ -176,16 +174,12 @@
 
           <div class="layout-column">
 
-            <svg class="icon flex" viewBox="0 0 24 24">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
-              <path d="M0 0h24v24H0z" fill="none"/>
-            </svg>
+            <div class="icon flex" [style.background-image]="globals.url('contact.png')"></div>
 
             <div class="layout-column layout-center">
               <div class="flex"></div>
               <div class="p">{{ card.name }}</div>
               <div class="p">{{ card.phone }}</div>
-              <div class="p">{{ card.mail }}</div>
               <div class="flex"></div>
             </div>
 

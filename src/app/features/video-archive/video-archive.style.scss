@@ -1,0 +1,25 @@
+.video-archive {
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  will-change: transform;
+  transform: translateZ(0);
+  background-color: #fff;
+
+  > div {
+    padding: 50px 20px;
+
+    .h1 {
+      font-size: 42px;
+      text-align: center;
+      text-transform: uppercase;
+      margin: 50px 0;
+    }
+    .p {
+      padding: 50px;
+      text-align: justify;
+      text-indent: 50px;
+      font-size: 24px;
+    }
+  }
+}

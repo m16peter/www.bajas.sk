@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CoreModule } from '@app/core/core.module';
-
-import { YoutubePlayerModule } from 'ngx-youtube-player';
-import { VideoComponent } from '@app/features/home/video/video.component';
-import { HomeComponent } from '@app/features/home/home.component';
+import { SharedModule } from '@app/shared/shared.module';
+import { HomeModule } from '@app/features/home/home.module';
 
 import { AppCommunicationService } from './app-communication.service';
 import { AppService } from './app.service';
@@ -15,14 +14,16 @@ import { AppComponent } from './app.component';
 @NgModule({
   imports: [
     BrowserModule,
-    YoutubePlayerModule,
+    BrowserAnimationsModule,
+
     CoreModule,
+    SharedModule,
+
+    HomeModule,
     AppRoutingModule
   ],
   declarations: [
-    AppComponent,
-    VideoComponent,
-    HomeComponent
+    AppComponent
   ],
   bootstrap: [
     AppComponent
@@ -33,5 +34,4 @@ import { AppComponent } from './app.component';
   ]
 })
 
-export class AppModule
-{}
+export class AppModule {}

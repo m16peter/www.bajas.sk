@@ -1,46 +1,39 @@
 {
-  "data":
-  {
-    "features":
-    {
-      "home":
+  "data": {
+    "features": [
       {
+        "route": "home",
         "icon": "assets/app/img/angular.svg",
-        "title-i18n":
-        {
-          "sk": "Stretnutie rumunských veriacich na Slovensku",
-          "ro": "Întâlnirea creștinilor români în Slovacia"
+        "title-i18n": {
+          "sk": "Stretnutie Rumunských Kresťanov",
+          "ro": "Întâlnirea Creștinilor din Romănia"
         }
       },
-      "videoArchive":
       {
+        "route": "video-archive",
         "icon": "assets/video-archive/img/youtube.svg",
-        "redirect": "https://www.youtube.com/channel/UCe1467eB7gZ9cBBk7jzRwkw/videos",
-        "title-i18n":
-        {
+        "redirect": "https://www.youtube.com/channel/UCSohEEtngvF7mhWKUGzaZ2g",
+        "title-i18n": {
           "sk": "Video Archív",
           "ro": "Arhivă Video"
         }
       },
-      "photoArchive":
       {
+        "route": "photo-archive",
         "icon": "assets/photo-archive/img/google-photos.svg",
-        "redirect": "https://photos.app.goo.gl/NOh2cDhhDrH95owj1",
-        "title-i18n":
-        {
+        "redirect": "https://photos.app.goo.gl/fDmMmfpb04xlA5jg1",
+        "title-i18n": {
           "sk": "Foto Archív",
           "ro": "Arhivă Foto"
         }
       },
-      "contact":
       {
         "icon": "assets/app/img/contact-card.svg",
-        "title-i18n":
-        {
+        "title-i18n": {
           "sk": "Kontakt",
           "ro": "Contact"
         }
       }
-    }
+    ]
   }
 }

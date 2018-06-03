@@ -1,5 +1,4 @@
-export class Home
-{
+export class Home {
   public features: any;
   public general: any;
 
@@ -11,13 +10,11 @@ export class Home
   public box: any;
   public loaded: boolean;
 
-  constructor()
-  {
+  constructor() {
     this.init();
   }
 
-  private init(): void
-  {
+  private init(): void {
     this.features = [];
     this.general = {};
 
@@ -26,18 +23,15 @@ export class Home
     this.photoArchive = {};
     this.contact = {};
 
-    this.box =
-    {
+    this.box = {
       cardId: 0,
       photoId: 0
     };
     this.loaded = false;
   }
 
-  public initialize(data: any, general: any, features: any): void
-  {
-    try
-    {
+  public initialize(data: any, general: any, features: any): void {
+    try {
       this.features = features;
       this.general = general;
 
@@ -47,10 +41,8 @@ export class Home
       this.contact = data['contact'];
 
       this.loaded = true;
-    }
-    catch (e)
-    {
-      // console.warn('Ooops, something went wrong...', [e]);
+    } catch (e) {
+      console.warn('Ooops, something went wrong...', [e]);
       this.init();
     }
   }

@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 
 @Injectable()
-export class AppCommunicationService
-{
+export class AppCommunicationService {
   private onLanguageChanged = new Subject<void>();
   private onScrollTo = new Subject<number>();
   private onUpdateFeature = new Subject<string>();
@@ -14,23 +13,19 @@ export class AppCommunicationService
   onUpdateFeature$ = this.onUpdateFeature.asObservable();
   onUpdateLanguage$ = this.onUpdateLanguage.asObservable();
 
-  public languageChanged(): void
-  {
+  public languageChanged(): void {
     this.onLanguageChanged.next();
   }
 
-  public scrollTo(section: number): void
-  {
+  public scrollTo(section: number): void {
     this.onScrollTo.next(section);
   }
 
-  public updateFeature(featureKey: string): void
-  {
+  public updateFeature(featureKey: string): void {
     this.onUpdateFeature.next(featureKey);
   }
 
-  public updateLanguage(languageId: string): void
-  {
+  public updateLanguage(languageId: string): void {
     this.onUpdateLanguage.next(languageId);
   }
 }

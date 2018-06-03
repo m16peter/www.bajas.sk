@@ -1,8 +1,6 @@
 {
-  "data":
-  {
-    "languages":
-    [
+  "data": {
+    "languages": [
       {
         "id": "sk",
         "icon": "assets/app/img/sk.svg"

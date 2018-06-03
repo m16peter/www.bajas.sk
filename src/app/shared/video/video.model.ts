@@ -1,5 +1,4 @@
-export class Video
-{
+export class Video {
   public id: string;
   public image: string;
   public title: string;
@@ -8,8 +7,7 @@ export class Video
   public isActive: boolean;
   public isLoading: boolean;
 
-  constructor()
-  {
+  constructor() {
     this.id = '';
     this.image = '';
     this.title = '';
@@ -19,18 +17,14 @@ export class Video
     this.isLoading = false;
   }
 
-  public initialize(data: any): void
-  {
-    try
-    {
+  public initialize(data: any): void {
+    try {
       this.id = data.id;
       this.image = data.image;
       this.title = data.title;
       this.topic = data.topic;
-    }
-    catch (e)
-    {
-      // console.warn('Ooops, something went wrong...', [data]);
+    } catch (e) {
+      console.warn('Error: ', [data]);
     }
   }
 }

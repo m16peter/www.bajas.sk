@@ -1,15 +1,20 @@
+<!-- Navigation -->
 <div class="navigation {{ app.navigationState ? 'active' : '' }}">
 
+  <!-- Menu Button -->
   <div class="shape" (click)="toggleMenu()"></div>
 
+  <!-- Menu Icon -->
   <div class="hamburger" (click)="toggleMenu()">
     <span class="hamburger_line_1"></span>
     <span class="hamburger_line_2"></span>
     <span class="hamburger_line_3"></span>
   </div>
 
+  <!-- Menu Content -->
   <div *ngIf="app.loaded">
 
+    <!-- Languages -->
     <div class="languages">
 
       <div class="flex"></div>
@@ -22,43 +27,17 @@
 
     </div>
 
+    <!-- Sections -->
     <div class="features layout-column">
 
       <div class="flex hr"></div>
 
-      <!-- Home -->
-      <div class="feature" (click)="scrollTo(0)">
-        <img src="{{ app.features['home'].icon }}" alt="" height="50" width="50"/>
+      <!-- Feature -->
+      <div class="feature" (click)="scrollTo(i)" *ngFor="let feature of app.features; let i = index;">
+        <img src="{{ feature.icon }}" alt="" />
 
         <div class="link">
-          <span>{{ i18n.translate(app.features['home'], 'title') }}</span>
-        </div>
-      </div>
-
-      <!-- Video Archive -->
-      <div class="feature" (click)="scrollTo(1)">
-        <img src="{{ app.features['videoArchive'].icon }}" alt="" height="50" width="50"/>
-
-        <div class="link">
-          <span>{{ i18n.translate(app.features['videoArchive'], 'title') }}</span>
-        </div>
-      </div>
-
-      <!-- Photo Archive -->
-      <div class="feature" (click)="scrollTo(2)">
-        <img src="{{ app.features['photoArchive'].icon }}" alt="" height="50" width="50"/>
-
-        <div class="link">
-          <span>{{ i18n.translate(app.features['photoArchive'], 'title') }}</span>
-        </div>
-      </div>
-
-      <!-- Contact -->
-      <div class="feature" (click)="scrollTo(3)">
-        <img src="{{ app.features['contact'].icon }}" alt="" height="50" width="50"/>
-
-        <div class="link">
-          <span>{{ i18n.translate(app.features['contact'], 'title') }}</span>
+          <span>{{ i18n.translate(feature, 'title') }}</span>
         </div>
       </div>
 
@@ -69,10 +48,12 @@
 
   </div>
 
+  <!-- Click Catcher -->
   <div class="full-screen click-catcher" (click)="toggleMenu()"></div>
 
 </div>
 
+<!-- Content -->
 <div *ngIf="app.loaded">
   <router-outlet></router-outlet>
 </div>
