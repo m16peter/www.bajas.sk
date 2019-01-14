@@ -1,0 +1,18 @@
+{
+  "data": {
+    "general": {
+      "more-i18n": {
+        "sk": "viac",
+        "ro": "mai mult"
+      },
+      "no-more-announcements-i18n": {
+        "sk": "žiaden ďalší oznám",
+        "ro": "niciun alt anunț"
+      },
+      "no-announcements-i18n": {
+        "sk": "žiaden oznám",
+        "ro": "niciun anunț"
+      }
+    }
+  }
+}

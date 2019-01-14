@@ -1,6 +1,6 @@
 {
   "name": "bajas.sk",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "license": "MIT",
   "scripts": {
     "start": "ng serve --aot",
@@ -34,6 +34,7 @@
     "codelyzer": "~4.0.1",
     "ngx-youtube-player": "0.0.41",
     "standard-version": "^4.2.0",
+    "sw-precache": "^5.2.1",
     "sw-precache-webpack-plugin": "^0.11.4",
     "ts-node": "~3.3.0",
     "tslint": "~5.8.0",
